@@ -1,8 +1,9 @@
 USE MASTER
+SET LANGUAGE Spanish
 GO
 
 IF EXISTS(SELECT * FROM sysDATABASEs WHERE name = 'Terminal')
-BEGin
+BEGIN
 	ALTER DATABASE Terminal SET single_USEr WITH ROLLBACK IMMEDIATE
 	DROP DATABASE Terminal
 end
@@ -50,8 +51,8 @@ GO
 
 --Se crea la tabla de Facilidades
 CREATE TABLE Facilidades(
-nombre VARCHAR(50) NOT NULL,
 terminal VARCHAR(3) NOT NULL FOREIGN KEY REFERENCES Terminales(codigo),
+nombre VARCHAR(50) NOT NULL,
 CONSTRAINT PK_Facilidades PRIMARY KEY (terminal, nombre)
 )
 GO
@@ -86,6 +87,54 @@ CONSTRAINT FK_internacionales FOREIGN KEY (numero) REFERENCES Viajes(numero)
 )
 GO
 
+
+
+INSERT INTO Empleados VALUES
+('11111111','111111','Empleado1',1),
+('22222222','222222','Empleado2',0),
+('33333333','333333','Empleado3',1)
+go
+
+INSERT INTO Companias VALUES
+('Compania 1','Calle 1','099111111',1),
+('Compania 2','Calle 2','099222222',0),
+('Compania 3','Calle 3','099333333',1)
+
+INSERT INTO Terminales VALUES
+('AAA','Cuidad 1','Uruguay',1),
+('BBB','Cuidad 2','Uruguay',1),
+('CCC','Cuidad 3','Brasil',0),
+('DDD','Cuidad 4','Brasil',1),
+('EEE','Cuidad 5','Paraguay',0),
+('FFF','Cuidad 6','Argentina',1)
+go
+
+INSERT INTO Facilidades VALUES
+('AAA','Facilidad 1'),
+('AAA','Facilidad 2'),
+('AAA','Facilidad 3'),
+('BBB','Facilidad 2'),
+('CCC','Facilidad 1'),
+('CCC','Facilidad 3'),
+('DDD','Facilidad 1'),
+('DDD','Facilidad 2'),
+('EEE','Facilidad 3'),
+('FFF','Facilidad 1'),
+('FFF','Facilidad 2'),
+('FFF','Facilidad 3')
+go
+
+INSERT INTO Viajes VALUES
+(1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '11111111'),
+(2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '22222222'),
+(3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '11111111'),
+(4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '11111111'),
+(5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '22222222'),
+(6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '22222222'),
+(7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '11111111'),
+(8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '22222222')
+GO
+
 -- -----------------------------------------------------------------------------------------------
 -- CREACIÓN DE STORED PROCEDURES
 -- -----------------------------------------------------------------------------------------------
@@ -108,7 +157,8 @@ BEGIN
 	SELECT * FROM Empleados WHERE cedula = @cedula AND pass = @pass AND activo = 1
 END
 GO
-
+-- Prueba Login_Empleado '11111111', '111111'
+-- Prueba Login_Empleado '22222222', '222222'
 -- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE EMPLEADOS
 CREATE PROCEDURE Buscar_Empleado
@@ -118,6 +168,8 @@ BEGIN
 	SELECT * FROM Empleados WHERE cedula = @cedula AND activo = 1
 END
 GO
+-- Prueba Buscar_Empleado '11111111'
+-- Prueba Buscar_Empleado '22222222'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -129,6 +181,8 @@ BEGIN
 	SELECT * FROM Empleados WHERE cedula = @cedula
 END
 GO
+-- Prueba BuscarTodos_Empleado '11111111'
+-- Prueba BuscarTodos_Empleado '22222222'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -144,7 +198,8 @@ BEGIN
 		
 	IF EXISTS(SELECT * FROM Empleados WHERE cedula = @cedula AND activo = 0)
 	BEGIN
-		UPDATE Empleados SET activo = 1, pass = @pass, nombre = @nombre WHERE cedula = @cedula
+		UPDATE Empleados SET activo = 1, pass = @pass, nombre = @nombre 
+		WHERE cedula = @cedula
 		IF (@@ERROR = 0)
 			RETURN 1
 		ELSE
@@ -159,6 +214,8 @@ BEGIN
 			RETURN -2
 END
 GO
+-- Prueba Alta_Empleado '44444444', '444444', 'Empleado4'
+-- Prueba Alta_Empleado '22222222', '123456', 'Empleado02'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -186,6 +243,8 @@ BEGIN
 		END
 END
 GO
+--Prueba Eliminar_Empleado '11111111'
+--Prueba Eliminar_Empleado '44444444'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -209,7 +268,27 @@ BEGIN
 		END
 END
 GO
+--Prueba Modificar_Empleado '11111111', '111111', 'Empleado01'
+--Prueba Modificar_Empleado '22222222', '222222', 'Empleado2'
 -- -----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- ***********************************************************************************************
 -- -----------------------------------------------------------------------------------------------
@@ -228,6 +307,8 @@ BEGIN
 	SELECT * FROM Companias WHERE nombre = @nombre AND activo = 1
 END
 GO
+-- Prueba Buscar_Compania 'Compania 1'
+-- Prueba Buscar_Compania 'Compania 2'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -236,9 +317,11 @@ CREATE PROCEDURE BuscarTodos_Compania
 @nombre VARCHAR(50)
 AS
 BEGIN
-	SELECT * FROM Empleados WHERE nombre = @nombre
+	SELECT * FROM Companias WHERE nombre = @nombre
 END
 GO
+-- Prueba BuscarTodos_Compania 'Compania 1'
+-- Prueba BuscarTodos_Compania 'Compania 2'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -263,19 +346,22 @@ BEGIN
 	END
 	
 	ELSE
-		INSERT INTO Companias (nombre, direccion, telefono) VALUES (@nombre, @direccion, @telefono)
+		INSERT INTO Companias (nombre, direccion, telefono) 
+		VALUES (@nombre, @direccion, @telefono)
 		IF (@@ERROR = 0)
 			RETURN 1
 		ELSE
 			RETURN -2
 END
 GO
+-- Prueba Alta_Compania 'Compania 4', 'Calle 4', '099444444'
+-- Prueba Alta_Compania 'Compania 2', 'Calle 02', '099222222'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA ELIMINAR COMPAÑÍA
 CREATE PROCEDURE Eliminar_Compania
-@nombre VARCHAR(9)
+@nombre VARCHAR(50)
 AS
 BEGIN
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @nombre)
@@ -297,6 +383,8 @@ BEGIN
 		END
 END
 GO
+-- Prueba Eliminar_Compania 'Compania 2'
+-- Prueba Eliminar_Compania 'Compania 4'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -321,7 +409,26 @@ BEGIN
 		END
 END
 GO
+-- Prueba Modificar_Compania 'Compania 1', 'Calle 01', '099111111'
+-- Prueba Modificar_Compania 'Compania 2', 'Calle 2', '099222222'
 -- -----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- ***********************************************************************************************
 -- -----------------------------------------------------------------------------------------------
@@ -340,17 +447,34 @@ BEGIN
 	SELECT * FROM Terminales WHERE codigo = @codigo AND activo = 1
 END
 GO
+-- Prueba Buscar_Terminal 'AAA'
+-- Prueba Buscar_Terminal 'CCC'
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE FACILIDADES
+CREATE PROCEDURE Buscar_Facilidades
+@terminal VARCHAR(3)
+AS
+BEGIN
+	SELECT * FROM Facilidades WHERE terminal = @terminal
+END
+GO
+-- Prueba Buscar_Facilidades 'AAA'
+-- Prueba Buscar_Facilidades 'CCC'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE TODAS LAS TERMINALES
 CREATE PROCEDURE BuscarTodos_Terminal
-@codigo VARCHAR(50)
+@codigo VARCHAR(3)
 AS
 BEGIN
 	SELECT * FROM Terminales WHERE codigo = @codigo
 END
 GO
+-- Prueba BuscarTodos_Terminal 'AAA'
+-- Prueba BuscarTodos_Terminal 'CCC'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -382,6 +506,31 @@ BEGIN
 			RETURN -2
 END
 GO
+-- Prueba Alta_Terminal 'GGG', 'Ciudad 7', 'Argentina'
+-- Prueba Alta_Terminal 'CCC', 'Ciudad 03', 'Uruguay'
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ALTA DE FACILIDADES
+CREATE PROCEDURE Alta_Facilidades
+@terminal VARCHAR(3),
+@nombre VARCHAR(50)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Terminales WHERE codigo = @terminal AND activo = 1)
+	BEGIN
+		INSERT INTO Facilidades (terminal, nombre) VALUES (@terminal, @nombre)
+		IF (@@ERROR = 0)
+			RETURN 1
+		ELSE
+			RETURN -1
+	END
+	ELSE
+		RETURN -2
+END
+GO
+--Prueba Alta_Facilidades 'GGG', 'Facilidad 3'
+--Prueba Alta_Facilidades 'CCC', 'Facilidad 2'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -401,14 +550,51 @@ BEGIN
 		
 	ELSE
 		BEGIN
+		BEGIN TRANSACTION
+			DELETE FROM Facilidades WHERE terminal = @codigo
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -2
+				END
+				
 			DELETE FROM Terminales WHERE codigo = @codigo
-			IF(@@ERROR = 0)
-				RETURN 1
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -3
+				END
+				
 			ELSE
-				RETURN -2
+				BEGIN
+					COMMIT TRANSACTION
+					RETURN 1
+				END
 		END
 END
 GO
+
+-- Prueba Eliminar_Terminal 'AAA'
+-- Prueba Eliminar_Terminal 'GGG'
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ELIMINAR FACILIDADES
+CREATE PROCEDURE Eliminar_Facilidades
+@codigo VARCHAR(9)
+AS
+BEGIN
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @codigo)
+		RETURN -1
+	
+	DELETE FROM Facilidades WHERE terminal = @codigo
+	IF (@@ERROR = 0)
+		RETURN 1
+	ELSE
+		RETURN -2
+END
+GO
+-- Prueba Eliminar_Facilidades 'AAA'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -433,4 +619,6 @@ BEGIN
 		END
 END
 GO
+-- Prueba Modificar_Terminal 'GGG', 'Ciudad 7', 'Argentina'
+-- Prueba Modificar_Terminal 'CCC', 'Ciudad 03', 'Uruguay'
 -- -----------------------------------------------------------------------------------------------
