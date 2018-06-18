@@ -79,16 +79,18 @@ CONSTRAINT FK_Nacionales FOREIGN KEY (numero) REFERENCES Viajes(numero)
 GO
 
 --Se crea la tabla de Viajes internacionales
-CREATE TABLE internacionales(
+CREATE TABLE Internacionales(
 numero int NOT NULL PRIMARY KEY, 
 servicio BIT NOT NULL, 
 documentacion VARCHAR(200),
-CONSTRAINT FK_internacionales FOREIGN KEY (numero) REFERENCES Viajes(numero)
+CONSTRAINT FK_Internacionales FOREIGN KEY (numero) REFERENCES Viajes(numero)
 )
 GO
 
 
-
+-- ESTO HAY QUE BORRARLO PORQUE LA INSERCIÓN DE DATOS DE PRUEBA DEBE HACERSE USANDO LOS SP
+-- CUANDO ILENA CONFIRME QUE TODOS LOS SP ESTÁN BIEN HAY QUE PASAR LA INSERCIÓN DE DATOS 
+-- PARA EL FINAL DEL SCRIPT PARA USAR LOS SP
 INSERT INTO Empleados VALUES
 ('11111111','111111','Empleado1',1),
 ('22222222','222222','Empleado2',0),
@@ -134,6 +136,22 @@ INSERT INTO Viajes VALUES
 (7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '11111111'),
 (8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '22222222')
 GO
+
+
+INSERT INTO Nacionales VALUES
+(1,0),
+(2,2),
+(3,0),
+(5,3)
+GO
+
+INSERT INTO Internacionales VALUES
+(4,0,'Cedula'),
+(6,1,''),
+(7,1,'Pasaporte y vacunas'),
+(8,0,'')
+GO
+
 
 -- -----------------------------------------------------------------------------------------------
 -- CREACIÓN DE STORED PROCEDURES
@@ -621,4 +639,348 @@ END
 GO
 -- Prueba Modificar_Terminal 'GGG', 'Ciudad 7', 'Argentina'
 -- Prueba Modificar_Terminal 'CCC', 'Ciudad 03', 'Uruguay'
+-- -----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ***********************************************************************************************
+-- -----------------------------------------------------------------------------------------------
+-- ***********************************************************************************************
+-- VIAJES
+-- ***********************************************************************************************
+-- -----------------------------------------------------------------------------------------------
+-- ***********************************************************************************************
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE VIAJE
+CREATE PROCEDURE Buscar_Viaje
+@numero INT
+AS
+BEGIN
+	SELECT * FROM Viajes WHERE numero = @numero
+END
+GO
+-- Prueba Buscar_Viaje 1
+-- Prueba Buscar_Viaje 4
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE VIAJE NACIONAL
+CREATE PROCEDURE Buscar_ViajeNacional
+@numero INT
+AS
+BEGIN
+	SELECT * FROM Nacionales WHERE numero = @numero
+END
+GO
+-- Prueba Buscar_ViajeNacional 1
+-- Prueba Buscar_ViajeNacional 4
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE VIAJE INTERNACIONAL
+CREATE PROCEDURE Buscar_ViajeInternacional
+@numero INT
+AS
+BEGIN
+	SELECT * FROM internacionales WHERE numero = @numero
+END
+GO
+-- Prueba Buscar_ViajeInternacional 1
+-- Prueba Buscar_ViajeInternacional 4
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ALTA DE VIAJE NACIONAL
+CREATE PROCEDURE Alta_ViajeNacional
+@numero INT, 
+@compania VARCHAR(50),
+@destino VARCHAR(3),
+@fecha_partida datetime,
+@fecha_arribo datetime,
+@asientos INT,
+@empleado VARCHAR(9),
+@paradas INT
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Viajes WHERE numero = @numero)
+		RETURN -1
+	
+	IF EXISTS(SELECT * FROM Viajes 
+	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
+		RETURN -2
+	
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+		INSERT INTO Viajes 
+		VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -3
+			END
+			
+		INSERT INTO Nacionales VALUES (@numero, @paradas)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -4
+			END
+			
+		ELSE
+			BEGIN
+				COMMIT TRANSACTION
+				RETURN 1
+			END
+		END
+END
+GO
+-- Prueba Alta_ViajeNacional 9, 'Compania 3', 'BBB', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 4
+-- Prueba Alta_ViajeNacional 10, 'Compania 1', 'BBB', '15/02/2018 17:00', '16/02/2018 02:00', 45, '33333333', 4
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ALTA DE VIAJE INTERNACIONAL
+CREATE PROCEDURE Alta_ViajeInternacional
+@numero INT, 
+@compania VARCHAR(50),
+@destino VARCHAR(3),
+@fecha_partida datetime,
+@fecha_arribo datetime,
+@asientos INT,
+@empleado VARCHAR(9),
+@servicio BIT, 
+@documentacion VARCHAR(200)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM Viajes WHERE numero = @numero)
+		RETURN -1
+	
+	IF EXISTS(SELECT * FROM Viajes 
+	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
+		RETURN -2
+	
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+		INSERT INTO Viajes 
+		VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -3
+			END
+			
+		INSERT INTO internacionales VALUES (@numero, @servicio, @documentacion)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -4
+			END
+			
+		ELSE
+			BEGIN
+				COMMIT TRANSACTION
+				RETURN 1
+			END
+		END
+END
+GO
+-- Prueba Alta_ViajeInternacional 11, 'Compania 3', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 1, 'Cedula'
+-- Prueba Alta_ViajeInternacional 12, 'Compania 1', 'DDD', '15/02/2018 17:00', '16/02/2018 02:00', 45, '33333333', 0, 'Pasaporte'
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ELIMINAR VIAJE NACIONAL
+CREATE PROCEDURE Eliminar_ViajeNacional
+@numero INT
+AS
+BEGIN
+	IF NOT EXISTS(SELECT * FROM Nacionales WHERE numero = @numero)
+		RETURN -1
+			
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+			DELETE FROM Nacionales WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -2
+				END
+				
+			DELETE FROM Viajes WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -3
+				END
+				
+			ELSE
+				BEGIN
+					COMMIT TRANSACTION
+					RETURN 1
+				END
+		END
+END
+GO
+
+-- Prueba Eliminar_ViajeNacional 9
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA ELIMINAR VIAJE INTERNACIONAL
+CREATE PROCEDURE Eliminar_ViajeInternacional
+@numero INT
+AS
+BEGIN
+	IF NOT EXISTS(SELECT * FROM Internacionales WHERE numero = @numero)
+		RETURN -1
+			
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+			DELETE FROM Internacionales WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -2
+				END
+				
+			DELETE FROM Viajes WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -3
+				END
+				
+			ELSE
+				BEGIN
+					COMMIT TRANSACTION
+					RETURN 1
+				END
+		END
+END
+GO
+
+-- Prueba Eliminar_ViajeInternacional 11
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA MODIFICAR VIAJE NACIONAL
+CREATE PROCEDURE Modificar_ViajeNacional
+@numero INT, 
+@compania VARCHAR(50),
+@destino VARCHAR(3),
+@fecha_partida datetime,
+@fecha_arribo datetime,
+@asientos INT,
+@empleado VARCHAR(9),
+@paradas INT
+AS
+BEGIN
+	IF NOT EXISTS(SELECT * FROM Viajes WHERE numero = @numero)
+		RETURN -1
+	
+	IF EXISTS(SELECT * FROM Viajes 
+	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
+		RETURN -2
+	
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+			UPDATE Viajes 
+			SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
+				fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
+			WHERE numero = @numero
+			IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -3
+			END
+		
+			UPDATE Nacionales SET paradas = @paradas WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -4
+				END
+			
+			ELSE
+			BEGIN
+				COMMIT TRANSACTION
+				RETURN 1
+			END
+		END
+END
+GO
+-- Prueba Modificar_ViajeNacional 9, 'Compania 3', 'CCC', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 5
+-- Prueba Modificar_ViajeNacional 9, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 5
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA MODIFICAR VIAJE INTERNACIONAL
+CREATE PROCEDURE Modificar_ViajeInternacional
+@numero INT, 
+@compania VARCHAR(50),
+@destino VARCHAR(3),
+@fecha_partida datetime,
+@fecha_arribo datetime,
+@asientos INT,
+@empleado VARCHAR(9),
+@servicio BIT, 
+@documentacion VARCHAR(200)
+AS
+BEGIN
+	IF NOT EXISTS(SELECT * FROM Viajes WHERE numero = @numero)
+		RETURN -1
+	
+	IF EXISTS(SELECT * FROM Viajes 
+	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
+		RETURN -2
+	
+	ELSE
+		BEGIN
+		BEGIN TRANSACTION
+			UPDATE Viajes 
+			SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
+				fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
+			WHERE numero = @numero
+			IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK TRANSACTION
+				RETURN -3
+			END
+		
+			UPDATE internacionales SET servicio = @servicio, documentacion = @documentacion 
+			WHERE numero = @numero
+			IF (@@ERROR <> 0)
+				BEGIN
+					ROLLBACK TRANSACTION
+					RETURN -4
+				END
+			
+			ELSE
+			BEGIN
+				COMMIT TRANSACTION
+				RETURN 1
+			END
+		END
+END
+GO
+-- Prueba Modificar_ViajeInternacional 11, 'Compania 1', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 0, 'Cedula y Vacunas'
+-- Prueba Modificar_ViajeInternacional 11, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 1, 'Cedula'
 -- -----------------------------------------------------------------------------------------------
