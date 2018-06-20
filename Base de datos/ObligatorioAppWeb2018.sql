@@ -983,6 +983,7 @@ BEGIN
 	END
 GO
 
+
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 1', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 0, 'Cedula y Vacunas'
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 1, 'Cedula'
 -- -----------------------------------------------------------------------------------------------
