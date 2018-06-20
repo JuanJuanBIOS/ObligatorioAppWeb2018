@@ -223,13 +223,12 @@ BEGIN
 		ELSE
 			RETURN -2
 	END
-	
+
+	INSERT INTO Empleados (cedula, pass, nombre) VALUES (@cedula, @pass, @nombre)
+	IF (@@ERROR = 0)
+		RETURN 1
 	ELSE
-		INSERT INTO Empleados (cedula, pass, nombre) VALUES (@cedula, @pass, @nombre)
-		IF (@@ERROR = 0)
-			RETURN 1
-		ELSE
-			RETURN -2
+		RETURN -2
 END
 GO
 -- Prueba Alta_Empleado '44444444', '444444', 'Empleado4'
@@ -250,15 +249,13 @@ BEGIN
 			UPDATE Empleados SET activo=0 WHERE cedula = @cedula
 			RETURN 1
 		END
-		
+
+	DELETE FROM Empleados WHERE cedula = @cedula
+	IF(@@ERROR = 0)
+		RETURN 1
 	ELSE
-		BEGIN
-			DELETE FROM Empleados WHERE cedula = @cedula
-			IF(@@ERROR = 0)
-				RETURN 1
-			ELSE
-				RETURN -2
-		END
+		RETURN -2
+
 END
 GO
 --Prueba Eliminar_Empleado '11111111'
@@ -275,15 +272,13 @@ AS
 BEGIN
 	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @cedula AND activo = 1)
 		RETURN -1
-	
+
+	UPDATE Empleados SET pass = @pass, nombre = @nombre	WHERE cedula = @cedula
+	IF(@@ERROR = 0)
+		RETURN 1
 	ELSE
-		BEGIN
-			UPDATE Empleados SET pass = @pass, nombre = @nombre	WHERE cedula = @cedula
-			IF(@@ERROR = 0)
-				RETURN 1
-			ELSE
-				RETURN -2
-		END
+		RETURN -2
+
 END
 GO
 --Prueba Modificar_Empleado '11111111', '111111', 'Empleado01'
@@ -362,14 +357,13 @@ BEGIN
 		ELSE
 			RETURN -2
 	END
-	
+
+	INSERT INTO Companias (nombre, direccion, telefono) 
+	VALUES (@nombre, @direccion, @telefono)
+	IF (@@ERROR = 0)
+		RETURN 1
 	ELSE
-		INSERT INTO Companias (nombre, direccion, telefono) 
-		VALUES (@nombre, @direccion, @telefono)
-		IF (@@ERROR = 0)
-			RETURN 1
-		ELSE
-			RETURN -2
+		RETURN -2
 END
 GO
 -- Prueba Alta_Compania 'Compania 4', 'Calle 4', '099444444'
@@ -390,15 +384,12 @@ BEGIN
 			UPDATE Companias SET activo=0 WHERE nombre = @nombre
 			RETURN 1
 		END
-		
+
+	DELETE FROM Companias WHERE nombre = @nombre
+	IF(@@ERROR = 0)
+		RETURN 1
 	ELSE
-		BEGIN
-			DELETE FROM Companias WHERE nombre = @nombre
-			IF(@@ERROR = 0)
-				RETURN 1
-			ELSE
-				RETURN -2
-		END
+		RETURN -2
 END
 GO
 -- Prueba Eliminar_Compania 'Compania 2'
@@ -415,16 +406,13 @@ AS
 BEGIN
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @nombre AND activo = 1)
 		RETURN -1
-	
+
+	UPDATE Companias SET direccion = @direccion, telefono = @telefono 
+	WHERE nombre = @nombre
+	IF(@@ERROR = 0)
+		RETURN 1
 	ELSE
-		BEGIN
-			UPDATE Companias SET direccion = @direccion, telefono = @telefono 
-			WHERE nombre = @nombre
-			IF(@@ERROR = 0)
-				RETURN 1
-			ELSE
-				RETURN -2
-		END
+		RETURN -2
 END
 GO
 -- Prueba Modificar_Compania 'Compania 1', 'Calle 01', '099111111'
@@ -515,13 +503,12 @@ BEGIN
 		ELSE
 			RETURN -2
 	END
-	
+
+	INSERT INTO Terminales (codigo, ciudad, pais) VALUES (@codigo, @ciudad, @pais)
+	IF (@@ERROR = 0)
+		RETURN 1
 	ELSE
-		INSERT INTO Terminales (codigo, ciudad, pais) VALUES (@codigo, @ciudad, @pais)
-		IF (@@ERROR = 0)
-			RETURN 1
-		ELSE
-			RETURN -2
+		RETURN -2
 END
 GO
 -- Prueba Alta_Terminal 'GGG', 'Ciudad 7', 'Argentina'
@@ -721,29 +708,26 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
 		RETURN -5
 	
+	BEGIN TRANSACTION
+	INSERT INTO Viajes 
+	VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
+	IF (@@ERROR <> 0)
+		BEGIN
+			ROLLBACK TRANSACTION
+			RETURN -6
+		END
+			
+	INSERT INTO Nacionales VALUES (@numero, @paradas)
+	IF (@@ERROR <> 0)
+		BEGIN
+			ROLLBACK TRANSACTION
+			RETURN -7
+		END
+			
 	ELSE
 		BEGIN
-		BEGIN TRANSACTION
-		INSERT INTO Viajes 
-		VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
-		IF (@@ERROR <> 0)
-			BEGIN
-				ROLLBACK TRANSACTION
-				RETURN -6
-			END
-			
-		INSERT INTO Nacionales VALUES (@numero, @paradas)
-		IF (@@ERROR <> 0)
-			BEGIN
-				ROLLBACK TRANSACTION
-				RETURN -7
-			END
-			
-		ELSE
-			BEGIN
-				COMMIT TRANSACTION
-				RETURN 1
-			END
+			COMMIT TRANSACTION
+			RETURN 1
 		END
 END
 GO
@@ -781,29 +765,26 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
 		RETURN -5
 	
+	BEGIN TRANSACTION
+	INSERT INTO Viajes 
+	VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
+	IF (@@ERROR <> 0)
+		BEGIN
+			ROLLBACK TRANSACTION
+			RETURN -6
+		END
+			
+	INSERT INTO internacionales VALUES (@numero, @servicio, @documentacion)
+	IF (@@ERROR <> 0)
+		BEGIN
+			ROLLBACK TRANSACTION
+			RETURN -7
+		END
+			
 	ELSE
 		BEGIN
-		BEGIN TRANSACTION
-		INSERT INTO Viajes 
-		VALUES (@numero, @compania, @destino, @fecha_partida, @fecha_arribo, @asientos, @empleado)
-		IF (@@ERROR <> 0)
-			BEGIN
-				ROLLBACK TRANSACTION
-				RETURN -6
-			END
-			
-		INSERT INTO internacionales VALUES (@numero, @servicio, @documentacion)
-		IF (@@ERROR <> 0)
-			BEGIN
-				ROLLBACK TRANSACTION
-				RETURN -7
-			END
-			
-		ELSE
-			BEGIN
-				COMMIT TRANSACTION
-				RETURN 1
-			END
+			COMMIT TRANSACTION
+			RETURN 1
 		END
 END
 GO
@@ -916,31 +897,28 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
 		RETURN -5
 		
-	ELSE
+	BEGIN TRANSACTION
+		UPDATE Viajes 
+		SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
+			fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
+		WHERE numero = @numero
+		IF (@@ERROR <> 0)
 		BEGIN
-		BEGIN TRANSACTION
-			UPDATE Viajes 
-			SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
-				fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
-			WHERE numero = @numero
-			IF (@@ERROR <> 0)
+			ROLLBACK TRANSACTION
+			RETURN -6
+		END
+		
+		UPDATE Nacionales SET paradas = @paradas WHERE numero = @numero
+		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -6
+				RETURN -7
 			END
-		
-			UPDATE Nacionales SET paradas = @paradas WHERE numero = @numero
-			IF (@@ERROR <> 0)
-				BEGIN
-					ROLLBACK TRANSACTION
-					RETURN -7
-				END
 			
-			ELSE
-			BEGIN
-				COMMIT TRANSACTION
-				RETURN 1
-			END
+		ELSE
+		BEGIN
+			COMMIT TRANSACTION
+			RETURN 1
 		END
 END
 GO
@@ -978,34 +956,31 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
 		RETURN -5
 	
-	ELSE
+	BEGIN TRANSACTION
+		UPDATE Viajes 
+		SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
+			fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
+		WHERE numero = @numero
+		IF (@@ERROR <> 0)
 		BEGIN
-		BEGIN TRANSACTION
-			UPDATE Viajes 
-			SET compania = @compania, destino = @destino, fecha_partida = @fecha_partida, 
-				fecha_arribo = @fecha_arribo, asientos = @asientos, empleado = @empleado
-			WHERE numero = @numero
-			IF (@@ERROR <> 0)
+			ROLLBACK TRANSACTION
+			RETURN -6
+		END
+		
+		UPDATE internacionales SET servicio = @servicio, documentacion = @documentacion 
+		WHERE numero = @numero
+		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -6
+				RETURN -7
 			END
-		
-			UPDATE internacionales SET servicio = @servicio, documentacion = @documentacion 
-			WHERE numero = @numero
-			IF (@@ERROR <> 0)
-				BEGIN
-					ROLLBACK TRANSACTION
-					RETURN -7
-				END
 			
-			ELSE
-			BEGIN
-				COMMIT TRANSACTION
-				RETURN 1
-			END
+		ELSE
+		BEGIN
+			COMMIT TRANSACTION
+			RETURN 1
 		END
-END
+	END
 GO
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 1', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 0, 'Cedula y Vacunas'
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 1, 'Cedula'
