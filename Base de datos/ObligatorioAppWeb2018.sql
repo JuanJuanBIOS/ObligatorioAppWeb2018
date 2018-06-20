@@ -664,25 +664,13 @@ GO
 -- ***********************************************************************************************
 
 -- -----------------------------------------------------------------------------------------------
--- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE VIAJE
-CREATE PROCEDURE Buscar_Viaje
-@numero INT
-AS
-BEGIN
-	SELECT * FROM Viajes WHERE numero = @numero
-END
-GO
--- Prueba Buscar_Viaje 1
--- Prueba Buscar_Viaje 4
--- -----------------------------------------------------------------------------------------------
-
--- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE VIAJE NACIONAL
 CREATE PROCEDURE Buscar_ViajeNacional
 @numero INT
 AS
 BEGIN
-	SELECT * FROM Nacionales WHERE numero = @numero
+	SELECT Viajes.*, Nacionales.paradas FROM Viajes INNER JOIN Nacionales 
+	ON Viajes.numero = Nacionales.numero WHERE Viajes.numero = @numero
 END
 GO
 -- Prueba Buscar_ViajeNacional 1
@@ -695,7 +683,9 @@ CREATE PROCEDURE Buscar_ViajeInternacional
 @numero INT
 AS
 BEGIN
-	SELECT * FROM internacionales WHERE numero = @numero
+	SELECT Viajes.*, Internacionales.servicio, Internacionales.documentacion 
+	FROM Viajes INNER JOIN Internacionales ON Viajes.numero = Internacionales.numero 
+	WHERE Viajes.numero = @numero
 END
 GO
 -- Prueba Buscar_ViajeInternacional 1
@@ -722,6 +712,15 @@ BEGIN
 	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
 		RETURN -2
 	
+	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
+		RETURN -3
+		
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @destino AND activo = 1)
+		RETURN -4
+	
+	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
+		RETURN -5
+	
 	ELSE
 		BEGIN
 		BEGIN TRANSACTION
@@ -730,14 +729,14 @@ BEGIN
 		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -3
+				RETURN -6
 			END
 			
 		INSERT INTO Nacionales VALUES (@numero, @paradas)
 		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -4
+				RETURN -7
 			END
 			
 		ELSE
@@ -772,6 +771,15 @@ BEGIN
 	IF EXISTS(SELECT * FROM Viajes 
 	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
 		RETURN -2
+		
+	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
+		RETURN -3
+		
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @destino AND activo = 1)
+		RETURN -4
+	
+	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
+		RETURN -5
 	
 	ELSE
 		BEGIN
@@ -781,14 +789,14 @@ BEGIN
 		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -3
+				RETURN -6
 			END
 			
 		INSERT INTO internacionales VALUES (@numero, @servicio, @documentacion)
 		IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -4
+				RETURN -7
 			END
 			
 		ELSE
@@ -899,6 +907,15 @@ BEGIN
 	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
 		RETURN -2
 	
+	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
+		RETURN -3
+		
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @destino AND activo = 1)
+		RETURN -4
+	
+	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
+		RETURN -5
+		
 	ELSE
 		BEGIN
 		BEGIN TRANSACTION
@@ -909,14 +926,14 @@ BEGIN
 			IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -3
+				RETURN -6
 			END
 		
 			UPDATE Nacionales SET paradas = @paradas WHERE numero = @numero
 			IF (@@ERROR <> 0)
 				BEGIN
 					ROLLBACK TRANSACTION
-					RETURN -4
+					RETURN -7
 				END
 			
 			ELSE
@@ -952,6 +969,15 @@ BEGIN
 	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
 		RETURN -2
 	
+	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
+		RETURN -3
+		
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @destino AND activo = 1)
+		RETURN -4
+	
+	IF NOT EXISTS(SELECT * FROM Empleados WHERE cedula = @empleado AND activo = 1)
+		RETURN -5
+	
 	ELSE
 		BEGIN
 		BEGIN TRANSACTION
@@ -962,7 +988,7 @@ BEGIN
 			IF (@@ERROR <> 0)
 			BEGIN
 				ROLLBACK TRANSACTION
-				RETURN -3
+				RETURN -6
 			END
 		
 			UPDATE internacionales SET servicio = @servicio, documentacion = @documentacion 
@@ -970,7 +996,7 @@ BEGIN
 			IF (@@ERROR <> 0)
 				BEGIN
 					ROLLBACK TRANSACTION
-					RETURN -4
+					RETURN -7
 				END
 			
 			ELSE
