@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObligatorioAppWeb", "ObligatorioAppWeb\ObligatorioAppWeb.csproj", "{D3A9DDDC-3E8B-4FD0-96DD-75869F44DD90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCompartidas", "EntidadesCompartidas\EntidadesCompartidas.csproj", "{286B7DE4-0A21-4A95-96C4-C4E816A787CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D3A9DDDC-3E8B-4FD0-96DD-75869F44DD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A9DDDC-3E8B-4FD0-96DD-75869F44DD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A9DDDC-3E8B-4FD0-96DD-75869F44DD90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
