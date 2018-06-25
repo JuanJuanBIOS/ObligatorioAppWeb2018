@@ -56,10 +56,36 @@ namespace EntidadesCompartidas
             }
         }
 
+        public string Pass
+        {
+            get {return _pass;}
 
+            set
+            {
+                if(value.Length == 6)
+                {
+                    _pass = value;
+                }
+                else
+                {
+                    throw new Exception("La contraseña ingresada debe contener 6 caracteres");
+                }
+            }
+        }
 
+        public string Nombre
+        {
+            get { return _nombre; }
 
+            set { _nombre = value; }
+        }
 
-
+        //Constructor
+        public Empleados(string pCedula, string pPass, string pNombre)
+        {
+            Cedula = pCedula;
+            Pass = pPass;
+            Nombre = pNombre;
+        }
     }
 }
