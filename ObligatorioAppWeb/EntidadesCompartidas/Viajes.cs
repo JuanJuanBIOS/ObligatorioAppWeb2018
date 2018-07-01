@@ -67,16 +67,36 @@ namespace EntidadesCompartidas
 
         public DateTime Fecha_partida
         {
-            get {return _fecha_partida;} //FALTA VERIFICAR QUE SEA POSTERIOR AL DÍA DE HOY Y ADEMÁS VER SI SE PUEDE VERIFICAR QUE SEA ANTERIOR A LA DE ARRIBO
+            get {return _fecha_partida;}
 
-            set {_fecha_partida = value;}
+            set
+            {
+                if (value <= _fecha_arribo)
+                {
+                    _fecha_partida = value;
+                }
+                else
+                {
+                    throw new Exception("La fecha de partida no puede ser posterior a la fecha de arribo");
+                } 
+            }
         }
 
         public DateTime Fecha_arribo
         {
-            get { return _fecha_arribo; } //FALTA VERIFICAR QUE SEA POSTERIOR AL DÍA DE HOY Y ADEMÁS VER SI SE PUEDE VERIFICAR QUE SEA POSTERIOR A LA DE PARTIDA
+            get { return _fecha_arribo; }
 
-            set {_fecha_arribo = value;}
+            set
+            {
+                if (value >= _fecha_partida)
+                {
+                    _fecha_arribo = value;
+                }
+                else
+                {
+                    throw new Exception("La fecha de arribo no puede ser anterior a la fecha de partida");
+                }
+            }
         }
 
         public int Asientos
