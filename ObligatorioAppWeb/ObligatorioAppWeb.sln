@@ -2,8 +2,24 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObligatorioAppWeb", "ObligatorioAppWeb\ObligatorioAppWeb.csproj", "{D3A9DDDC-3E8B-4FD0-96DD-75869F44DD90}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5} = {EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}
+		{A866C1BA-204F-4532-9CC8-5DFC3AA7B560} = {A866C1BA-204F-4532-9CC8-5DFC3AA7B560}
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF} = {286B7DE4-0A21-4A95-96C4-C4E816A787CF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCompartidas", "EntidadesCompartidas\EntidadesCompartidas.csproj", "{286B7DE4-0A21-4A95-96C4-C4E816A787CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistencia", "Persistencia\Persistencia.csproj", "{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF} = {286B7DE4-0A21-4A95-96C4-C4E816A787CF}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{A866C1BA-204F-4532-9CC8-5DFC3AA7B560}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5} = {EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}
+		{286B7DE4-0A21-4A95-96C4-C4E816A787CF} = {286B7DE4-0A21-4A95-96C4-C4E816A787CF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +35,14 @@ Global
 		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{286B7DE4-0A21-4A95-96C4-C4E816A787CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC73CB0F-9FA6-49BB-9090-2A842EBD5FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A866C1BA-204F-4532-9CC8-5DFC3AA7B560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A866C1BA-204F-4532-9CC8-5DFC3AA7B560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A866C1BA-204F-4532-9CC8-5DFC3AA7B560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A866C1BA-204F-4532-9CC8-5DFC3AA7B560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
