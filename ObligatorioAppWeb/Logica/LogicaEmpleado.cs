@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EntidadesCompartidas;
+using Persistencia;
 
-namespace Persistencia
+namespace Logica
 {
-    public class PersistenciaEmpleado
+    public class LogicaEmpleado
     {
         public static Empleados Login(string pCed, string pPass)
         {
-            return null;
+            Empleados E = null;
+
+            E = PersistenciaEmpleado.Login(pCed, pPass);
+
+            return E;
         }
     }
 }

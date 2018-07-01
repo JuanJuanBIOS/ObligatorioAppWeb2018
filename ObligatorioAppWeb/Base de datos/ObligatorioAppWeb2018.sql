@@ -87,72 +87,6 @@ CONSTRAINT FK_Internacionales FOREIGN KEY (numero) REFERENCES Viajes(numero)
 )
 GO
 
-
--- ESTO HAY QUE BORRARLO PORQUE LA INSERCIÓN DE DATOS DE PRUEBA DEBE HACERSE USANDO LOS SP
--- CUANDO ILENA CONFIRME QUE TODOS LOS SP ESTÁN BIEN HAY QUE PASAR LA INSERCIÓN DE DATOS 
--- PARA EL FINAL DEL SCRIPT PARA USAR LOS SP
-INSERT INTO Empleados VALUES
-('11111111','111111','Empleado1',1),
-('22222222','222222','Empleado2',0),
-('33333333','333333','Empleado3',1)
-go
-
-INSERT INTO Companias VALUES
-('Compania 1','Calle 1','099111111',1),
-('Compania 2','Calle 2','099222222',0),
-('Compania 3','Calle 3','099333333',1)
-
-INSERT INTO Terminales VALUES
-('AAA','Cuidad 1','Uruguay',1),
-('BBB','Cuidad 2','Uruguay',1),
-('CCC','Cuidad 3','Brasil',0),
-('DDD','Cuidad 4','Brasil',1),
-('EEE','Cuidad 5','Paraguay',0),
-('FFF','Cuidad 6','Argentina',1)
-go
-
-INSERT INTO Facilidades VALUES
-('AAA','Facilidad 1'),
-('AAA','Facilidad 2'),
-('AAA','Facilidad 3'),
-('BBB','Facilidad 2'),
-('CCC','Facilidad 1'),
-('CCC','Facilidad 3'),
-('DDD','Facilidad 1'),
-('DDD','Facilidad 2'),
-('EEE','Facilidad 3'),
-('FFF','Facilidad 1'),
-('FFF','Facilidad 2'),
-('FFF','Facilidad 3')
-go
-
-INSERT INTO Viajes VALUES
-(1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '11111111'),
-(2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '22222222'),
-(3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '11111111'),
-(4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '11111111'),
-(5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '22222222'),
-(6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '22222222'),
-(7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '11111111'),
-(8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '22222222')
-GO
-
-
-INSERT INTO Nacionales VALUES
-(1,0),
-(2,2),
-(3,0),
-(5,3)
-GO
-
-INSERT INTO Internacionales VALUES
-(4,0,'Cedula'),
-(6,1,''),
-(7,1,'Pasaporte y vacunas'),
-(8,0,'')
-GO
-
-
 -- -----------------------------------------------------------------------------------------------
 -- CREACIÓN DE STORED PROCEDURES
 -- -----------------------------------------------------------------------------------------------
@@ -987,3 +921,88 @@ GO
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 1', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 0, 'Cedula y Vacunas'
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 1, 'Cedula'
 -- -----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+-- -----------------------------------------------------------------------------------------------
+-- INSERCIÓN DE DATOS DE PRUEBA
+-- -----------------------------------------------------------------------------------------------
+
+Alta_Empleado '11111111', '111111', 'Empleado1'
+GO
+Alta_Empleado '22222222', '222222', 'Empleado2'
+GO
+Alta_Empleado '33333333', '333333', 'Empleado3'
+GO
+
+Alta_Compania 'Compania 1','Calle 1','099111111'
+GO
+Alta_Compania 'Compania 2','Calle 2','099222222'
+GO
+Alta_Compania 'Compania 3','Calle 3','099333333'
+GO
+
+Alta_Terminal 'AAA','Cuidad 1','Uruguay'
+GO
+Alta_Terminal 'BBB','Cuidad 2','Uruguay'
+GO
+Alta_Terminal 'CCC','Cuidad 3','Brasil'
+GO
+Alta_Terminal 'DDD','Cuidad 4','Brasil'
+GO
+Alta_Terminal 'EEE','Cuidad 5','Paraguay'
+GO
+Alta_Terminal 'FFF','Cuidad 6','Argentina'
+GO
+
+Alta_Facilidades 'AAA','Facilidad 1'
+GO
+Alta_Facilidades 'AAA','Facilidad 2'
+GO
+Alta_Facilidades 'AAA','Facilidad 3'
+GO
+Alta_Facilidades 'BBB','Facilidad 2'
+GO
+Alta_Facilidades 'CCC','Facilidad 1'
+GO
+Alta_Facilidades 'CCC','Facilidad 3'
+GO
+Alta_Facilidades 'DDD','Facilidad 1'
+GO
+Alta_Facilidades 'DDD','Facilidad 2'
+GO
+Alta_Facilidades 'EEE','Facilidad 3'
+GO
+Alta_Facilidades 'FFF','Facilidad 1'
+GO
+Alta_Facilidades 'FFF','Facilidad 2'
+GO
+Alta_Facilidades 'FFF','Facilidad 3'
+GO
+
+Alta_ViajeNacional 1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '11111111', 0
+GO
+Alta_ViajeNacional 2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '22222222', 2
+GO
+Alta_ViajeNacional 3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '11111111', 0
+GO
+Alta_ViajeNacional 5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '22222222', 3
+GO
+Alta_ViajeInternacional 4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '11111111', 0, 'Cedula'
+GO
+Alta_ViajeInternacional 6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '22222222', 1, ''
+GO
+Alta_ViajeInternacional 7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '11111111', 1, 'Pasaporte y vacunas'
+GO
+Alta_ViajeInternacional 8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '22222222', 0, ''
+GO
+
+Eliminar_Empleado '22222222'
+GO
+Eliminar_Compania 'Compania 2'
+GO
+Eliminar_Terminal 'CCC'
+GO
