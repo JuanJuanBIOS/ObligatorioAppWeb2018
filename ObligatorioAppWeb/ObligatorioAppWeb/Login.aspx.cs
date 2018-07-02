@@ -20,31 +20,24 @@ namespace ObligatorioAppWeb
         {
             try
             {
-                //Verifico el usuario y contraseña
-                Empleados unEmp = LogicaEmpleado.Login(TBCedula.Text, TBContrasenia.Text);
+                string _cedula = TBCedula.Text;
+                string _pass = TBContrasenia.Text;
+
+                ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
+
+                Empleados unEmp = FEmpleado.Login(_cedula, _pass);
+
                 if (unEmp != null)
                 {
                     Session["Empleado"] = unEmp;
-                //    if (unUsu is Administrador)
-                //    {
-                //        Response.Redirect("BienvenidaAdministrador.aspx", false);
-                //    }
-                //    else if (unUsu is Cliente)
-                //    {
-                //        Response.Redirect("BienvenidaCliente.aspx", false);
-                //    }
-                //    else
-                //    {
-                //        Response.Redirect("Login.aspx", false);
-                //    }
                 }
                 else
                 {
                     LblException.Text = "";
                     LblError.Text = "Cédula y/o contraseña incorrectas.";
                 }
-
             }
+
             catch
             {
                 LblError.Text = "";

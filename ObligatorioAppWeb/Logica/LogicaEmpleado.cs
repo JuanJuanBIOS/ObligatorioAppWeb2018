@@ -7,13 +7,29 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaEmpleado
+    internal class LogicaEmpleado : ILogicaEmpleado
     {
-        public static Empleados Login(string pCed, string pPass)
-        {
-            Empleados E = null;
+        //Singleton
+        private static LogicaEmpleado _instancia = null;
+        private LogicaEmpleado() { }
 
-            E = PersistenciaEmpleado.Login(pCed, pPass);
+        public static LogicaEmpleado GetInstancia()
+        {
+            if (_instancia == null)
+            {
+                _instancia = new LogicaEmpleado();
+            }
+
+            return _instancia;
+        }
+
+
+        //Operaciones
+        public Empleados Login(string pCed, string pPass)
+        {
+            IPersistenciaEmpleado FEmpleado = FabricaPersistencia.getPersistenciaEmpleado();
+
+            Empleados E = FEmpleado.Login(pCed, pPass);
 
             return E;
         }

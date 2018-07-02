@@ -6,10 +6,28 @@ using EntidadesCompartidas;
 
 namespace Persistencia
 {
-    public class PersistenciaEmpleado
+    internal class PersistenciaEmpleado : IPersistenciaEmpleado
     {
-        public static Empleados Login(string pCed, string pPass)
+        //Singleton
+        private static PersistenciaEmpleado _instancia = null;
+
+        private PersistenciaEmpleado() { }
+
+        public static PersistenciaEmpleado GetInstancia()
         {
+            if (_instancia == null)
+            {
+                _instancia = new PersistenciaEmpleado();
+            }
+
+            return _instancia;
+        }
+
+
+        //Operaciones
+        public Empleados Login(string pCed, string pPass)
+        {
+            //ACÁ FALTA HACER LA CONEXIÓN CON LA BASE DE DATOS, ETC, ETC
             return null;
         }
     }
