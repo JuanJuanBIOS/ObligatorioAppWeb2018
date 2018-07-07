@@ -44,7 +44,11 @@
     <Compile Include="ILogicaCompania.cs" />
     <Compile Include="ILogicaEmpleado.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="ILogicaTerminales.cs" />
+=======
+    <Compile Include="LogicaCompania.cs" />
+>>>>>>> 843afe1e700de0628470ab0457913b4469e3b7eb
 =======
     <Compile Include="LogicaCompania.cs" />
 >>>>>>> 843afe1e700de0628470ab0457913b4469e3b7eb
