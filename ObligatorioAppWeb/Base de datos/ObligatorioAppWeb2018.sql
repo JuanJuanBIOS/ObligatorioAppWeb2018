@@ -931,11 +931,11 @@ GO
 -- INSERCIÓN DE DATOS DE PRUEBA
 -- -----------------------------------------------------------------------------------------------
 
-Alta_Empleado '11111111', '111111', 'Empleado1'
+Alta_Empleado '47879585', '111111', 'Empleado1'
 GO
-Alta_Empleado '22222222', '222222', 'Empleado2'
+Alta_Empleado '41348194', '222222', 'Empleado2'
 GO
-Alta_Empleado '33333333', '333333', 'Empleado3'
+Alta_Empleado '15080405', '333333', 'Empleado3'
 GO
 
 Alta_Compania 'Compania 1','Calle 1','099111111'

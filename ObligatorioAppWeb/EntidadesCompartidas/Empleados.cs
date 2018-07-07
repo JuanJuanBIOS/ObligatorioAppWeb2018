@@ -27,15 +27,15 @@ namespace EntidadesCompartidas
                     
                     //Verifico que el dígito verificador sea el que debe ser
                     int digver = ced % 10;
-                    int dig1 = (ced - digver) % 100;
-                    int dig2 = (ced - digver - dig1 * 10) % 1000;
-                    int dig3 = (ced - digver - dig1 * 10 - dig2 * 1000) % 10000;
-                    int dig4 = (ced - digver - dig1 * 10 - dig2 * 1000 - dig3 * 10000) % 100000;
-                    int dig5 = (ced - digver - dig1 * 10 - dig2 * 1000 - dig3 * 10000 - dig4 * 100000) % 1000000;
-                    int dig6 = (ced - digver - dig1 * 10 - dig2 * 1000 - dig3 * 10000 - dig4 * 100000 - dig5 * 1000000) % 10000000;
-                    int dig7 = (ced - digver - dig1 * 10 - dig2 * 1000 - dig3 * 10000 - dig4 * 100000 - dig5 * 1000000 - dig6 * 10000000) % 100000000;
+                    int dig1 = ((ced - digver)/10) % 10;
+                    int dig2 = ((ced - digver - dig1 * 10)/100) % 10;
+                    int dig3 = ((ced - digver - dig1 * 10 - dig2 * 100)/1000) % 10;
+                    int dig4 = ((ced - digver - dig1 * 10 - dig2 * 100 - dig3 * 1000)/10000) % 10;
+                    int dig5 = ((ced - digver - dig1 * 10 - dig2 * 100 - dig3 * 1000 - dig4 * 10000)/100000) % 10;
+                    int dig6 = ((ced - digver - dig1 * 10 - dig2 * 100 - dig3 * 1000 - dig4 * 10000 - dig5 * 100000)/1000000) % 10;
+                    int dig7 = ((ced - digver - dig1 * 10 - dig2 * 100 - dig3 * 1000 - dig4 * 10000 - dig5 * 100000 - dig6 * 1000000) / 10000000) % 10;
                     
-                    int verificador = dig7 * 8 + dig6 * 1 + dig5 * 2 + dig4 * 3 + dig3 * 4 + dig2 * 7 + dig1 * 6;
+                    int verificador = (dig7 * 8 + dig6 * 1 + dig5 * 2 + dig4 * 3 + dig3 * 4 + dig2 * 7 + dig1 * 6) % 10;
 
                     //Si el dígito verificador es correcto lo asigno, de lo contrario devuelvo un error
                     if (digver == verificador)

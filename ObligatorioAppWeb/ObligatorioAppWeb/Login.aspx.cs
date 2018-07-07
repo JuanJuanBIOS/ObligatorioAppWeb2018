@@ -13,7 +13,7 @@ namespace ObligatorioAppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            TBCedula.Focus();
         }
 
         protected void BtnLogin_Click(object sender, EventArgs e)
@@ -30,6 +30,8 @@ namespace ObligatorioAppWeb
                 if (unEmp != null)
                 {
                     Session["Empleado"] = unEmp;
+
+                    Response.Redirect("BienvenidaEmpleado.aspx", false);
                 }
                 else
                 {

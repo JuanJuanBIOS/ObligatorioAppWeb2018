@@ -29,48 +29,44 @@ namespace Persistencia
         //Operaciones
         public Empleados Login(string pCed, string pPass)
         {
-            Empleados E = null;
+            Empleados unEmp = null;
 
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Login_Empleado", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter _cedula = new SqlParameter("@cedula", pCed);
-            SqlParameter _pass = new SqlParameter("@pass", pPass);
-            
-
-            //no me acuerdo si esto era para capturar los errores o teniamos que definir la variable tambien en el stored procedure
-            SqlParameter _Retorno = new SqlParameter("@Retorno", SqlDbType.Int);
-            _Retorno.Direction = ParameterDirection.ReturnValue;
-
-            int oAfectados = -1;
-
-            oComando.Parameters.Add(_cedula);
-            oComando.Parameters.Add(_pass);
+            oComando.Parameters.AddWithValue("@cedula", pCed);
+            oComando.Parameters.AddWithValue("@pass", pPass);
 
             try
             {
                 oConexion.Open();
-                oReader = oComando.ExecuteReader();
-                if (oReader.Read())
+                SqlDataReader oReader = oComando.ExecuteReader();
+
+                if (oReader.HasRows)
                 {
-                    _codigo = (int)oReader["CodArt"];
-                    _nombre = (string)oReader["NomArt"];
-                    _precio = (decimal)oReader["PreArt"];
-                    a = new Articulo(_codigo,_nombre,_precio);
+                    oReader.Read();
+
+                    string _cedula = (string)oReader["cedula"];
+                    string _pass = (string)oReader["pass"];
+                    string _nombre = (string)oReader["nombre"];
+
+                    oReader.Close();
+
+                    unEmp = new Empleados(_cedula, _pass, _nombre);
                 }
-                oReader.Close();
             }
             catch (Exception ex)
             {
                 throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
             }
+
             finally
             {
                 oConexion.Close();
             }
-            return a;
+
+            return unEmp;
         }
-       }
     }
 }
