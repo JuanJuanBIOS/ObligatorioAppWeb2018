@@ -71,7 +71,7 @@ namespace Persistencia
 
 
         //Crear
-        public static void Crear(Companias unaC)
+        public void Crear(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Alta_Compania", oConexion);
@@ -112,7 +112,7 @@ namespace Persistencia
         }
 
         //Modificar
-        public static void Modificar(Companias unaC)
+        public void Modificar(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Modificar", oConexion);
@@ -153,7 +153,7 @@ namespace Persistencia
         }
 
         //Eliminar
-        public static void Eliminar(Companias unaC)
+        public void Eliminar(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Eliminar_Compania", oConexion);
