@@ -24,36 +24,36 @@ namespace Logica
         }
 
         //Operaciones
-        public Companias Buscar(string pNombre)
+        public Companias Buscar_Compania(string pNombre)
         {
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
-            Companias C = FCompania.Buscar(pNombre);
+            Companias C = FCompania.Buscar_Compania(pNombre);
 
             return C;
         }
 
-        public void Crear(Companias C)
+        public void Alta_Compania(Companias C)
         {
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
-            FCompania.Crear(C);
+            FCompania.Alta_Compania(C);
 
         }
 
-        public void Eliminar(Companias C)
+        public void Eliminar_Compania(Companias C)
         {
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
-            FCompania.Eliminar(C);
+            FCompania.Eliminar_Compania(C);
 
         }
 
-        public void Modificar(Companias C)
+        public void Modificar_Compania(Companias C)
         {
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
-            FCompania.Modificar(C);
+            FCompania.Modificar_Compania(C);
 
         }
 
