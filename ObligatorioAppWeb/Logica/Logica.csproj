@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FabricaLogica.cs" />
+    <Compile Include="ILogicaCompania.cs" />
     <Compile Include="ILogicaEmpleado.cs" />
+    <Compile Include="LogicaCompania.cs" />
     <Compile Include="LogicaEmpleado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

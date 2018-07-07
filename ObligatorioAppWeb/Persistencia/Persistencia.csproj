@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="Conexion.cs" />
     <Compile Include="FabricaPersistencia.cs" />
+    <Compile Include="IPersistenciaCompania.cs" />
     <Compile Include="IPersistenciaEmpleado.cs" />
+    <Compile Include="PersistenciaCompania.cs" />
     <Compile Include="PersistenciaEmpleado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
