@@ -28,7 +28,7 @@ namespace Persistencia
 
         //Operaciones
         //Buscar
-        public Companias Buscar(string pNombre)
+        public Companias Buscar_Compania(string pNombre)
         {
             Companias unaComp = null;
 
@@ -71,7 +71,7 @@ namespace Persistencia
 
 
         //Crear
-        public void Crear(Companias unaC)
+        public void Alta_Compania(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Alta_Compania", oConexion);
@@ -112,10 +112,10 @@ namespace Persistencia
         }
 
         //Modificar
-        public void Modificar(Companias unaC)
+        public void Modificar_Compania(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
-            SqlCommand oComando = new SqlCommand("Modificar", oConexion);
+            SqlCommand oComando = new SqlCommand("Modificar_Compania", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
             oComando.Parameters.AddWithValue("@nombre", unaC.Nombre);
@@ -153,7 +153,7 @@ namespace Persistencia
         }
 
         //Eliminar
-        public void Eliminar(Companias unaC)
+        public void Eliminar_Compania(Companias unaC)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Eliminar_Compania", oConexion);
