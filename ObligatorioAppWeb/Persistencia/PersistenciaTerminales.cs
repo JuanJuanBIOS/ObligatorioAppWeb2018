@@ -71,7 +71,7 @@ namespace Persistencia
         }
 
 
-        public void Baja_Terminal(Terminales unaTer)
+        public void Eliminar_Terminal(Terminales unaTer)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Eliminar_Terminal", oConexion);

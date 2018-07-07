@@ -10,7 +10,7 @@ namespace Persistencia
     {
         void Alta_Terminal(Terminales pTemrinal);
 
-        void Baja_Terminal(Terminales pTemrinal);
+        void Eliminar_Terminal(Terminales pTemrinal);
 
         void Modificar_Terminal(Terminales pTemrinal);
     }

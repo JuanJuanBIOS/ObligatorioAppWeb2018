@@ -32,11 +32,11 @@ namespace Logica
             FTerminal.Alta_Terminal(Ter);
         }
 
-        public void Baja_Terminal(Terminales Ter)
+        public void Eliminar_Terminal(Terminales Ter)
         {
             IPersistenciaTerminales FTerminal = FabricaPersistencia.getPersistenciaTerminal();
 
-            FTerminal.Baja_Terminal(Ter);
+            FTerminal.Eliminar_Terminal(Ter);
         }
 
         public void Modificar_Terminal(Terminales Ter)

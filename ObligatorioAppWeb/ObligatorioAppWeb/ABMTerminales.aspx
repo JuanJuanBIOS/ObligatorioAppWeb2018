@@ -8,7 +8,7 @@
     </h2>
 <p>
     Código:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:TextBox ID="TBCodigo" runat="server" MaxLength="50"></asp:TextBox>
+    <asp:TextBox ID="TBCodigo" runat="server" MaxLength="3"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" 
        />
@@ -22,7 +22,7 @@
                 Ciudad:
             </td>
             <td colspan="11">
-                <asp:TextBox ID="TBCiudad" runat="server" Width="324px" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TBCiudad" runat="server" Width="324px" MaxLength="50"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -30,15 +30,14 @@
                 País:
             </td>
             <td colspan="11">
-                <asp:TextBox ID="TBPais" runat="server" Width="324px" MaxLength="100" 
-                    TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="TBPais" runat="server" Width="324px" MaxLength="50"></asp:TextBox>
             </td>
         </tr>
         <tr>
                 <td style="width: 94px">
                     Facilidades:</td>
                 <td class="style10" colspan="2">
-        <asp:TextBox ID="TBFacilidades" runat="server" Width="233px"></asp:TextBox>
+        <asp:TextBox ID="TBFacilidades" runat="server" Width="233px" MaxLength="50"></asp:TextBox>
                 </td>
                 <td colspan="3">
                     &nbsp;</td>
