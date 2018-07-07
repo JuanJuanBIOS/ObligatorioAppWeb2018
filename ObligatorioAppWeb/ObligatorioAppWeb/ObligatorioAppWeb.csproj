@@ -51,6 +51,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ABMCompanias.aspx" />
     <Content Include="ABMEmpleados.aspx" />
     <Content Include="ABMTerminales.aspx" />
     <Content Include="ABMViajesInternacionales.aspx" />
@@ -60,7 +61,6 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="AMBCompanias.aspx" />
     <Content Include="BienvenidaEmpleado.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\Site.css" />
@@ -77,6 +77,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABMCompanias.aspx.cs">
+      <DependentUpon>ABMCompanias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ABMCompanias.aspx.designer.cs">
+      <DependentUpon>ABMCompanias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ABMEmpleados.aspx.cs">
       <DependentUpon>ABMEmpleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,13 +146,6 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AMBCompanias.aspx.cs">
-      <DependentUpon>AMBCompanias.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AMBCompanias.aspx.designer.cs">
-      <DependentUpon>AMBCompanias.aspx</DependentUpon>
     </Compile>
     <Compile Include="BienvenidaEmpleado.aspx.cs">
       <DependentUpon>BienvenidaEmpleado.aspx</DependentUpon>

@@ -41,8 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FabricaLogica.cs" />
+    <Compile Include="ILogicaCompania.cs" />
     <Compile Include="ILogicaEmpleado.cs" />
+<<<<<<< HEAD
+    <Compile Include="ILogicaTerminales.cs" />
+=======
+    <Compile Include="LogicaCompania.cs" />
+>>>>>>> 843afe1e700de0628470ab0457913b4469e3b7eb
     <Compile Include="LogicaEmpleado.cs" />
+    <Compile Include="LogicaTerminales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

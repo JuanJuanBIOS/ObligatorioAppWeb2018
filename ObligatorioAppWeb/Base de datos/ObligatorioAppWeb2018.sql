@@ -501,7 +501,7 @@ BEGIN
 			IF (@@ERROR <> 0)
 				BEGIN
 					ROLLBACK TRANSACTION
-					RETURN -3
+					RETURN -2
 				END
 				
 			ELSE

@@ -11,7 +11,7 @@ namespace ObligatorioAppWeb
 {
 
 
-    public partial class AMBCompanias
+    public partial class ABMCompanias
     {
     }
 }

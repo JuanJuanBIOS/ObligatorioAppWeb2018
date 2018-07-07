@@ -42,8 +42,15 @@
   <ItemGroup>
     <Compile Include="Conexion.cs" />
     <Compile Include="FabricaPersistencia.cs" />
+    <Compile Include="IPersistenciaCompania.cs" />
     <Compile Include="IPersistenciaEmpleado.cs" />
+<<<<<<< HEAD
+    <Compile Include="IPersistenciaTerminales.cs" />
+=======
+    <Compile Include="PersistenciaCompania.cs" />
+>>>>>>> 843afe1e700de0628470ab0457913b4469e3b7eb
     <Compile Include="PersistenciaEmpleado.cs" />
+    <Compile Include="PersistenciaTerminales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

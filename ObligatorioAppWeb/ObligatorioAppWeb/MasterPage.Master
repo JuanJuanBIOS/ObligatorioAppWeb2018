@@ -61,7 +61,7 @@
                         </p>
                         <p align="center">
                             <asp:HyperLink ID="ABMTerminales" runat="server" 
-                                NavigateUrl="~/AMBTerminales.aspx">Mantenimiento de Terminales</asp:HyperLink>
+                                NavigateUrl="~/ABMTerminales.aspx">Mantenimiento de Terminales</asp:HyperLink>
                         </p>
                         <p align="center">
                             <asp:HyperLink ID="ABMViajesNacionales" runat="server" 
