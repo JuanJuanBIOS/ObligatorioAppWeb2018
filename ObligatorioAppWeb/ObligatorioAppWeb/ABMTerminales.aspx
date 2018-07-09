@@ -13,8 +13,11 @@
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" 
        />
 </p>
-    <p>
+    <p dir="ltr">
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="BtnOk" runat="server" onclick="BtnOk_Click" Text="Ok" 
+            Visible="False" />
 </p>
     <table style="width: 100%">
         <tr>
@@ -43,7 +46,7 @@
                     &nbsp;</td>
                 <td class="style9" colspan="1">
         <asp:Button ID="BtnAgregar" runat="server"  
-            Text="Agregar"  />
+            Text="Agregar" onclick="BtnAgregar_Click"  />
                 </td>
                 <td class="style9" colspan="2">
                     &nbsp;</td>
@@ -61,7 +64,7 @@
                     &nbsp;</td>
                 <td class="style9" colspan="2">
         <asp:Button ID="BtnQuitar" runat="server" 
-            Text="Quitar" />
+            Text="Quitar" onclick="BtnQuitar_Click" />
                 </td>
                 <td class="style9" colspan="3">
                     &nbsp;</td>
@@ -86,7 +89,7 @@
             <td align="center" style="width: 94px" >
                 &nbsp;</td>
             <td align="center" >
-                <asp:Button ID="BtnAlta" runat="server" Text="Alta" 
+                <asp:Button ID="BtnAlta" runat="server" Text="Alta" onclick="BtnAlta_Click" 
                     />
             </td>
             <td align="center" style="width: 90px" >

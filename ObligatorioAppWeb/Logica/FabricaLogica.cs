@@ -16,5 +16,10 @@ namespace Logica
         {
             return (LogicaCompania.GetInstancia());
         }
+
+        public static ILogicaTerminales getLogicaTerminal()
+        {
+            return (LogicaTerminales.GetInstancia());
+        }
     }
 }
