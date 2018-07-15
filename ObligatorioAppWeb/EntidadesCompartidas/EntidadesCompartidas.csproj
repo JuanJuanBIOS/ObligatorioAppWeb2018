@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Companias.cs" />
     <Compile Include="Empleados.cs" />
+    <Compile Include="Facilidades.cs" />
     <Compile Include="Internacionales.cs" />
     <Compile Include="Nacionales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

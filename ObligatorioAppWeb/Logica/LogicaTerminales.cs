@@ -25,6 +25,13 @@ namespace Logica
 
 
         //Operaciones
+        public Terminales Buscar_Terminal(string pCodTerminal)
+        {
+            IPersistenciaTerminales FTerminal = FabricaPersistencia.getPersistenciaTerminal();
+
+            return FTerminal.Buscar_Terminal(pCodTerminal);
+        }
+
         public void Alta_Terminal(Terminales Ter)
         {
             IPersistenciaTerminales FTerminal = FabricaPersistencia.getPersistenciaTerminal();

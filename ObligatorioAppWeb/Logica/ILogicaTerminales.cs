@@ -8,6 +8,8 @@ namespace Logica
 {
     public interface ILogicaTerminales
     {
+        Terminales Buscar_Terminal(string pCodTerminal);
+
         void Alta_Terminal(Terminales pTerminal);
 
         void Eliminar_Terminal(Terminales pTerminal);

@@ -8,6 +8,8 @@ namespace Persistencia
 {
     public interface IPersistenciaTerminales
     {
+        Terminales Buscar_Terminal(string pCodTerminal);
+
         void Alta_Terminal(Terminales pTemrinal);
 
         void Eliminar_Terminal(Terminales pTemrinal);

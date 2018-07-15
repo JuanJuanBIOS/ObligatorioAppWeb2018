@@ -4,7 +4,7 @@ GO
 
 IF EXISTS(SELECT * FROM sysDATABASEs WHERE name = 'Terminal')
 BEGIN
-	ALTER DATABASE Terminal SET single_USEr WITH ROLLBACK IMMEDIATE
+	ALTER DATABASE Terminal SET single_USER WITH ROLLBACK IMMEDIATE
 	DROP DATABASE Terminal
 end
 GO
@@ -456,14 +456,12 @@ CREATE PROCEDURE Alta_Facilidades
 @nombre VARCHAR(50)
 AS
 BEGIN
-	IF EXISTS(SELECT * FROM Terminales WHERE codigo = @terminal AND activo = 1)
-	BEGIN
-		INSERT INTO Facilidades (terminal, nombre) VALUES (@terminal, @nombre)
-		IF (@@ERROR = 0)
-			RETURN 1
-		ELSE
-			RETURN -1
-	END
+	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @terminal AND activo = 1)
+		RETURN -1
+	
+	INSERT INTO Facilidades (terminal, nombre) VALUES (@terminal, @nombre)
+	IF (@@ERROR = 0)
+		RETURN 1
 	ELSE
 		RETURN -2
 END

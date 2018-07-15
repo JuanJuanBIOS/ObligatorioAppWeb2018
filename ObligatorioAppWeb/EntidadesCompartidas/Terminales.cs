@@ -12,7 +12,7 @@ namespace EntidadesCompartidas
         private string _codigo;
         private string _ciudad;
         private string _pais;
-        private List<string> _facilidades = new List<string>();
+        private List<Facilidades> _facilidades = new List<Facilidades>();
 
         //Propiedades
         public string Codigo
@@ -21,9 +21,15 @@ namespace EntidadesCompartidas
 
             set
             {
-                if(value.Length == 3)   //FALTA AGREGAR EL CÓDIGO DEFENSIVO PARA QUE VERIFIQUE QUE SEAN TRES LETRAS
-                                        //TIENE PINTA DE QUE PUEDE SER USANDO EXPRESIONES REGULARES
+                if(value.Length == 3)
                 {
+                    for (int i = 0;  i < value.Length; i++)
+                    {
+                        if (!Char.IsLetter(Convert.ToChar(value.Substring(i, 1))))
+                        {
+                            throw new Exception("ERROR: El código de la terminal debe constar de tres letras");
+                        }
+                    }
                     _codigo = value;
                 }
                 else
@@ -47,29 +53,20 @@ namespace EntidadesCompartidas
             set {_pais = value; }
         }
 
-        public List<string> Facilidades
+        public List<Facilidades> ListaFacilidades
         {
-            get {return _facilidades;}
-
-            set
-            {
-                foreach (string facilidad in Facilidades)
-                {
-                    _facilidades.Add(facilidad);
-                }
-
-                _facilidades = value;
-            }
+            get { return _facilidades; }
+            set { _facilidades = value; }
         }
 
 
         //Constructor
-        public Terminales(string pCodigo, string pCiudad, string pPais, List<string> pFacilidades)
+        public Terminales(string pCodigo, string pCiudad, string pPais, List<Facilidades> pFacilidades)
         {
             Codigo=pCodigo;
             Ciudad=pCiudad;
             Pais=pPais;
-            Facilidades=pFacilidades;
+            ListaFacilidades = pFacilidades;
         }
     }
 }

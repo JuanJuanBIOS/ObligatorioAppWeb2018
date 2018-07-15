@@ -27,6 +27,50 @@ namespace Persistencia
 
 
         //Operaciones
+        public Terminales Buscar_Terminal(string pCodTerminal)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Buscar_Terminal", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@codigo", pCodTerminal);
+
+            Terminales unaTer = null;
+
+            try
+            {
+                oConexion.Open();
+
+                SqlDataReader _Reader = oComando.ExecuteReader();
+
+                if (_Reader.HasRows)
+                {
+                    _Reader.Read();
+
+                    string _codigo=(string)_Reader["codigo"];
+                    string _ciudad=(string)_Reader["ciudad"];
+                    string _pais=(string)_Reader["pais"];
+                    List<Facilidades> _facilidades = new List<Facilidades>();
+                    _facilidades = PersistenciaFacilidades.CargoFacilidades(pCodTerminal);
+
+                    unaTer = new Terminales(_codigo, _ciudad, _pais, _facilidades);
+
+                    _Reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+            return unaTer;
+        }
+
+
         public void Alta_Terminal(Terminales unaTer)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
@@ -40,28 +84,41 @@ namespace Persistencia
             SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
             oRetorno.Direction = ParameterDirection.ReturnValue;
             oComando.Parameters.Add(oRetorno);
-
-            int oAfectados = -1;
+            
+            SqlTransaction _transaccion = null;
 
             try
             {
                 oConexion.Open();
+
+                _transaccion = oConexion.BeginTransaction();
+
+                oComando.Transaction = _transaccion;
+
                 oComando.ExecuteNonQuery();
 
-                oAfectados = (int)oComando.Parameters["@Retorno"].Value;
+                //string oRetorno = Convert.ToString(oRetorno.Value);
 
-                if (oAfectados == -1)
+                if (Convert.ToInt32(oRetorno.Value) == -1)
                 {
                     throw new Exception("La terminal ingresada ya existe en la base de datos");
                 }
-                if (oAfectados == -2)
+                if (Convert.ToInt32(oRetorno.Value) == -2)
                 {
                     throw new Exception("Error al crear la terminal en la base de datos");
                 }
+
+                foreach (Facilidades unaFac in unaTer.ListaFacilidades)
+                {
+                    PersistenciaFacilidades.Alta_Facilidad(unaFac, unaTer.Codigo, _transaccion);
+                }
+
+                _transaccion.Commit();
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+                _transaccion.Rollback();
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
             }
 
             finally

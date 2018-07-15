@@ -12,7 +12,7 @@ namespace ObligatorioAppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Empleado"] == null)
+            /*if (Session["Empleado"] == null)
             {
                 Response.Redirect("Login.aspx", false);
             }
@@ -24,7 +24,7 @@ namespace ObligatorioAppWeb
 
                     LblUser.Text = empLogueado.Nombre;
                 }
-            }
+            }*/
         }
     }
 }
