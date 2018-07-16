@@ -49,7 +49,7 @@
         <asp:Button ID="BtnAgregar" runat="server"  
             Text="Agregar" Enabled="False" onclick="BtnAgregar_Click"  />
                 </td>
-                <td class="style9" colspan="2">
+                <td class="style9">
                     &nbsp;</td>
                 <td>
                     &nbsp;</td>
@@ -67,7 +67,7 @@
         <asp:Button ID="BtnQuitar" runat="server" 
             Text="Quitar" Enabled="False" onclick="BtnQuitar_Click" />
                 </td>
-                <td class="style9" colspan="3">
+                <td class="style9" colspan="2">
                     &nbsp;</td>
                 <td>
                     &nbsp;</td>
@@ -81,9 +81,9 @@
                 &nbsp;</td>
             <td colspan="2">
                 &nbsp;</td>
-            <td colspan="3">
-                &nbsp;</td>
             <td colspan="2">
+                &nbsp;</td>
+            <td colspan="3">
                 &nbsp;</td>
         </tr>
         <tr>
@@ -94,12 +94,12 @@
                     />
             </td>
             <td align="center" style="width: 90px" >
-                <asp:Button ID="BtnModificar" runat="server" Text="Modificar"  Enabled="False" 
+                <asp:Button ID="BtnModificar" runat="server" Text="Modificar"  Enabled="False" onclick="BtnModificar_Click" 
                     />
             </td>
             <td align="center" style="width: 22px" >
                 &nbsp;</td>
-            <td align="center" colspan="5" >
+            <td align="center" colspan="4" >
                 <asp:Button ID="BtnConfirmarModificacion" runat="server" 
                     Text="Confirmar Modificación" Enabled="False"  />
             </td>
@@ -109,8 +109,12 @@
                 <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" 
                      />
             </td>
-            <td align="center" style="width: 543px" >
+            <td align="left" style="width: 23px" >
                 &nbsp;</td>
+            <td align="left" style="width: 543px" >
+                <asp:Button ID="BtnLimpiar" runat="server" onclick="BtnLimpiar_Click" 
+                    Text="Limpiar formulario" />
+            </td>
         </tr>
     </table>
 </asp:Content>

@@ -54,10 +54,11 @@ namespace ObligatorioAppWeb
                     LBFacilidades.DataSource = Facilidades;
                     LBFacilidades.DataBind();
                     //*****************************************************************************************************************
-
-                    ActivoFormularioModificacion();
+                    TBCodigo.Enabled = false;
+                    BtnBuscar.Enabled = false;
+                    BtnModificar.Enabled = true;
+                    BtnEliminar.Enabled = true;
                 }
-
             }
 
             catch (Exception ex)
@@ -119,16 +120,13 @@ namespace ObligatorioAppWeb
                 LblError.ForeColor = System.Drawing.Color.Blue;
                 LblError.Text = "La Terminal ha sido ingresada a la base de datos correctamente.";
 
-                ActivoFormularioBuscar();
-                TBCodigo.Enabled = false;
-                BtnBuscar.Enabled = false;
-                BtnOk.Visible = true;
+                BloqueoFormulario();
             }
 
             catch (Exception ex)
             {
-                LblError.Text = "";
-                LblError.Text = "Error en la base de datos. Contacte con el administrador.";
+                LblError.Text = ex.Message;
+                BloqueoFormulario();
             }
         }
 
@@ -137,16 +135,25 @@ namespace ObligatorioAppWeb
             Response.Redirect("ABMTerminales.aspx", false);
         }
 
+        protected void BtnModificar_Click(object sender, EventArgs e)
+        {
+            ActivoFormularioModificacion();
+        }
 
-        private void ActivoFormularioBuscar()
+        protected void BtnLimpiar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ABMTerminales.aspx", false);
+        }
+
+        private void BloqueoFormulario()
         {
             //ESTO NO SE SI SE HACE ASI, PREGUNTAR EN CLASE**********************************
             List<string> Facilidades = new List<string>();
             Session["Facilidades"] = Facilidades;
             //*******************************************************************************
-            TBCodigo.Enabled = true;
-            BtnBuscar.Enabled = true;
-            BtnOk.Visible = false;
+            TBCodigo.Enabled = false;
+            BtnBuscar.Enabled = false;
+            BtnOk.Visible = true;
             TBCiudad.Enabled = false;
             TBPais.Enabled = false;
             TBFacilidades.Enabled = false;
@@ -157,6 +164,7 @@ namespace ObligatorioAppWeb
             BtnModificar.Enabled = false;
             BtnConfirmarModificacion.Enabled = false;
             BtnEliminar.Enabled = false;
+            BtnLimpiar.Enabled = false;
         }
 
 
@@ -194,8 +202,8 @@ namespace ObligatorioAppWeb
             LBFacilidades.Enabled = true;
             BtnQuitar.Enabled = true;
             BtnAlta.Enabled = false;
-            BtnModificar.Enabled = true;
-            BtnConfirmarModificacion.Enabled = false;
+            BtnModificar.Enabled = false;
+            BtnConfirmarModificacion.Enabled = true;
             BtnEliminar.Enabled = false;
         }
     }
