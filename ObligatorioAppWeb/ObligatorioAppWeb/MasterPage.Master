@@ -1,7 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="ObligatorioAppWeb.MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<link href="Styles/Site.css" rel="stylesheet" type="text/css" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
@@ -51,6 +51,7 @@
                 </td>
         </tr>
         <tr>
+
             <td class="style2" valign="top">
                         <h2 align="center">
                             <asp:Label ID="LbMenu" runat="server" Text="Menú Principal"></asp:Label>
