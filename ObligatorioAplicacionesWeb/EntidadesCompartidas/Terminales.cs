@@ -42,14 +42,34 @@ namespace EntidadesCompartidas
         {
             get { return _ciudad; }
 
-            set { _ciudad = value; }
+            set
+            {
+                if (value.Length > 50)
+                {
+                    _ciudad = value;
+                }
+                else
+                {
+                    throw new Exception("El nombre de la ciudad no puede contener más de 50 caracteres");
+                }
+            }
         }
 
         public string Pais
         {
             get { return _pais; }
 
-            set { _pais = value; }
+            set
+            {
+                if (value == "Argentina" || value == "Brasil" || value == "Paraguay" || value == "Uruguay")
+                {
+                    _pais = value;
+                }
+                else
+                {
+                    throw new Exception("El país debe pertenecer al MERCOSUR");
+                }
+            }
         }
 
         public List<Facilidades> ListaFacilidades

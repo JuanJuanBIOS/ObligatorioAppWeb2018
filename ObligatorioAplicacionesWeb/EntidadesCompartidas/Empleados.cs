@@ -77,7 +77,17 @@ namespace EntidadesCompartidas
         {
             get { return _nombre; }
 
-            set { _nombre = value; }
+            set
+            {
+                if (value.Length > 100)
+                {
+                    _nombre = value;
+                }
+                else
+                {
+                    throw new Exception("El nombre no puede contener más de 100 caracteres");
+                }
+            }
         }
 
         //Constructor

@@ -17,14 +17,34 @@ namespace EntidadesCompartidas
         {
             get { return _nombre; }
 
-            set { _nombre = value; }
+            set
+            {
+                if (value.Length > 50)
+                {
+                    _nombre = value;
+                }
+                else
+                {
+                    throw new Exception("El nombre de la compañía no puede contener más de 50 caracteres");
+                }
+            }
         }
 
         public string Direccion
         {
             get { return _direccion; }
 
-            set { _direccion = value; }
+            set
+            {
+                if (value.Length > 100)
+                {
+                    _direccion = value;
+                }
+                else
+                {
+                    throw new Exception("La dirección no puede contener más de 100 caracteres");
+                }
+            }
         }
 
         public string Telefono

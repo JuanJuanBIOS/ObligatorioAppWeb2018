@@ -16,7 +16,16 @@ namespace EntidadesCompartidas
             get { return _facilidad; }
 
             set
-            { _facilidad = value; }
+            {
+                if (value.Length > 50)
+                {
+                    _facilidad = value;
+                }
+                else
+                {
+                    throw new Exception("El nombre de la facilidad no puede contener más de 50 caracteres");
+                }
+            }
         }
 
 

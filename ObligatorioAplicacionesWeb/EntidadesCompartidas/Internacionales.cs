@@ -23,7 +23,17 @@ namespace EntidadesCompartidas
         {
             get { return _documentacion; }
 
-            set { _documentacion = value; }
+            set
+            {
+                if (value.Length > 200)
+                {
+                    _documentacion = value;
+                }
+                else
+                {
+                    throw new Exception("La descripción de la documentación no puede contener más de 200 caracteres");
+                }
+            }
         }
 
 
