@@ -97,8 +97,6 @@ namespace Persistencia
 
                 oComando.ExecuteNonQuery();
 
-                //string oRetorno = Convert.ToString(oRetorno.Value);
-
                 if (Convert.ToInt32(oRetorno.Value) == -1)
                 {
                     throw new Exception("La terminal ingresada ya existe en la base de datos");
