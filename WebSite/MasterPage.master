@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+            margin-right: 0px;
+        }
+        .style2
+        {
+            width: 214px;
+            height: 101px;
+        }
+        .style3
+        {
+            height: 101px;
+            width: 1170px;
+        }
+        .style4
+        {
+            height: 40px;
+        }
+        .style5
+        {
+            height: 6px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table class="style1">
+        <tr>
+            <td colspan="2" align="right" valign="middle" class="style5">
+                <asp:Label ID="LblUser" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:HyperLink ID="Salir" runat="server" NavigateUrl="~/Default.aspx">Salir</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" class="style4">
+               
+                </td>
+            <td align="center" valign="middle" class="style4">
+                <h1><asp:Label ID="LbTitulo" runat="server" Text="Terminales"></asp:Label></h1>
+                </td>
+        </tr>
+        <tr>
+
+            <td class="style2" valign="top">
+                        <h2 align="center">
+                            <asp:Label ID="LbMenu" runat="server" Text="Menú Principal"></asp:Label>
+                        </h2>
+                        <p align="center">
+                            <asp:HyperLink ID="ABMCompanias" runat="server" 
+                                NavigateUrl="~/ABMCompanias.aspx">Mantenimiento de Compañías</asp:HyperLink>
+                        </p>
+                        <p align="center">
+                            <asp:HyperLink ID="ABMTerminales" runat="server" 
+                                NavigateUrl="~/ABMTerminales.aspx">Mantenimiento de Terminales</asp:HyperLink>
+                        </p>
+                        <p align="center">
+                            <asp:HyperLink ID="ABMViajesNacionales" runat="server" 
+                                NavigateUrl="~/ABMViajesNacionales.aspx">Mantenimiento de Viajes Nacionales</asp:HyperLink>
+                        </p>
+                        <p align="center">
+                            <asp:HyperLink ID="ABMViajesInternacionales" runat="server" 
+                                NavigateUrl="~/ABMViajesInternacionales.aspx">Mantenimiento de Viajes Internacionales</asp:HyperLink>
+                        </p>
+                        <p align="center">
+                            <asp:HyperLink ID="ABMEmpleados" runat="server" 
+                                NavigateUrl="~/ABMEmpleados.aspx">Mantenimiento de Empleados</asp:HyperLink>
+                        </p>
+            </td>
+            <td class="style3" valign="top">
+                <asp:ContentPlaceHolder ID="PaginaPrincipal" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height="50" valign="middle" align="center">
+                <h4>&nbsp;</h4>
+                </td>
+        </tr>
+    </table>
+    <div>
+    </div>
+    </form>
+</body>
+</html>
