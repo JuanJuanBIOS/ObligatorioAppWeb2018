@@ -79,7 +79,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value.Length > 100)
+                if (value.Length <= 100)
                 {
                     _nombre = value;
                 }

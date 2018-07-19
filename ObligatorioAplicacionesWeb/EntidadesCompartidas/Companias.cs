@@ -19,7 +19,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value.Length > 50)
+                if (value.Length <= 50)
                 {
                     _nombre = value;
                 }
@@ -36,7 +36,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value.Length > 100)
+                if (value.Length <= 100)
                 {
                     _direccion = value;
                 }

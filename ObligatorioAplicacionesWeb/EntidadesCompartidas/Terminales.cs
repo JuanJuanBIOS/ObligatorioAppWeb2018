@@ -44,7 +44,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value.Length > 50)
+                if (value.Length <= 50)
                 {
                     _ciudad = value;
                 }

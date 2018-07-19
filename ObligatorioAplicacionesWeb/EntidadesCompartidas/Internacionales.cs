@@ -25,7 +25,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value.Length > 200)
+                if (value.Length <= 200)
                 {
                     _documentacion = value;
                 }

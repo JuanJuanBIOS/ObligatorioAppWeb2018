@@ -101,21 +101,19 @@
             <td align="center" style="width: 22px" >
                 &nbsp;</td>
             <td align="center" colspan="4" >
-                <asp:Button ID="BtnConfirmarModificacion" runat="server" 
-                    Text="Confirmar Modificación" Enabled="False"  />
+                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" 
+                     />
             </td>
             <td align="center" style="width: 34px" >
                 &nbsp;</td>
             <td align="center" >
-                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" 
-                     />
+                <asp:Button ID="BtnLimpiar" runat="server" onclick="BtnLimpiar_Click" 
+                    Text="Limpiar formulario" />
             </td>
             <td align="left" style="width: 23px" >
                 &nbsp;</td>
             <td align="left" style="width: 543px" >
-                <asp:Button ID="BtnLimpiar" runat="server" onclick="BtnLimpiar_Click" 
-                    Text="Limpiar formulario" />
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
 </asp:Content>
