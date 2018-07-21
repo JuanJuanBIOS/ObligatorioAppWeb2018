@@ -121,7 +121,7 @@ public partial class ABMTerminales : System.Web.UI.Page
             string _Codigo = Convert.ToString(TBCodigo.Text);
             string _Ciudad = Convert.ToString(TBCiudad.Text);
             string _Pais = Convert.ToString(TBPais.Text);
-            
+
             List<Facilidades> _Facilidades = new List<Facilidades>();
             foreach (string facilidad in (List<string>)Session["Facilidades"])
             {
