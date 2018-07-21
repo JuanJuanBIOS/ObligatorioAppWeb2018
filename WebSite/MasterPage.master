@@ -56,6 +56,8 @@
                         <h2 align="center">
                             <asp:Label ID="LbMenu" runat="server" Text="Menú Principal"></asp:Label>
                         </h2>
+                        <asp:Menu ID="Menu" runat="server">
+                        </asp:Menu>
                         <p align="center">
                             <asp:HyperLink ID="ABMCompanias" runat="server" 
                                 NavigateUrl="~/ABMCompanias.aspx">Mantenimiento de Compañías</asp:HyperLink>

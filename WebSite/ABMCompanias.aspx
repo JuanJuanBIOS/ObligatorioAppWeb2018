@@ -22,7 +22,8 @@
             Dirección:
         </td>
         <td colspan="10">
-            <asp:TextBox ID="TBDireccion" runat="server" MaxLength="50" Width="324px"></asp:TextBox>
+            <asp:TextBox ID="TBDireccion" runat="server" MaxLength="50" Width="324px" 
+                Enabled="False"></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -30,7 +31,8 @@
             Teléfono:
         </td>
         <td colspan="10">
-            <asp:TextBox ID="TBTelefono" runat="server" MaxLength="50" Width="324px"></asp:TextBox>
+            <asp:TextBox ID="TBTelefono" runat="server" MaxLength="50" Width="324px" 
+                Enabled="False"></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -79,23 +81,26 @@
         <td align="center" style="width: 94px" >
                 &nbsp;</td>
         <td align="center" >
-            <asp:Button ID="BtnAlta" runat="server" Text="Alta" onclick="BtnAlta_Click" 
+            <asp:Button ID="BtnAlta" runat="server" Text="Alta" onclick="BtnAlta_Click" Enabled="False" 
                     />
         </td>
         <td align="center" style="width: 90px" >
-            <asp:Button ID="BtnModificar" runat="server" Text="Modificar" onclick="BtnModificar_Click" 
+            <asp:Button ID="BtnModificar" runat="server" Text="Modificar" 
+                onclick="BtnModificar_Click" Enabled="False" 
                     />
         </td>
         <td align="center" style="width: 22px" >
                 &nbsp;</td>
         </td>
         <td align="center" style="width: 34px" >
-                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" />
+                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" Enabled="False" 
+                    onclick="BtnEliminar_Click" />
         </td>
         <td align="center" >
             &nbsp;</td>
         <td align="left" style="width: 543px" >
-                <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar formulario" />
+                <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar formulario" 
+                    onclick="BtnLimpiar_Click" />
         </td>
     </tr>
 </table>
