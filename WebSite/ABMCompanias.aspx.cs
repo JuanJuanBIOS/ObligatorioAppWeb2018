@@ -88,9 +88,62 @@ public partial class ABMCompanias : System.Web.UI.Page
 
     protected void BtnModificar_Click(object sender, EventArgs e)
     {
+        try
+        {
+            string _Nombre = Convert.ToString(TBNombre.Text);
+            string _Direccion = Convert.ToString(TBDireccion.Text);
+            string _Telefono = Convert.ToString(TBTelefono.Text);
 
+            Companias unaComp = new Companias(_Nombre, _Direccion, _Telefono);
+
+            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+
+            FCompania.Modificar_Compania(unaComp);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "La Compania " + Convert.ToString(unaComp.Nombre) + " ha sido modificada correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
     }
 
+
+
+    protected void BtnEliminar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Companias unaComp = (Companias)Session["Compania"];
+
+            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+
+            FCompania.Eliminar_Compania(unaComp);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "La Compania " + Convert.ToString(unaComp.Nombre) + " ha sido eliminada correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+
+    protected void BtnLimpiar_Click(object sender, EventArgs e)
+    {
+        LimpioFormulario();
+
+    }
 
     private void LimpioFormulario()
     {
@@ -110,7 +163,6 @@ public partial class ABMCompanias : System.Web.UI.Page
 
     private void ActivoFormularioAlta()
     {
-        TBNombre.Text = TBNombre.Text.ToUpper();
         TBNombre.Enabled = false;
         BtnBuscar.Enabled = false;
         TBDireccion.Enabled = true;
@@ -130,6 +182,5 @@ public partial class ABMCompanias : System.Web.UI.Page
         BtnModificar.Enabled = true;
         BtnEliminar.Enabled = true;
     }
-
 
 }
