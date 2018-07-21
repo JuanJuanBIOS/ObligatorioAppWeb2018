@@ -3,11 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PaginaPrincipal" runat="server">
     <h2 align="center">
     <asp:Label ID="LbSubt" runat="server" 
-        Text="Mantenimiento de Companias FALTA CAMBIAR"></asp:Label>
+        Text="Mantenimiento de Companias"></asp:Label>
 </h2>
 <p>
     Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:TextBox ID="TBNombre" runat="server" MaxLength="3"></asp:TextBox>
+    <asp:TextBox ID="TBNombre" runat="server" MaxLength="50"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
@@ -15,9 +15,7 @@
 <p dir="ltr">
     <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="BtnOk" runat="server" onclick="BtnOk_Click" Text="Ok" 
-            Visible="False" />
-</p>
+        </p>
 <table style="width: 100%">
     <tr>
         <td style="width: 94px">
@@ -85,23 +83,20 @@
                     />
         </td>
         <td align="center" style="width: 90px" >
-            <asp:Button ID="BtnModificar" runat="server" Text="Modificar" 
+            <asp:Button ID="BtnModificar" runat="server" Text="Modificar" onclick="BtnModificar_Click" 
                     />
         </td>
         <td align="center" style="width: 22px" >
                 &nbsp;</td>
-        <td align="center" colspan="4" >
-            <asp:Button ID="BtnConfirmarModificacion" runat="server" 
-                    Text="Confirmar Modificación"  />
         </td>
         <td align="center" style="width: 34px" >
-                &nbsp;</td>
-        <td align="center" >
-            <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" 
-                     />
+                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" />
         </td>
-        <td align="center" style="width: 543px" >
-                &nbsp;</td>
+        <td align="center" >
+            &nbsp;</td>
+        <td align="left" style="width: 543px" >
+                <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar formulario" />
+        </td>
     </tr>
 </table>
 </asp:Content>

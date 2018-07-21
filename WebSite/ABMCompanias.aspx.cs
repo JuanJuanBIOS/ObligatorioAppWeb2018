@@ -15,11 +15,46 @@ public partial class ABMCompanias : System.Web.UI.Page
         if (!IsPostBack)
         {
             TBNombre.Focus();
-            Session["Companias"] = null;
         }
     }
 
+    protected void BtnBuscar_Click(object sender, EventArgs e)
+    {
+        if (TBNombre.Text != "")
+        {
+            try
+            {
+                LblError.Text = "";
 
+                string _Nombre = Convert.ToString(TBNombre.Text);
+
+                ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+
+                Companias unaComp = FCompania.Buscar_Compania(_Nombre);
+
+                Session["Compania"] = unaComp;
+
+                if (unaComp == null)
+                {
+                    ActivoFormularioAlta();
+                }
+
+                else
+                {
+                    TBDireccion.Text = unaComp.Direccion;
+                    TBTelefono.Text = unaComp.Telefono;
+                    ActivoFormularioModificacion();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                LblError.ForeColor = System.Drawing.Color.Red;
+                LblError.Text = ex.Message;
+            }
+        }
+
+    }
 
     protected void BtnAlta_Click(object sender, EventArgs e)
     {
@@ -36,27 +71,65 @@ public partial class ABMCompanias : System.Web.UI.Page
             FCompania.Alta_Compania(unaComp);
 
             LblError.ForeColor = System.Drawing.Color.Blue;
-            LblError.Text = "La Compania ha sido ingresada a la base de datos correctamente.";
-            TBNombre.Enabled = false;
-            TBDireccion.Enabled = false;
-            TBTelefono.Enabled = false;
-            BtnOk.Visible = true;
+            LblError.Text = "La Compania " + Convert.ToString(unaComp.Nombre) + " ha sido ingresada a la base de datos correctamente.";
+
+            LimpioFormulario();
         }
 
         catch (Exception ex)
         {
-            LblError.Text = "";
-            LblError.Text = "Error en la base de datos. Contacte con el administrador.";
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
         }
     }
 
-    protected void BtnOk_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("ABMCompanias.aspx", false);
-    }
 
-    protected void BtnBuscar_Click(object sender, EventArgs e)
+
+
+    protected void BtnModificar_Click(object sender, EventArgs e)
     {
 
     }
+
+
+    private void LimpioFormulario()
+    {
+        TBNombre.Text = "";
+        TBNombre.Enabled = true;
+        BtnBuscar.Enabled = true;
+        TBDireccion.Text = "";
+        TBDireccion.Enabled = false;
+        TBTelefono.Text = "";
+        TBTelefono.Enabled = false;
+        BtnAlta.Enabled = false;
+        BtnModificar.Enabled = false;
+        BtnEliminar.Enabled = false;
+        BtnLimpiar.Enabled = true;
+    }
+
+
+    private void ActivoFormularioAlta()
+    {
+        TBNombre.Text = TBNombre.Text.ToUpper();
+        TBNombre.Enabled = false;
+        BtnBuscar.Enabled = false;
+        TBDireccion.Enabled = true;
+        TBTelefono.Enabled = true;
+        BtnAlta.Enabled = true;
+        BtnModificar.Enabled = false;
+        BtnEliminar.Enabled = false;
+    }
+
+    private void ActivoFormularioModificacion()
+    {
+        TBNombre.Enabled = false;
+        BtnBuscar.Enabled = false;
+        TBDireccion.Enabled = true;
+        TBTelefono.Enabled = true;
+        BtnAlta.Enabled = false;
+        BtnModificar.Enabled = true;
+        BtnEliminar.Enabled = true;
+    }
+
+
 }

@@ -18,7 +18,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value > 0)
+                if (value >= 0)
                     _paradas = value;
                 else
                     throw new Exception("El número de paradas no es válido");
