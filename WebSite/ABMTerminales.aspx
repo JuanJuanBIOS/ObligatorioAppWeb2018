@@ -17,9 +17,7 @@
     <p dir="ltr">
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="BtnOk" runat="server" onclick="BtnOk_Click" Text="Ok" 
-            Visible="False" />
-</p>
+        </p>
     <table style="width: 100%">
         <tr>
             <td style="width: 94px">

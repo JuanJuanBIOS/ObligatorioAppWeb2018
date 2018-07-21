@@ -24,22 +24,24 @@ public partial class ABMTerminales : System.Web.UI.Page
         {
             try
             {
+                LblError.Text = "";
+
                 string _Codigo = Convert.ToString(TBCodigo.Text);
 
                 ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
 
                 Terminales unaTer = FTerminal.Buscar_Terminal(_Codigo);
 
+                Session["Terminal"] = unaTer;
+
                 if (unaTer == null)
                 {
-                    Session["Terminal"] = unaTer;
+                    Session["Facilidades"] = new List<Facilidades>();
                     ActivoFormularioAlta();
                 }
 
                 else
                 {
-                    Session["Terminal"] = unaTer;
-
                     TBCiudad.Text = unaTer.Ciudad;
                     TBPais.Text = unaTer.Pais;
 
@@ -50,8 +52,6 @@ public partial class ABMTerminales : System.Web.UI.Page
                     LBFacilidades.DataBind();
 
                     ActivoFormularioModificacion();
-                    BtnModificar.Enabled = true;
-                    BtnEliminar.Enabled = true;
                 }
             }
 
@@ -69,12 +69,7 @@ public partial class ABMTerminales : System.Web.UI.Page
             Facilidades _facilidad = new Facilidades(TBFacilidades.Text);
             bool encontrado = false;
 
-            if (LBFacilidades.Items.Count == 0)
-            {
-                Session["Facilidades"] = new List<Facilidades>();
-            }
-
-            else
+            if (((List<Facilidades>)Session["Facilidades"]).Count() > 0)
             {
                 int posicion = 0;
 
@@ -123,11 +118,7 @@ public partial class ABMTerminales : System.Web.UI.Page
             string _Pais = Convert.ToString(TBPais.Text);
 
             List<Facilidades> _Facilidades = new List<Facilidades>();
-            foreach (string facilidad in (List<string>)Session["Facilidades"])
-            {
-                Facilidades _unaFacilidad = new Facilidades(facilidad);
-                _Facilidades.Add(_unaFacilidad);
-            }
+            _Facilidades = (List<Facilidades>)Session["Facilidades"];
 
             Terminales unaTer = new Terminales(_Codigo, _Ciudad, _Pais, _Facilidades);
 
@@ -136,20 +127,15 @@ public partial class ABMTerminales : System.Web.UI.Page
             FTerminal.Alta_Terminal(unaTer);
 
             LblError.ForeColor = System.Drawing.Color.Blue;
-            LblError.Text = "La Terminal ha sido ingresada a la base de datos correctamente.";
+            LblError.Text = "La Terminal " + Convert.ToString(unaTer.Codigo) + " ha sido ingresada a la base de datos correctamente.";
 
-            BloqueoFormulario();
+            LimpioFormulario();
         }
 
         catch (Exception ex)
         {
             LblError.Text = ex.Message;
         }
-    }
-
-    protected void BtnOk_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("ABMTerminales.aspx", false);
     }
 
     protected void BtnModificar_Click(object sender, EventArgs e)
@@ -161,38 +147,33 @@ public partial class ABMTerminales : System.Web.UI.Page
         Response.Redirect("ABMTerminales.aspx", false);
     }
 
-    private void BloqueoFormulario()
+    private void LimpioFormulario()
     {
-        //ESTO NO SE SI SE HACE ASI, PREGUNTAR EN CLASE**********************************
-        List<string> Facilidades = new List<string>();
-        Session["Facilidades"] = Facilidades;
-        //*******************************************************************************
-        TBCodigo.Enabled = false;
-        BtnBuscar.Enabled = false;
-        BtnOk.Visible = true;
+        TBCodigo.Text = "";
+        TBCodigo.Enabled = true;
+        BtnBuscar.Enabled = true;
+        TBCiudad.Text = "";
         TBCiudad.Enabled = false;
+        TBPais.Text = "";
         TBPais.Enabled = false;
+        TBFacilidades.Text = "";
         TBFacilidades.Enabled = false;
         BtnAgregar.Enabled = false;
+        LBFacilidades.Items.Clear();
         LBFacilidades.Enabled = false;
         BtnQuitar.Enabled = false;
         BtnAlta.Enabled = false;
         BtnModificar.Enabled = false;
         BtnEliminar.Enabled = false;
-        BtnLimpiar.Enabled = false;
+        BtnLimpiar.Enabled = true;
     }
 
 
     private void ActivoFormularioAlta()
     {
         TBCodigo.Text = TBCodigo.Text.ToUpper();
-        //ESTO NO SE SI SE HACE ASI, PREGUNTAR EN CLASE**********************************
-        List<string> Facilidades = new List<string>();
-        Session["Facilidades"] = Facilidades;
-        //*******************************************************************************
         TBCodigo.Enabled = false;
         BtnBuscar.Enabled = false;
-        BtnOk.Visible = false;
         TBCiudad.Enabled = true;
         TBPais.Enabled = true;
         TBFacilidades.Enabled = true;
@@ -208,7 +189,6 @@ public partial class ABMTerminales : System.Web.UI.Page
     {
         TBCodigo.Enabled = false;
         BtnBuscar.Enabled = false;
-        BtnOk.Visible = false;
         TBCiudad.Enabled = true;
         TBPais.Enabled = true;
         TBFacilidades.Enabled = true;
