@@ -109,7 +109,7 @@ namespace Persistencia
 
                 foreach (Facilidades unaFac in unaTer.ListaFacilidades)
                 {
-                    PersistenciaFacilidades.Alta_Facilidad(unaFac, unaTer.Codigo, _transaccion);
+                    PersistenciaFacilidades.Alta_Facilidad(unaFac, unaTer, _transaccion);
                 }
 
                 _transaccion.Commit();
@@ -125,7 +125,6 @@ namespace Persistencia
                 oConexion.Close();
             }
         }
-
 
         public void Eliminar_Terminal(Terminales unaTer)
         {
@@ -150,7 +149,7 @@ namespace Persistencia
 
                 if (oAfectados == -1)
                 {
-                    throw new Exception("La terminal no existe en la base de datos");
+                    throw new Exception("La terminal ingresada no existe en la base de datos");
                 }
                 if (oAfectados == -2)
                 {
@@ -183,27 +182,40 @@ namespace Persistencia
             oRetorno.Direction = ParameterDirection.ReturnValue;
             oComando.Parameters.Add(oRetorno);
 
-            int oAfectados = -1;
+            SqlTransaction _transaccion = null;
 
             try
             {
                 oConexion.Open();
+
+                _transaccion = oConexion.BeginTransaction();
+
+                oComando.Transaction = _transaccion;
+
                 oComando.ExecuteNonQuery();
 
-                oAfectados = (int)oComando.Parameters["@Retorno"].Value;
-
-                if (oAfectados == -1)
+                if (Convert.ToInt32(oRetorno.Value) == -1)
                 {
                     throw new Exception("La terminal ingresada no existe en la base de datos");
                 }
-                if (oAfectados == -2)
+                if (Convert.ToInt32(oRetorno.Value) == -2)
                 {
-                    throw new Exception("Error al modificar la terminal en la base de datos");
+                    throw new Exception("Error al eliminar la terminal en la base de datos");
                 }
+
+                PersistenciaFacilidades.Eliminar_Facilidades(unaTer, _transaccion);
+
+                foreach (Facilidades unaFac in unaTer.ListaFacilidades)
+                {
+                    PersistenciaFacilidades.Alta_Facilidad(unaFac, unaTer, _transaccion);
+                }
+
+                _transaccion.Commit();
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+                _transaccion.Rollback();
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
             }
 
             finally

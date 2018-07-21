@@ -48,12 +48,12 @@ namespace Persistencia
             return unaListaFacilidades;
         }
 
-        internal static void Alta_Facilidad(Facilidades pFacilidad, string pCodTer, SqlTransaction _pTransaccion)
+        internal static void Alta_Facilidad(Facilidades pFacilidad, Terminales pTer, SqlTransaction _pTransaccion)
         {
             SqlCommand oComando = new SqlCommand("Alta_Facilidades", _pTransaccion.Connection);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            oComando.Parameters.AddWithValue("@terminal", pCodTer);
+            oComando.Parameters.AddWithValue("@terminal", pTer.Codigo);
             oComando.Parameters.AddWithValue("@nombre", pFacilidad.Facilidad);
 
             SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
@@ -71,19 +71,51 @@ namespace Persistencia
 
                 if (retorno == -1)
                 {
-                    throw new Exception("Error: la terminal a la cual quiere agregarle una facilidad no existe");
+                    throw new Exception("La terminal ingresada no existe en la base de datos");
                 }
                 if (retorno == -2)
                 {
-                    throw new Exception("Error al ingresar la facilidad en la base de datos");
+                    throw new Exception("Error al crear la terminal en la base de datos");
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
 
+        internal static void Eliminar_Facilidades(Terminales pTerminal, SqlTransaction _pTransaccion)
+        {
+            SqlCommand oComando = new SqlCommand("Eliminar_Facilidades", _pTransaccion.Connection);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@codigo", pTerminal.Codigo);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oComando.Transaction = _pTransaccion;
+
+                oComando.ExecuteNonQuery();
+
+                int retorno = Convert.ToInt32(oRetorno.Value);
+
+                if (retorno == -1)
+                {
+                    throw new Exception("La terminal ingresada no existe en la base de datos");
+                }
+                if (retorno == -2)
+                {
+                    throw new Exception("Error al eliminar la terminal en la base de datos");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

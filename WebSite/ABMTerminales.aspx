@@ -8,13 +8,14 @@
         <asp:Label ID="LbSubt" runat="server" Text="Mantenimiento de Terminales"></asp:Label>
     </h2>
 <p>
-    Código:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Código:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     <asp:TextBox ID="TBCodigo" runat="server" MaxLength="3"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
 </p>
-    <p dir="ltr">
+    <p dir="ltr" style="margin-left: 40px">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </p>
@@ -33,7 +34,13 @@
                 País:
             </td>
             <td colspan="11">
-                <asp:TextBox ID="TBPais" runat="server" Width="324px" MaxLength="50" Enabled="False"></asp:TextBox>
+                <asp:DropDownList ID="DDLPais" runat="server" Enabled="False" Width="240px">
+                    <asp:ListItem></asp:ListItem>
+                    <asp:ListItem>Argentina</asp:ListItem>
+                    <asp:ListItem>Brasil</asp:ListItem>
+                    <asp:ListItem>Paraguay</asp:ListItem>
+                    <asp:ListItem>Uruguay</asp:ListItem>
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -99,7 +106,7 @@
             <td align="center" style="width: 22px" >
                 &nbsp;</td>
             <td align="center" colspan="4" >
-                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" 
+                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" onclick="BtnEliminar_Click" 
                      />
             </td>
             <td align="center" style="width: 34px" >

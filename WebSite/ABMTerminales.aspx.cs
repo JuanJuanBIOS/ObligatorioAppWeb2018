@@ -43,7 +43,7 @@ public partial class ABMTerminales : System.Web.UI.Page
                 else
                 {
                     TBCiudad.Text = unaTer.Ciudad;
-                    TBPais.Text = unaTer.Pais;
+                    DDLPais.Text = unaTer.Pais;
 
                     Session["Facilidades"] = unaTer.ListaFacilidades;
 
@@ -57,6 +57,7 @@ public partial class ABMTerminales : System.Web.UI.Page
 
             catch (Exception ex)
             {
+                LblError.ForeColor = System.Drawing.Color.Red;
                 LblError.Text = ex.Message;
             }
         }
@@ -115,7 +116,7 @@ public partial class ABMTerminales : System.Web.UI.Page
         {
             string _Codigo = Convert.ToString(TBCodigo.Text);
             string _Ciudad = Convert.ToString(TBCiudad.Text);
-            string _Pais = Convert.ToString(TBPais.Text);
+            string _Pais = Convert.ToString(DDLPais.Text);
 
             List<Facilidades> _Facilidades = new List<Facilidades>();
             _Facilidades = (List<Facilidades>)Session["Facilidades"];
@@ -134,12 +135,62 @@ public partial class ABMTerminales : System.Web.UI.Page
 
         catch (Exception ex)
         {
+            LblError.ForeColor = System.Drawing.Color.Red;
             LblError.Text = ex.Message;
         }
     }
 
     protected void BtnModificar_Click(object sender, EventArgs e)
     {
+        try
+        {
+            string _Codigo = Convert.ToString(TBCodigo.Text);
+            string _Ciudad = Convert.ToString(TBCiudad.Text);
+            string _Pais = Convert.ToString(DDLPais.Text);
+
+            List<Facilidades> _Facilidades = new List<Facilidades>();
+            _Facilidades = (List<Facilidades>)Session["Facilidades"];
+
+            Terminales unaTer = new Terminales(_Codigo, _Ciudad, _Pais, _Facilidades);
+
+            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+
+            FTerminal.Modificar_Terminal(unaTer);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "La Terminal " + Convert.ToString(unaTer.Codigo) + " ha sido modificada correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+    protected void BtnEliminar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Terminales unaTer = (Terminales)Session["Terminal"];
+
+            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+
+            FTerminal.Eliminar_Terminal(unaTer);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "La Terminal " + Convert.ToString(unaTer.Codigo) + " ha sido eliminada correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
     }
 
     protected void BtnLimpiar_Click(object sender, EventArgs e)
@@ -154,8 +205,8 @@ public partial class ABMTerminales : System.Web.UI.Page
         BtnBuscar.Enabled = true;
         TBCiudad.Text = "";
         TBCiudad.Enabled = false;
-        TBPais.Text = "";
-        TBPais.Enabled = false;
+        DDLPais.Text = "";
+        DDLPais.Enabled = false;
         TBFacilidades.Text = "";
         TBFacilidades.Enabled = false;
         BtnAgregar.Enabled = false;
@@ -175,7 +226,7 @@ public partial class ABMTerminales : System.Web.UI.Page
         TBCodigo.Enabled = false;
         BtnBuscar.Enabled = false;
         TBCiudad.Enabled = true;
-        TBPais.Enabled = true;
+        DDLPais.Enabled = true;
         TBFacilidades.Enabled = true;
         BtnAgregar.Enabled = true;
         LBFacilidades.Enabled = true;
@@ -190,7 +241,7 @@ public partial class ABMTerminales : System.Web.UI.Page
         TBCodigo.Enabled = false;
         BtnBuscar.Enabled = false;
         TBCiudad.Enabled = true;
-        TBPais.Enabled = true;
+        DDLPais.Enabled = true;
         TBFacilidades.Enabled = true;
         BtnAgregar.Enabled = true;
         LBFacilidades.Enabled = true;
