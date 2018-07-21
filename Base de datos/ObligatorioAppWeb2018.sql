@@ -353,6 +353,17 @@ GO
 -- Prueba Modificar_Compania 'Compania 2', 'Calle 2', '099222222'
 -- -----------------------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA LISTAR COMPANIAS
+CREATE PROCEDURE Listar_Companias
+AS
+BEGIN
+	Select * from Companias
+END
+GO
+-- Prueba Listar_Companias
+-- -----------------------------------------------------------------------------------------------
+
 
 
 
@@ -560,6 +571,16 @@ GO
 -- Prueba Modificar_Terminal 'CCC', 'Ciudad 03', 'Uruguay'
 -- -----------------------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA LISTAR TERMINALES
+CREATE PROCEDURE Listar_Terminales
+AS
+BEGIN
+	Select * from Terminales
+END
+GO
+-- Prueba Listar_Terminales
+-- -----------------------------------------------------------------------------------------------
 
 
 

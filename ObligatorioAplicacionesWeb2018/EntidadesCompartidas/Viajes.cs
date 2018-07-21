@@ -24,10 +24,22 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value > 0)
-                    _numero = value;
-                else
-                    throw new Exception("El número de viaje no es válido");
+                try
+                {
+                    if (Convert.ToInt32(value) > 0)
+                    {
+                        _numero = value;
+                    }
+                    else
+                    {
+                        throw new Exception("El número de viaje ingresado no es válido");
+                    }
+                }
+
+                catch
+                {
+                    throw new Exception("El número de viaje ingresado no es válido");
+                }
             }
         }
 

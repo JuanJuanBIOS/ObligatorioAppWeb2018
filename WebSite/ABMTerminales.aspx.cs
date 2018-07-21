@@ -14,6 +14,7 @@ public partial class ABMTerminales : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            LimpioFormulario();
             TBCodigo.Focus();
         }
     }

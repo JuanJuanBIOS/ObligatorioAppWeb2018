@@ -43,11 +43,10 @@
                 </td>
         </tr>
         <tr>
-            <td align="center" valign="middle" class="style4">
+            <td align="center" valign="middle" class="style4" colspan="2">
                
-                </td>
-            <td align="center" valign="middle" class="style4">
                 <h1><asp:Label ID="LbTitulo" runat="server" Text="Terminales"></asp:Label></h1>
+               
                 </td>
         </tr>
         <tr>

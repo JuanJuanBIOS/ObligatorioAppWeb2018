@@ -167,7 +167,6 @@ namespace Persistencia
             }
         }
 
-
         public void Modificar_Terminal(Terminales unaTer)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
@@ -222,6 +221,43 @@ namespace Persistencia
             {
                 oConexion.Close();
             }
+        }
+
+        public List<string> Listar_Terminales()
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Listar_Terminales", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            List<string> ListaTerminales = new List<string>();
+
+            try
+            {
+                oConexion.Open();
+                SqlDataReader oReader = oComando.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        string Ter = oReader["codigo"].ToString();
+                        ListaTerminales.Add(Ter);
+                    }
+                }
+
+                oReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return ListaTerminales;
         }
     }
 }

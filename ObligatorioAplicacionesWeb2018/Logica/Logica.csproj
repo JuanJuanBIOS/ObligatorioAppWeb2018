@@ -44,9 +44,11 @@
     <Compile Include="Interfaces\ILogicaCompania.cs" />
     <Compile Include="Interfaces\ILogicaEmpleado.cs" />
     <Compile Include="Interfaces\ILogicaTerminales.cs" />
+    <Compile Include="Interfaces\ILogicaViajes.cs" />
     <Compile Include="LogicaTerminales.cs" />
     <Compile Include="LogicaCompania.cs" />
     <Compile Include="LogicaEmpleado.cs" />
+    <Compile Include="LogicaViajes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

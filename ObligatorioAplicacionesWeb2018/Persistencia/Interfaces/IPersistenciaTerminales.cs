@@ -15,5 +15,7 @@ namespace Persistencia.Interfaces
         void Eliminar_Terminal(Terminales pTemrinal);
 
         void Modificar_Terminal(Terminales pTemrinal);
+
+        List<string> Listar_Terminales();
     }
 }
