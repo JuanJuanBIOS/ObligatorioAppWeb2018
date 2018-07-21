@@ -70,13 +70,15 @@ namespace Persistencia
             return unEmp;
         }
 
+
+
         public Empleados Buscar_Empleado(string pCedula)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Buscar_Empleado", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            oComando.Parameters.AddWithValue("@codigo", pCedula);
+            oComando.Parameters.AddWithValue("@cedula", pCedula);
 
             Empleados unEmp = null;
 
@@ -111,5 +113,131 @@ namespace Persistencia
 
             return unEmp;
         }
+
+
+        public void Alta_Empleado(Empleados unEmp)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Alta_Empleado", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@cedula", unEmp.Cedula);
+            oComando.Parameters.AddWithValue("@nombre", unEmp.Nombre);
+            oComando.Parameters.AddWithValue("@pass", unEmp.Pass);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oConexion.Open();
+                oComando.ExecuteNonQuery();
+
+                int oAfectados = (int)oComando.Parameters["@Retorno"].Value;
+
+                if (oAfectados == -1)
+                {
+                    throw new Exception("Ya existe el Empleado con la cedula ingresada");
+                }
+                else if (oAfectados == -2)
+                {
+                    throw new Exception("Error en la base de datos");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                oConexion.Close();
+            }
+        }
+
+        //Modificar
+        public void Modificar_Empleado(Empleados unEmp)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Modificar_Empleado", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@cedula", unEmp.Cedula);
+            oComando.Parameters.AddWithValue("@nombre", unEmp.Nombre);
+            oComando.Parameters.AddWithValue("@pass", unEmp.Pass);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oConexion.Open();
+                oComando.ExecuteNonQuery();
+
+                int oAfectados = (int)oComando.Parameters["@Retorno"].Value;
+
+                if (oAfectados == -1)
+                {
+                    throw new Exception("No existe Empleado con la cedula ingresada");
+                }
+                else if (oAfectados == -2)
+                {
+                    throw new Exception("Error en la base de datos");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                oConexion.Close();
+            }
+        }
+
+        //Eliminar
+        public void Eliminar_Empleado(Empleados unEmp)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Eliminar_Empleado", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@cedula", unEmp.Cedula);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oConexion.Open();
+                oComando.ExecuteNonQuery();
+
+                int oAfectados = (int)oComando.Parameters["@Retorno"].Value;
+
+                if (oAfectados == -1)
+                {
+                    throw new Exception("El Empleado no existe en la base de datos");
+                }
+                else if (oAfectados == -2)
+                {
+                    throw new Exception("Error al eliminar el empleado de la base de datos");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                oConexion.Close();
+            }
+        }
+
+
+
+
+
     }
 }
