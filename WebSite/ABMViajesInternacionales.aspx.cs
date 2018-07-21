@@ -43,31 +43,33 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
                 ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
 
-                Internacionales unInter = FViaje.Buscar_Viaje(_Codigo);
-
-                Session["Internacional"] = unInter;
+                Viajes unInter = FViaje.Buscar_Viaje(_Codigo);
 
                 if (unInter == null)
                 {
                     ActivoFormularioAlta();
                 }
 
+                if (unInter is Nacionales)
+                {
+                    LblError.ForeColor = System.Drawing.Color.Red;
+                    LblError.Text = "El número de viaje ingresado corresponde a un viaje nacional";
+                }
+
                 else
                 {
+                    Session["Internacional"] = (Internacionales)unInter;
+
                     DDLCompania.Text = unInter.Compania.Nombre;
                     DDLTerminal.Text = unInter.Terminal.Codigo;
-
-
-
-                    TBCiudad.Text = unaTer.Ciudad;
-                    DDLPais.Text = unaTer.Pais;
-
-                    Session["Facilidades"] = unaTer.ListaFacilidades;
-
-                    LBFacilidades.DataSource = unaTer.ListaFacilidades;
-                    LBFacilidades.DataTextField = "Facilidad";
-                    LBFacilidades.DataBind();
-
+                    CalFechaPartida.SelectedDate = unInter.Fecha_partida.Date;
+                    CalFechaArribo.SelectedDate = unInter.Fecha_arribo.Date;
+                    DDLHoraPartida.SelectedIndex = unInter.Fecha_partida.Hour;
+                    DDLMinutosPartida.SelectedIndex = unInter.Fecha_partida.Minute;
+                    DDLHoraArribo.SelectedIndex = unInter.Fecha_arribo.Hour;
+                    DDLMinutosArribo.SelectedIndex = unInter.Fecha_arribo.Minute;
+                    TBCantAsientos.Text = Convert.ToString(unInter.Asientos);
+                    
                     ActivoFormularioModificacion();
                 }
             }
@@ -80,6 +82,10 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         }
     }
 
+    protected void BtnLimpiar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ABMInternacionales.aspx", false);
+    }
 
     private void LimpioFormulario()
     {
@@ -157,10 +163,28 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         BtnEliminar.Enabled = true;
         BtnLimpiar.Enabled = true;
     }
+
     protected void CalFechaPartida_SelectionChanged(object sender, EventArgs e)
     {
         LblError.Text = "";
         TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
-        if(CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && 
+        if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaArribo.Text != "")
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+        }
     }
+
+
+    protected void CalFechaArribo_SelectionChanged(object sender, EventArgs e)
+    {
+        LblError.Text = "";
+        TBFechaArribo.Text = CalFechaPartida.SelectedDate.ToShortDateString();
+        if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaPartida.Text != "")
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+        }
+    }
+
 }
