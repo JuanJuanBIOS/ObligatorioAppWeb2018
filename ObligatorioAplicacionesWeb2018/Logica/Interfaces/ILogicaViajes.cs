@@ -8,6 +8,6 @@ namespace Logica.Interfaces
 {
     public interface ILogicaViajes
     {
-
+        Viajes Buscar_Viaje(int pCodViaje);
     }
 }

@@ -9,5 +9,7 @@ namespace Logica.Interfaces
     public interface ILogicaEmpleado
     {
         Empleados Login(string pCedula, string pPass);
+
+        Empleados Buscar_Empleado(string pCedula);
     }
 }

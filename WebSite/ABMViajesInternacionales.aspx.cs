@@ -21,19 +21,63 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         DDLTerminal.DataSource = ListaTerminales;
         DDLTerminal.DataBind();
 
+        ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
 
+        List<string> ListaCompanias = FCompania.Listar_Companias();
 
-
-
-
-
-
-
-
-
-
+        DDLCompania.DataSource = ListaCompanias;
+        DDLCompania.DataBind();
 
         TBNumero.Focus();
+    }
+
+    protected void BtnBuscar_Click(object sender, EventArgs e)
+    {
+        if (TBNumero.Text != "")
+        {
+            try
+            {
+                LblError.Text = "";
+
+                int _Codigo = Convert.ToInt32(TBNumero.Text);
+
+                ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
+
+                Internacionales unInter = FViaje.Buscar_Viaje(_Codigo);
+
+                Session["Internacional"] = unInter;
+
+                if (unInter == null)
+                {
+                    ActivoFormularioAlta();
+                }
+
+                else
+                {
+                    DDLCompania.Text = unInter.Compania.Nombre;
+                    DDLTerminal.Text = unInter.Terminal.Codigo;
+
+
+
+                    TBCiudad.Text = unaTer.Ciudad;
+                    DDLPais.Text = unaTer.Pais;
+
+                    Session["Facilidades"] = unaTer.ListaFacilidades;
+
+                    LBFacilidades.DataSource = unaTer.ListaFacilidades;
+                    LBFacilidades.DataTextField = "Facilidad";
+                    LBFacilidades.DataBind();
+
+                    ActivoFormularioModificacion();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                LblError.ForeColor = System.Drawing.Color.Red;
+                LblError.Text = ex.Message;
+            }
+        }
     }
 
 
@@ -113,8 +157,10 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         BtnEliminar.Enabled = true;
         BtnLimpiar.Enabled = true;
     }
-    protected void BtnLimpiar_Click(object sender, EventArgs e)
+    protected void CalFechaPartida_SelectionChanged(object sender, EventArgs e)
     {
-        Response.Redirect("ABMViajesInternacionales.aspx", false);
+        LblError.Text = "";
+        TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
+        if(CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && 
     }
 }

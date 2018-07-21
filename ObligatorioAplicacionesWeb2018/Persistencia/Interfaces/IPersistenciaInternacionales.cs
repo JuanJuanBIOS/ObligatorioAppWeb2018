@@ -6,10 +6,8 @@ using EntidadesCompartidas;
 
 namespace Persistencia.Interfaces
 {
-    public interface IPersistenciaEmpleado
+    public interface IPersistenciaInternacionales
     {
-        Empleados Login(string pCedula, string pPass);
-
-        Empleados Buscar_Empleado(string pCedula);
+        Internacionales Buscar_Viaje(int pCodViaje);
     }
 }

@@ -23,9 +23,9 @@ namespace Logica
             return (LogicaTerminales.GetInstancia());
         }
 
-        //public static ILogicaViajes getLogicaViaje()
-        //{
-        //    return (LogicaViajes.GetInstancia());
-        //}
+        public static ILogicaViajes getLogicaViaje()
+        {
+            return (LogicaViajes.GetInstancia());
+        }
     }
 }

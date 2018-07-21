@@ -40,7 +40,6 @@ namespace Logica
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
             FCompania.Alta_Compania(C);
-
         }
 
         public void Eliminar_Compania(Companias C)
@@ -48,7 +47,6 @@ namespace Logica
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
             FCompania.Eliminar_Compania(C);
-
         }
 
         public void Modificar_Compania(Companias C)
@@ -56,7 +54,13 @@ namespace Logica
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 
             FCompania.Modificar_Compania(C);
+        }
 
+        public List<string> Listar_Companias()
+        {
+            IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
+
+            return FCompania.Listar_Companias();
         }
     }
 }

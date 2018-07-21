@@ -44,10 +44,14 @@
     <Compile Include="FabricaPersistencia.cs" />
     <Compile Include="Interfaces\IPersistenciaCompania.cs" />
     <Compile Include="Interfaces\IPersistenciaEmpleado.cs" />
+    <Compile Include="Interfaces\IPersistenciaInternacionales.cs" />
+    <Compile Include="Interfaces\IPersistenciaNacionales.cs" />
     <Compile Include="Interfaces\IPersistenciaTerminales.cs" />
     <Compile Include="PersistenciaCompania.cs" />
     <Compile Include="PersistenciaEmpleado.cs" />
     <Compile Include="PersistenciaFacilidades.cs" />
+    <Compile Include="PersistenciaInternacionales.cs" />
+    <Compile Include="PersistenciaNacionales.cs" />
     <Compile Include="PersistenciaTerminales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EntidadesCompartidas
 {
-    public class Viajes
+    public abstract class Viajes
     {
         //Atributos
         private int _numero;

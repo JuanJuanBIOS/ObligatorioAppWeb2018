@@ -69,5 +69,47 @@ namespace Persistencia
 
             return unEmp;
         }
+
+        public Empleados Buscar_Empleado(string pCedula)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Buscar_Empleado", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@codigo", pCedula);
+
+            Empleados unEmp = null;
+
+            try
+            {
+                oConexion.Open();
+
+                SqlDataReader _Reader = oComando.ExecuteReader();
+
+                if (_Reader.HasRows)
+                {
+                    _Reader.Read();
+
+                    string _cedula = (string)_Reader["cedula"];
+                    string _pass = (string)_Reader["pass"];
+                    string _nombre = (string)_Reader["nombre"];
+
+                    unEmp = new Empleados(_cedula, _pass, _nombre);
+
+                    _Reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return unEmp;
+        }
     }
 }

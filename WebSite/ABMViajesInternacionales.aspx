@@ -12,7 +12,7 @@
     Número:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:TextBox ID="TBNumero" runat="server"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" 
+    <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
 </p>
     <p dir="ltr" style="margin-left: 40px">
@@ -60,7 +60,8 @@
                     <asp:TextBox ID="TBFechaPartida" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td class="style10" colspan="6">
-                    <asp:Calendar ID="CalFechaPartida" runat="server" Enabled="False"></asp:Calendar>
+                    <asp:Calendar ID="CalFechaPartida" runat="server" Enabled="False" 
+                        onselectionchanged="CalFechaPartida_SelectionChanged"></asp:Calendar>
                 </td>
                 <td class="style9">
                     <br />

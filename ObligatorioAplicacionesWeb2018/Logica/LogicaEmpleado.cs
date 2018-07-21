@@ -35,5 +35,14 @@ namespace Logica
 
             return E;
         }
+
+        public Empleados Buscar_Empleado(string pCedula)
+        {
+            IPersistenciaEmpleado Fempleado = FabricaPersistencia.getPersistenciaEmpleado();
+
+            Empleados E = Fempleado.Buscar_Empleado(pCedula);
+
+            return E;
+        }
     }
 }
