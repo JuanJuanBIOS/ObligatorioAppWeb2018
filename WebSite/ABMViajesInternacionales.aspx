@@ -76,7 +76,8 @@
                 </td> 
                 <td colspan="2" align="left" style="width: 179px">
                     <br />
-                    <asp:Calendar ID="CalFechaArribo" runat="server" Enabled="False"></asp:Calendar>
+                    <asp:Calendar ID="CalFechaArribo" runat="server" Enabled="False" 
+                        onselectionchanged="CalFechaArribo_SelectionChanged"></asp:Calendar>
                 </td>
                 <td align="left" >
                     &nbsp;</td>
