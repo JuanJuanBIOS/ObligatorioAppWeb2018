@@ -182,25 +182,29 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
     protected void CalFechaPartida_SelectionChanged(object sender, EventArgs e)
     {
-        LblError.Text = "";
         TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
-        if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaArribo.Text != "")
-        {
-            LblError.ForeColor = System.Drawing.Color.Red;
-            LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
-        }
+        VerificarFechas();
+        //LblError.Text = "";
+        //TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
+        //if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaArribo.Text != "")
+        //{
+        //    LblError.ForeColor = System.Drawing.Color.Red;
+        //    LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+        //}
     }
 
 
     protected void CalFechaArribo_SelectionChanged(object sender, EventArgs e)
     {
-        LblError.Text = "";
         TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
-        if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaPartida.Text != "")
-        {
-            LblError.ForeColor = System.Drawing.Color.Red;
-            LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
-        }
+        VerificarFechas();
+        //LblError.Text = "";
+        //TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
+        //if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaPartida.Text != "")
+        //{
+        //    LblError.ForeColor = System.Drawing.Color.Red;
+        //    LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+        //}
     }
 
     protected void DDLHoraPartida_SelectedIndexChanged(object sender, EventArgs e)
@@ -221,12 +225,48 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         VerificarFechas();
     }
 
-    private bool VerificarFechas()
+    private void VerificarFechas()
     {
         bool valido = false;
+        LblError.Text = "";
+        BtnModificar.Enabled = false;
 
+        try
+        {
+            int diapartida = Convert.ToDateTime(TBFechaPartida.Text).Day;
+            int mespartida = Convert.ToDateTime(TBFechaPartida.Text).Month;
+            int aniopartida = Convert.ToDateTime(TBFechaPartida.Text).Year;
+            int horapartida = Convert.ToInt16(DDLHoraPartida.Text);
+            int minutospartida = Convert.ToInt16(DDLMinutosPartida.Text);
+            int diaarribo = Convert.ToDateTime(TBFechaArribo.Text).Day;
+            int mesarribo = Convert.ToDateTime(TBFechaArribo.Text).Month;
+            int anioarribo = Convert.ToDateTime(TBFechaArribo.Text).Year;
+            int horaarribo = Convert.ToInt16(DDLHoraArribo.Text);
+            int minutosarribo = Convert.ToInt16(DDLMinutosArribo.Text);
+            DateTime fechapartida = new DateTime(aniopartida, mespartida, diapartida, horapartida, minutospartida, 0);
+            DateTime fechaarribo = new DateTime(anioarribo, mesarribo, diaarribo, horaarribo, minutosarribo, 0);
 
+            if (fechapartida < fechaarribo)
+            {
+                valido = true;
+            }
 
-        return valido;
+            else
+            {
+                LblError.ForeColor = System.Drawing.Color.Red;
+                LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+            }
+        }
+
+        catch
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
+        }
+
+        if (valido)
+        {
+            BtnModificar.Enabled = true;
+        }
     }
 }

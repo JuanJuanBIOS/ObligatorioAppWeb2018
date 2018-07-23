@@ -16,7 +16,7 @@
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
 </p>
-    <p dir="ltr" style="margin-left: 40px">
+    <p dir="ltr" style="margin-left: 80px">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,7 +89,8 @@
             </td>
             <td colspan="7">
                 <asp:DropDownList ID="DDLHoraPartida" runat="server" Enabled="False" 
-                    Width="70px" onselectedindexchanged="DDLHoraPartida_SelectedIndexChanged">
+                    Width="70px" onselectedindexchanged="DDLHoraPartida_SelectedIndexChanged" 
+                    AutoPostBack="True">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -118,7 +119,8 @@
                 &nbsp;:
                 <asp:DropDownList ID="DDLMinutosPartida" runat="server" Enabled="False" 
                     Width="70px" 
-                    onselectedindexchanged="DDLMinutosPartida_SelectedIndexChanged">
+                    onselectedindexchanged="DDLMinutosPartida_SelectedIndexChanged" 
+                    AutoPostBack="True">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -188,7 +190,8 @@
             </td>
             <td colspan="2">
                 <asp:DropDownList ID="DDLHoraArribo" runat="server" Enabled="False" 
-                    Width="70px" onselectedindexchanged="DDLHoraArribo_SelectedIndexChanged">
+                    Width="70px" onselectedindexchanged="DDLHoraArribo_SelectedIndexChanged" 
+                    AutoPostBack="True">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -217,7 +220,8 @@
                 &nbsp;:
                 <asp:DropDownList ID="DDLMinutosArribo" runat="server" Enabled="False" 
                     Width="70px" 
-                    onselectedindexchanged="DDLMinutosArribo_SelectedIndexChanged">
+                    onselectedindexchanged="DDLMinutosArribo_SelectedIndexChanged" 
+                    AutoPostBack="True">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
