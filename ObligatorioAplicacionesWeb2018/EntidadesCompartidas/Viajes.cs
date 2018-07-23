@@ -83,14 +83,7 @@ namespace EntidadesCompartidas
 
             set
             {
-                if (value <= _fecha_arribo)
-                {
-                    _fecha_partida = value;
-                }
-                else
-                {
-                    throw new Exception("La fecha de partida no puede ser posterior a la fecha de arribo");
-                }
+                _fecha_partida = value;
             }
         }
 

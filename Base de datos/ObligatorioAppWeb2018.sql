@@ -358,7 +358,7 @@ GO
 CREATE PROCEDURE Listar_Companias
 AS
 BEGIN
-	Select * from Companias
+	Select * from Companias where activo = 1 
 END
 GO
 -- Prueba Listar_Companias
@@ -576,7 +576,7 @@ GO
 CREATE PROCEDURE Listar_Terminales
 AS
 BEGIN
-	Select * from Terminales
+	Select * from Terminales where activo = 1
 END
 GO
 -- Prueba Listar_Terminales
@@ -684,7 +684,7 @@ BEGIN
 		END
 END
 GO
--- Prueba Alta_ViajeNacional 9, 'Compania 3', 'BBB', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 4
+-- Prueba Alta_ViajeNacional 9, 'Compania 3', 'BBB', '15/02/2019 16:00', '16/02/2019 01:00', 45, '33333333', 4
 -- Prueba Alta_ViajeNacional 10, 'Compania 1', 'BBB', '15/02/2018 17:00', '16/02/2018 02:00', 45, '33333333', 4
 -- -----------------------------------------------------------------------------------------------
 
@@ -741,7 +741,7 @@ BEGIN
 		END
 END
 GO
--- Prueba Alta_ViajeInternacional 11, 'Compania 3', 'DDD', '15/02/2018 16:00', '16/02/2018 01:00', 45, '33333333', 1, 'Cedula'
+-- Prueba Alta_ViajeInternacional 11, 'Compania 3', 'DDD', '15/02/2019 16:00', '16/02/2019 01:00', 45, '33333333', 1, 'Cedula'
 -- Prueba Alta_ViajeInternacional 12, 'Compania 1', 'DDD', '15/02/2018 17:00', '16/02/2018 02:00', 45, '33333333', 0, 'Pasaporte'
 -- -----------------------------------------------------------------------------------------------
 
@@ -1002,26 +1002,19 @@ GO
 Alta_Facilidades 'FFF','Facilidad 3'
 GO
 
-Alta_ViajeNacional 1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '11111111', 0
+Alta_ViajeNacional 1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '47879585', 0
 GO
-Alta_ViajeNacional 2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '22222222', 2
+Alta_ViajeNacional 2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '41348194', 2
 GO
-Alta_ViajeNacional 3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '11111111', 0
+Alta_ViajeNacional 3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '47879585', 0
 GO
-Alta_ViajeNacional 5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '22222222', 3
+Alta_ViajeNacional 5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '41348194', 3
 GO
-Alta_ViajeInternacional 4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '11111111', 0, 'Cedula'
+Alta_ViajeInternacional 4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '47879585', 0, 'Cedula'
 GO
-Alta_ViajeInternacional 6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '22222222', 1, ''
+Alta_ViajeInternacional 6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '41348194', 1, ''
 GO
-Alta_ViajeInternacional 7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '11111111', 1, 'Pasaporte y vacunas'
+Alta_ViajeInternacional 7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '47879585', 1, 'Pasaporte y vacunas'
 GO
-Alta_ViajeInternacional 8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '22222222', 0, ''
-GO
-
-Eliminar_Empleado '22222222'
-GO
-Eliminar_Compania 'Compania 2'
-GO
-Eliminar_Terminal 'CCC'
+Alta_ViajeInternacional 8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '41348194', 0, ''
 GO

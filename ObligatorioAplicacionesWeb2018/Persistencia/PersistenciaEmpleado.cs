@@ -76,7 +76,7 @@ namespace Persistencia
             SqlCommand oComando = new SqlCommand("Buscar_Empleado", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            oComando.Parameters.AddWithValue("@codigo", pCedula);
+            oComando.Parameters.AddWithValue("@cedula", pCedula);
 
             Empleados unEmp = null;
 

@@ -34,7 +34,7 @@ namespace Persistencia
             SqlCommand oComando = new SqlCommand("Buscar_ViajeNacional", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            oComando.Parameters.AddWithValue("@codigo", pCodViaje);
+            oComando.Parameters.AddWithValue("@numero", pCodViaje);
 
             Nacionales unNac = null;
 
@@ -49,12 +49,12 @@ namespace Persistencia
                     _Reader.Read();
 
                     int _numero = (int)_Reader["numero"];
-                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania(((Companias)_Reader["compania"]).Nombre);
-                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal(((Terminales)_Reader["destino"]).Codigo);
+                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
+                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
                     DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
                     DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
                     int _asientos = (int)_Reader["asientos"];
-                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado(Convert.ToString(((Empleados)_Reader["empleado"]).Cedula));
+                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
                     int _paradas = (int)_Reader["paradas"];
 
                     unNac = new Nacionales(_numero, _compania, _terminal, _fechapartida, _fechaarribo, _asientos, _empleado, _paradas);

@@ -9,8 +9,9 @@
             Text="Mantenimiento de Viajes Internacionales"></asp:Label>
     </h2>
 <p>
-    Número:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:TextBox ID="TBNumero" runat="server"></asp:TextBox>
+    Número:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox 
+        ID="TBNumero" runat="server"></asp:TextBox>
+    &nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
@@ -88,7 +89,7 @@
             </td>
             <td colspan="7">
                 <asp:DropDownList ID="DDLHoraPartida" runat="server" Enabled="False" 
-                    Width="70px">
+                    Width="70px" onselectedindexchanged="DDLHoraPartida_SelectedIndexChanged">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -116,7 +117,8 @@
                 </asp:DropDownList>
                 &nbsp;:
                 <asp:DropDownList ID="DDLMinutosPartida" runat="server" Enabled="False" 
-                    Width="70px">
+                    Width="70px" 
+                    onselectedindexchanged="DDLMinutosPartida_SelectedIndexChanged">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -186,7 +188,7 @@
             </td>
             <td colspan="2">
                 <asp:DropDownList ID="DDLHoraArribo" runat="server" Enabled="False" 
-                    Width="70px">
+                    Width="70px" onselectedindexchanged="DDLHoraArribo_SelectedIndexChanged">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>
@@ -214,7 +216,8 @@
                 </asp:DropDownList>
                 &nbsp;:
                 <asp:DropDownList ID="DDLMinutosArribo" runat="server" Enabled="False" 
-                    Width="70px">
+                    Width="70px" 
+                    onselectedindexchanged="DDLMinutosArribo_SelectedIndexChanged">
                     <asp:ListItem>00</asp:ListItem>
                     <asp:ListItem>01</asp:ListItem>
                     <asp:ListItem>02</asp:ListItem>

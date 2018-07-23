@@ -12,7 +12,11 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        LimpioFormulario();
+        if (!IsPostBack)
+        {
+            LimpioFormulario();
+            TBNumero.Focus();
+        }
 
         ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
 
@@ -33,7 +37,8 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
     protected void BtnBuscar_Click(object sender, EventArgs e)
     {
-        if (TBNumero.Text != "")
+
+        if(TBNumero.Text!="")
         {
             try
             {
@@ -63,12 +68,23 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
                     DDLCompania.Text = unInter.Compania.Nombre;
                     DDLTerminal.Text = unInter.Terminal.Codigo;
                     CalFechaPartida.SelectedDate = unInter.Fecha_partida.Date;
+                    TBFechaPartida.Text = unInter.Fecha_partida.Date.ToShortDateString();
                     CalFechaArribo.SelectedDate = unInter.Fecha_arribo.Date;
+                    TBFechaArribo.Text = unInter.Fecha_arribo.Date.ToShortDateString();
                     DDLHoraPartida.SelectedIndex = unInter.Fecha_partida.Hour;
                     DDLMinutosPartida.SelectedIndex = unInter.Fecha_partida.Minute;
                     DDLHoraArribo.SelectedIndex = unInter.Fecha_arribo.Hour;
                     DDLMinutosArribo.SelectedIndex = unInter.Fecha_arribo.Minute;
                     TBCantAsientos.Text = Convert.ToString(unInter.Asientos);
+                    if (((Internacionales)unInter).Servicio)
+                    {
+                        DDLServicio.SelectedIndex = 1;
+                    }
+                    else
+                    {
+                        DDLServicio.SelectedIndex = 0;
+                    }
+                    TBDocumentacion.Text = ((Internacionales)unInter).Documentacion;
                     
                     ActivoFormularioModificacion();
                 }
@@ -84,7 +100,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
     protected void BtnLimpiar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("ABMInternacionales.aspx", false);
+        Response.Redirect("ABMViajesInternacionales.aspx", false);
     }
 
     private void LimpioFormulario()
@@ -133,7 +149,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         DDLHoraPartida.Enabled = true;
         DDLMinutosPartida.Enabled = true;
         DDLHoraArribo.Enabled = true;
-        DDLHoraArribo.Enabled = true;
+        DDLMinutosArribo.Enabled = true;
         TBCantAsientos.Enabled = true;
         DDLServicio.Enabled = true;
         TBDocumentacion.Enabled = true;
@@ -154,7 +170,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         DDLHoraPartida.Enabled = true;
         DDLMinutosPartida.Enabled = true;
         DDLHoraArribo.Enabled = true;
-        DDLHoraArribo.Enabled = true;
+        DDLMinutosArribo.Enabled = true;
         TBCantAsientos.Enabled = true;
         DDLServicio.Enabled = true;
         TBDocumentacion.Enabled = true;
@@ -179,7 +195,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
     protected void CalFechaArribo_SelectionChanged(object sender, EventArgs e)
     {
         LblError.Text = "";
-        TBFechaArribo.Text = CalFechaPartida.SelectedDate.ToShortDateString();
+        TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
         if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaPartida.Text != "")
         {
             LblError.ForeColor = System.Drawing.Color.Red;
@@ -187,4 +203,30 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         }
     }
 
+    protected void DDLHoraPartida_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        VerificarFechas();
+    }
+
+    protected void DDLMinutosPartida_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        VerificarFechas();
+    }
+    protected void DDLHoraArribo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        VerificarFechas();
+    }
+    protected void DDLMinutosArribo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        VerificarFechas();
+    }
+
+    private bool VerificarFechas()
+    {
+        bool valido = false;
+
+
+
+        return valido;
+    }
 }
