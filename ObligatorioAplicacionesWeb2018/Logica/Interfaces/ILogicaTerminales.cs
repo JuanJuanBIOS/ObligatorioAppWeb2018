@@ -16,6 +16,6 @@ namespace Logica.Interfaces
 
         void Modificar_Terminal(Terminales pTerminal);
 
-        List<string> Listar_Terminales();
+        List<Terminales> Listar_Terminales();
     }
 }

@@ -224,13 +224,13 @@ namespace Persistencia
             }
         }
 
-        public List<string> Listar_Terminales()
+        public List<Terminales> Listar_Terminales()
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Listar_Terminales", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            List<string> ListaTerminales = new List<string>();
+            List<Terminales> ListaTerminales = new List<Terminales>();
 
             try
             {
@@ -241,7 +241,7 @@ namespace Persistencia
                 {
                     while (oReader.Read())
                     {
-                        string Ter = oReader["codigo"].ToString();
+                        Terminales Ter = Buscar_Terminal(oReader["codigo"].ToString());
                         ListaTerminales.Add(Ter);
                     }
                 }

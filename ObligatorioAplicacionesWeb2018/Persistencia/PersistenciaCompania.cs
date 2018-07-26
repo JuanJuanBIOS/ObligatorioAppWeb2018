@@ -192,13 +192,13 @@ namespace Persistencia
             }
         }
 
-        public List<string> Listar_Companias()
+        public List<Companias> Listar_Companias()
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
             SqlCommand oComando = new SqlCommand("Listar_Companias", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
 
-            List<string> ListaCompanias = new List<string>();
+            List<Companias> ListaCompanias = new List<Companias>();
 
             try
             {
@@ -209,7 +209,7 @@ namespace Persistencia
                 {
                     while (oReader.Read())
                     {
-                        string Comp = oReader["nombre"].ToString();
+                        Companias Comp = Buscar_Compania(oReader["nombre"].ToString());
                         ListaCompanias.Add(Comp);
                     }
                 }

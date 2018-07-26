@@ -16,6 +16,6 @@ namespace Persistencia.Interfaces
 
         void Modificar_Terminal(Terminales pTemrinal);
 
-        List<string> Listar_Terminales();
+        List<Terminales> Listar_Terminales();
     }
 }

@@ -15,7 +15,7 @@ namespace Persistencia.Interfaces
         void Eliminar_Compania(Companias C);
 
         void Modificar_Compania(Companias C);
-
-    List<string> Listar_Companias();
+        
+        List<Companias> Listar_Companias();
     }
 }

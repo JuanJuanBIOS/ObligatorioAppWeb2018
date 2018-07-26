@@ -55,7 +55,7 @@ namespace Logica.Interfaces
             FTerminal.Modificar_Terminal(Ter);
         }
 
-        public List<string> Listar_Terminales()
+        public List<Terminales> Listar_Terminales()
         {
             IPersistenciaTerminales FTerminal = FabricaPersistencia.getPersistenciaTerminal();
 

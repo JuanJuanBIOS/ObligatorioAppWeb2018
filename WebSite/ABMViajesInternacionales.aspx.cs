@@ -20,16 +20,21 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
         ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
 
-        List<string> ListaTerminales = FTerminal.Listar_Terminales();
+        List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
+
+        Session["Terminales"] = ListaTerminales;
 
         DDLTerminal.DataSource = ListaTerminales;
+        DDLTerminal.DataTextField = "codigo";
         DDLTerminal.DataBind();
 
         ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
 
-        List<string> ListaCompanias = FCompania.Listar_Companias();
+        List<Companias> ListaCompanias = FCompania.Listar_Companias();
 
+        Session["Companias"] = ListaCompanias;
         DDLCompania.DataSource = ListaCompanias;
+        DDLCompania.DataTextField = "nombre";
         DDLCompania.DataBind();
 
         TBNumero.Focus();
@@ -184,13 +189,6 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
     {
         TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
         VerificarFechas();
-        //LblError.Text = "";
-        //TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
-        //if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaArribo.Text != "")
-        //{
-        //    LblError.ForeColor = System.Drawing.Color.Red;
-        //    LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
-        //}
     }
 
 
@@ -198,13 +196,6 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
     {
         TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
         VerificarFechas();
-        //LblError.Text = "";
-        //TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
-        //if (CalFechaPartida.SelectedDate > CalFechaArribo.SelectedDate && TBFechaPartida.Text != "")
-        //{
-        //    LblError.ForeColor = System.Drawing.Color.Red;
-        //    LblError.Text = "La fecha de Arribo debe ser mayor a la fecha de Partida";
-        //}
     }
 
     protected void DDLHoraPartida_SelectedIndexChanged(object sender, EventArgs e)

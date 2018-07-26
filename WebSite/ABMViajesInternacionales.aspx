@@ -29,6 +29,7 @@
             <td colspan="13">
                 <asp:DropDownList ID="DDLCompania" runat="server" Width="240px">
                 </asp:DropDownList>
+                <asp:TextBox ID="TBCompania" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>

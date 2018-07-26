@@ -56,7 +56,7 @@ namespace Logica
             FCompania.Modificar_Compania(C);
         }
 
-        public List<string> Listar_Companias()
+        public List<Companias> Listar_Companias()
         {
             IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
 

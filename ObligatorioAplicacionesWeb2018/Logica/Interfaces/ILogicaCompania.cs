@@ -16,6 +16,6 @@ namespace Logica.Interfaces
 
         void Modificar_Compania(Companias C);
 
-        List<string> Listar_Companias();
+        List<Companias> Listar_Companias();
     }
 }
