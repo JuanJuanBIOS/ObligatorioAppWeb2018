@@ -9,5 +9,7 @@ namespace Logica.Interfaces
     public interface ILogicaViajes
     {
         Viajes Buscar_Viaje(int pCodViaje);
+
+        void Alta_Viaje(Viajes pViaje);
     }
 }

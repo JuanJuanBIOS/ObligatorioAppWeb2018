@@ -43,5 +43,22 @@ namespace Logica
 
             return unViaje;
         }
+
+        public void Alta_Viaje(Viajes unViaje)
+        {
+            if(unViaje is Internacionales)
+            {
+                IPersistenciaInternacionales FInternacional = FabricaPersistencia.getPersistenciaInternacionales();
+
+                FInternacional.Alta_Internacional((Internacionales)unViaje);
+            }
+
+            //else
+            //{
+            //    IPersistenciaNacionales FNacional=FabricaPersistencia.getPersistenciaNacionales();
+
+            //    FNacional.Alta_Nacional(unViaje)
+            //}
+        }
     }
 }

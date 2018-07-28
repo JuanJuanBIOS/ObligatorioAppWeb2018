@@ -15,29 +15,31 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         if (!IsPostBack)
         {
             LimpioFormulario();
+
+            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+
+            List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
+
+            Session["Terminales"] = ListaTerminales;
+
+            DDLTerminal.DataSource = ListaTerminales;
+            DDLTerminal.DataTextField = "codigo";
+            DDLTerminal.DataBind();
+
+            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+
+            List<Companias> ListaCompanias = FCompania.Listar_Companias();
+
+            Session["Companias"] = ListaCompanias;
+            DDLCompania.DataSource = ListaCompanias;
+            DDLCompania.DataTextField = "nombre";
+            DDLCompania.DataBind();
+
+            bool encontrado = false;
+            Session["Encontrado"] = encontrado;
+
             TBNumero.Focus();
         }
-
-        ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
-
-        List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
-
-        Session["Terminales"] = ListaTerminales;
-
-        DDLTerminal.DataSource = ListaTerminales;
-        DDLTerminal.DataTextField = "codigo";
-        DDLTerminal.DataBind();
-
-        ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
-
-        List<Companias> ListaCompanias = FCompania.Listar_Companias();
-
-        Session["Companias"] = ListaCompanias;
-        DDLCompania.DataSource = ListaCompanias;
-        DDLCompania.DataTextField = "nombre";
-        DDLCompania.DataBind();
-
-        TBNumero.Focus();
     }
 
     protected void BtnBuscar_Click(object sender, EventArgs e)
@@ -60,7 +62,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
                     ActivoFormularioAlta();
                 }
 
-                if (unInter is Nacionales)
+                else if (unInter is Nacionales)
                 {
                     LblError.ForeColor = System.Drawing.Color.Red;
                     LblError.Text = "El número de viaje ingresado corresponde a un viaje nacional";
@@ -68,6 +70,8 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
                 else
                 {
+                    Session["Encontrado"] = true;
+
                     Session["Internacional"] = (Internacionales)unInter;
 
                     DDLCompania.Text = unInter.Compania.Nombre;
@@ -100,6 +104,62 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
                 LblError.ForeColor = System.Drawing.Color.Red;
                 LblError.Text = ex.Message;
             }
+        }
+    }
+
+    protected void BtnAlta_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int _Numero = Convert.ToInt16(TBNumero.Text);
+
+            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+            Companias _Compania = FCompania.Buscar_Compania(DDLCompania.SelectedValue);
+
+            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+            Terminales _Terminal = FTerminal.Buscar_Terminal(DDLTerminal.SelectedValue);
+
+            int diapartida = Convert.ToDateTime(TBFechaPartida.Text).Day;
+            int mespartida = Convert.ToDateTime(TBFechaPartida.Text).Month;
+            int aniopartida = Convert.ToDateTime(TBFechaPartida.Text).Year;
+            int horapartida = Convert.ToInt16(DDLHoraPartida.Text);
+            int minutospartida = Convert.ToInt16(DDLMinutosPartida.Text);
+            int diaarribo = Convert.ToDateTime(TBFechaArribo.Text).Day;
+            int mesarribo = Convert.ToDateTime(TBFechaArribo.Text).Month;
+            int anioarribo = Convert.ToDateTime(TBFechaArribo.Text).Year;
+            int horaarribo = Convert.ToInt16(DDLHoraArribo.Text);
+            int minutosarribo = Convert.ToInt16(DDLMinutosArribo.Text);
+            DateTime _Fechapartida = new DateTime(aniopartida, mespartida, diapartida, horapartida, minutospartida, 0);
+            DateTime _Fechaarribo = new DateTime(anioarribo, mesarribo, diaarribo, horaarribo, minutosarribo, 0);
+
+            int _CantAsientos = Convert.ToInt16(TBCantAsientos.Text);
+
+            Empleados _Empleado = (Empleados)Session["Empleado"];
+
+            bool _Servicio = false;
+            if (DDLServicio.SelectedIndex == 1)
+            {
+                _Servicio = true;
+            }
+
+            string _Documentacion = TBDocumentacion.Text;
+
+            Internacionales unInter = new Internacionales(_Numero, _Compania, _Terminal, _Fechapartida, _Fechaarribo, _CantAsientos, _Empleado, _Servicio, _Documentacion);
+
+            ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
+
+            FViaje.Alta_Viaje(unInter);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "El Viaje " + Convert.ToString(unInter.Numero) + " ha sido ingresado a la base de datos correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
         }
     }
 
@@ -158,7 +218,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
         TBCantAsientos.Enabled = true;
         DDLServicio.Enabled = true;
         TBDocumentacion.Enabled = true;
-        BtnAlta.Enabled = true;
+        BtnAlta.Enabled = false;
         BtnModificar.Enabled = false;
         BtnEliminar.Enabled = false;
         BtnLimpiar.Enabled = true;
@@ -220,6 +280,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
     {
         bool valido = false;
         LblError.Text = "";
+        BtnAlta.Enabled = false;
         BtnModificar.Enabled = false;
 
         try
@@ -257,7 +318,18 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
         if (valido)
         {
-            BtnModificar.Enabled = true;
+            if ((bool)Session["Encontrado"])
+            {
+                BtnModificar.Enabled = true;
+            }
+            else
+            {
+                BtnAlta.Enabled = true;
+            }
         }
+    }
+    protected void BtnModificar_Click(object sender, EventArgs e)
+    {
+
     }
 }

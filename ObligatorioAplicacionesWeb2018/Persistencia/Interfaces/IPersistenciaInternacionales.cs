@@ -9,5 +9,7 @@ namespace Persistencia.Interfaces
     public interface IPersistenciaInternacionales
     {
         Internacionales Buscar_Viaje(int pCodViaje);
+
+        void Alta_Internacional(Internacionales pInternacional);
     }
 }

@@ -29,7 +29,6 @@
             <td colspan="13">
                 <asp:DropDownList ID="DDLCompania" runat="server" Width="240px">
                 </asp:DropDownList>
-                <asp:TextBox ID="TBCompania" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -48,7 +47,7 @@
                     &nbsp;</td>
                 <td colspan="3">
                     &nbsp;</td>
-                <td class="style9" colspan="1">
+                <td class="style9" colspan="1" style="width: 370px">
                     &nbsp;</td>
                 <td class="style9">
                     &nbsp;</td>
@@ -61,30 +60,29 @@
                     <br />
                     <asp:TextBox ID="TBFechaPartida" runat="server" Enabled="False"></asp:TextBox>
                 </td>
-                <td class="style10" colspan="6">
+                <td class="style10" colspan="6" align="center" valign="middle">
                     <asp:Calendar ID="CalFechaPartida" runat="server" Enabled="False" 
                         onselectionchanged="CalFechaPartida_SelectionChanged"></asp:Calendar>
                 </td>
-                <td class="style9">
+                <td class="style9" style="width: 60px">
+                    <br />
+                    <br />
                     <br />
                 </td>
-                <td class="style9" style="width: 232px">
-                    <br />
-                </td> 
-                <td class="style9">
+                <td>
                     <asp:Label ID="LbFechaArribo" runat="server" Text="Fecha Arribo"></asp:Label>
                     <br />
                     <asp:TextBox ID="TBFechaArribo" runat="server" Enabled="False"></asp:TextBox>
-                </td> 
-                <td colspan="2" align="left" style="width: 179px">
-                    <br />
+                </td>
+                <td class="style10" colspan="3" align="center" valign="middle" 
+                    style="width: 268435392px">
                     <asp:Calendar ID="CalFechaArribo" runat="server" Enabled="False" 
                         onselectionchanged="CalFechaArribo_SelectionChanged"></asp:Calendar>
                 </td>
-                <td align="left" >
-                    &nbsp;</td>
+                <td
+                </td colspan="2">
             </tr>
-        <tr>
+                <tr>
             <td style="width: 179px">
                 <asp:Label ID="LBHoraPartida" runat="server" Text="Hora Partida"></asp:Label>
             </td>
@@ -184,12 +182,12 @@
                     <asp:ListItem>59</asp:ListItem>
                 </asp:DropDownList>
             </td>
-            <td>
+            <td style="width: 61px">
                 &nbsp;</td>
-            <td>
+            <td style="width: 125px">
                 <asp:Label ID="LBHoraArribo" runat="server" Text="Hora Arribo"></asp:Label>
             </td>
-            <td colspan="2">
+            <td colspan="2" style="width: 228px">
                 <asp:DropDownList ID="DDLHoraArribo" runat="server" Enabled="False" 
                     Width="70px" onselectedindexchanged="DDLHoraArribo_SelectedIndexChanged" 
                     AutoPostBack="True">
@@ -299,7 +297,7 @@
                 &nbsp;</td>
             <td colspan="3">
                 &nbsp;</td>
-            <td colspan="2">
+            <td colspan="2" style="width: 228px">
                 &nbsp;</td>
             <td colspan="2">
                 &nbsp;</td>
@@ -341,7 +339,7 @@
                 &nbsp;</td>
             <td colspan="3">
                 &nbsp;</td>
-            <td colspan="2">
+            <td colspan="2" style="width: 228px">
                 &nbsp;</td>
             <td colspan="2">
                 &nbsp;</td>
@@ -350,11 +348,11 @@
             <td align="center" style="width: 179px" >
                 &nbsp;</td>
             <td align="center" >
-                <asp:Button ID="BtnAlta" runat="server" Text="Alta" Enabled="False" 
+                <asp:Button ID="BtnAlta" runat="server" Text="Alta" Enabled="False" onclick="BtnAlta_Click" 
                     />
             </td>
             <td align="center" style="width: 117px" >
-                <asp:Button ID="BtnModificar" runat="server" Text="Modificar"  Enabled="False" 
+                <asp:Button ID="BtnModificar" runat="server" Text="Modificar"  Enabled="False" onclick="BtnModificar_Click" 
                     />
             </td>
             <td align="center" style="width: 22px" >
@@ -369,7 +367,7 @@
             </td>
             <td align="center" style="width: 268435440px" >
                 &nbsp;</td>
-            <td align="left" style="width: 23px" colspan="2" >
+            <td align="left" colspan="2" >
                 &nbsp;</td>
             <td align="left" style="width: 543px" >
                 &nbsp;</td>
