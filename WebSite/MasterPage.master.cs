@@ -26,8 +26,5 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
 
 
-    protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
-    {
-
-    }
+  
 }
