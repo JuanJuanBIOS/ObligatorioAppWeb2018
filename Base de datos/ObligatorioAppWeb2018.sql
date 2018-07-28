@@ -941,7 +941,15 @@ GO
 -- Prueba Modificar_ViajeInternacional 11, 'Compania 3', 'CCC', '15/04/2017 15:00', '15/04/2017 22:00', 45, '33333333', 1, 'Cedula'
 -- -----------------------------------------------------------------------------------------------
 
-
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA LISTAR VIAJES
+CREATE PROCEDURE Listar_Viajes
+AS
+BEGIN
+	Select * from Viajes
+END
+GO
+-- Prueba Listar_Viajes
 
 
 
