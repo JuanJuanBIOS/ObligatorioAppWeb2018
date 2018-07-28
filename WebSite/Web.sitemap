@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-    <siteMapNode title="fff"  description=" Inicio de Terminales" url="~/Default.aspx">
-        <siteMapNode title="Mantenimiento de Companías"  description="Alta , baja y modificación de companías" url="~/ABMCompanias.aspx" />
-        <siteMapNode title="Mantenimiento de Terminales"  description="Alta , baja y modificación de terminales" url="~/ABMTerminales.aspx"/>
-        <siteMapNode title="Mantenimiento de Viajes Nacionales"  description="Alta , baja y modificación de viajes nacionales" url="~/ABMViajesNacionales.aspx" />
-        <siteMapNode title="Mantenimiento de Viajes Internacionales"  description="Alta , baja y modificación de viajes internacionales" url="~/ABMViajesInternacionales.aspx" />
-        <siteMapNode title="Mantenimiento de Empleados"  description="Alta , baja y modificación de empleados" url="~/ABMEmpleados.aspx" />
+<siteMap >
+  <siteMapNode title="" description="" url="~/Default.aspx">
+      <siteMapNode title="Mantenimiento de Companías"  description="Alta , baja y modificación de companías" url="~/ABMCompanias.aspx" />
+      <siteMapNode title="Mantenimiento de Terminales"  description="Alta , baja y modificación de terminales" url="~/ABMTerminales.aspx"/>
+      <siteMapNode title="Mantenimiento de Viajes Nacionales"  description="Alta , baja y modificación de viajes nacionales" url="~/ABMViajesNacionales.aspx" />
+      <siteMapNode title="Mantenimiento de Viajes Internacionales"  description="Alta , baja y modificación de viajes internacionales" url="~/ABMViajesInternacionales.aspx" />
+      <siteMapNode title="Mantenimiento de Empleados"  description="Alta , baja y modificación de empleados" url="~/ABMEmpleados.aspx" />
     </siteMapNode>
-</siteMap>
+  </siteMap>
+
