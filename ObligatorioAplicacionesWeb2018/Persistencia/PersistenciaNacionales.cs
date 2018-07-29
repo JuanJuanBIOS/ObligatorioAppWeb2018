@@ -239,7 +239,7 @@ namespace Persistencia
             }
         }
 
-
+        //revisar que haya quedado andando bien
         public List<Nacionales> ListarViajeNac()
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
