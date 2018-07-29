@@ -75,7 +75,6 @@ namespace Persistencia
             return unNac;
         }
 
-<<<<<<< HEAD
         public void Alta_Nacional(Nacionales unNac)
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
@@ -94,21 +93,12 @@ namespace Persistencia
             SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
             oRetorno.Direction = ParameterDirection.ReturnValue;
             oComando.Parameters.Add(oRetorno);
-=======
-        public List<Nacionales> ListarViajeNac()
-        {
-            SqlConnection oConexion = new SqlConnection(Conexion.STR);
-            SqlCommand oComando = new SqlCommand("ListarViajeNacional", oConexion);
-            oComando.CommandType = CommandType.StoredProcedure;
 
-            List<Nacionales> _Lista = null;
->>>>>>> 1b41bfdf101348a5a74f2e6f945e428917c562da
 
             try
             {
                 oConexion.Open();
 
-<<<<<<< HEAD
                 oComando.ExecuteNonQuery();
 
                 if (Convert.ToInt32(oRetorno.Value) == -1)
@@ -200,38 +190,12 @@ namespace Persistencia
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos:" + ex.Message);
-=======
-                SqlDataReader _Reader = oComando.ExecuteReader();
-
-                while (_Reader.Read())
-                {
-                    _Reader.Read();
-
-                    int _numero = (int)_Reader["numero"];
-                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
-                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
-                    DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
-                    DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
-                    int _asientos = (int)_Reader["asientos"];
-                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
-                    int _paradas = (int)_Reader["paradas"];
-
-                    Nacionales viaje = new Nacionales(_numero, _compania, _terminal, _fechapartida, _fechaarribo, _asientos, _empleado, _paradas);
-                    _Lista.Add(viaje);
-                }
-                _Reader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
->>>>>>> 1b41bfdf101348a5a74f2e6f945e428917c562da
             }
 
             finally
             {
                 oConexion.Close();
             }
-<<<<<<< HEAD
         }
 
         public void Eliminar_Nacional(Nacionales unNac)
@@ -273,10 +237,44 @@ namespace Persistencia
             {
                 oConexion.Close();
             }
-=======
+        }
 
+
+        public List<Nacionales> ListarViajeNac()
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("ListarViajeNacional", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+            List<Nacionales> _Lista = null;
+            try
+            {
+                oConexion.Open();
+                SqlDataReader _Reader = oComando.ExecuteReader();
+                while (_Reader.Read())
+                {
+                    _Reader.Read();
+                    int _numero = (int)_Reader["numero"];
+                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
+                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
+                    DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
+                    DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
+                    int _asientos = (int)_Reader["asientos"];
+                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
+                    int _paradas = (int)_Reader["paradas"];
+                    Nacionales viaje = new Nacionales(_numero, _compania, _terminal, _fechapartida, _fechaarribo, _asientos, _empleado, _paradas);
+                    _Lista.Add(viaje);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                oConexion.Close();
+            }
             return _Lista;
->>>>>>> 1b41bfdf101348a5a74f2e6f945e428917c562da
         }
     }
 }
