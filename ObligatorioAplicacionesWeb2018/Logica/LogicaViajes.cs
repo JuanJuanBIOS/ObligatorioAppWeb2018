@@ -53,12 +53,46 @@ namespace Logica
                 FInternacional.Alta_Internacional((Internacionales)unViaje);
             }
 
-            //else
-            //{
-            //    IPersistenciaNacionales FNacional=FabricaPersistencia.getPersistenciaNacionales();
+            else
+            {
+                IPersistenciaNacionales FNacional=FabricaPersistencia.getPersistenciaNacionales();
 
-            //    FNacional.Alta_Nacional(unViaje)
-            //}
+                FNacional.Alta_Nacional((Nacionales)unViaje);
+            }
+        }
+
+        public void Modificar_Viaje(Viajes unViaje)
+        {
+            if (unViaje is Internacionales)
+            {
+                IPersistenciaInternacionales FInternacional = FabricaPersistencia.getPersistenciaInternacionales();
+
+                FInternacional.Modificar_Internacional((Internacionales)unViaje);
+            }
+
+            else
+            {
+                IPersistenciaNacionales FNacional=FabricaPersistencia.getPersistenciaNacionales();
+
+                FNacional.Modificar_Nacional((Nacionales)unViaje);
+            }
+        }
+
+        public void Eliminar_Viaje(Viajes unViaje)
+        {
+            if (unViaje is Internacionales)
+            {
+                IPersistenciaInternacionales FInternacional = FabricaPersistencia.getPersistenciaInternacionales();
+
+                FInternacional.Eliminar_Internacional((Internacionales)unViaje);
+            }
+
+            else
+            {
+                IPersistenciaNacionales FNacional=FabricaPersistencia.getPersistenciaNacionales();
+
+                FNacional.Eliminar_Nacional((Nacionales)unViaje);
+            }
         }
     }
 }

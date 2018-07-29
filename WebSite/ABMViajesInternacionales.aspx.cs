@@ -44,7 +44,6 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
     protected void BtnBuscar_Click(object sender, EventArgs e)
     {
-
         if(TBNumero.Text!="")
         {
             try
@@ -152,6 +151,85 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
             LblError.ForeColor = System.Drawing.Color.Blue;
             LblError.Text = "El Viaje " + Convert.ToString(unInter.Numero) + " ha sido ingresado a la base de datos correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+    protected void BtnModificar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int _Numero = Convert.ToInt16(TBNumero.Text);
+
+            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+            Companias _Compania = FCompania.Buscar_Compania(DDLCompania.SelectedValue);
+
+            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+            Terminales _Terminal = FTerminal.Buscar_Terminal(DDLTerminal.SelectedValue);
+
+            int diapartida = Convert.ToDateTime(TBFechaPartida.Text).Day;
+            int mespartida = Convert.ToDateTime(TBFechaPartida.Text).Month;
+            int aniopartida = Convert.ToDateTime(TBFechaPartida.Text).Year;
+            int horapartida = Convert.ToInt16(DDLHoraPartida.Text);
+            int minutospartida = Convert.ToInt16(DDLMinutosPartida.Text);
+            int diaarribo = Convert.ToDateTime(TBFechaArribo.Text).Day;
+            int mesarribo = Convert.ToDateTime(TBFechaArribo.Text).Month;
+            int anioarribo = Convert.ToDateTime(TBFechaArribo.Text).Year;
+            int horaarribo = Convert.ToInt16(DDLHoraArribo.Text);
+            int minutosarribo = Convert.ToInt16(DDLMinutosArribo.Text);
+            DateTime _Fechapartida = new DateTime(aniopartida, mespartida, diapartida, horapartida, minutospartida, 0);
+            DateTime _Fechaarribo = new DateTime(anioarribo, mesarribo, diaarribo, horaarribo, minutosarribo, 0);
+
+            int _CantAsientos = Convert.ToInt16(TBCantAsientos.Text);
+
+            Empleados _Empleado = (Empleados)Session["Empleado"];
+
+            bool _Servicio = false;
+            if (DDLServicio.SelectedIndex == 1)
+            {
+                _Servicio = true;
+            }
+
+            string _Documentacion = TBDocumentacion.Text;
+
+            Internacionales unInter = new Internacionales(_Numero, _Compania, _Terminal, _Fechapartida, _Fechaarribo, _CantAsientos, _Empleado, _Servicio, _Documentacion);
+
+            ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
+
+            FViaje.Modificar_Viaje(unInter);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "El Viaje " + Convert.ToString(unInter.Numero) + " ha sido modificado correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+    protected void BtnEliminar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Internacionales unInter = (Internacionales)Session["Internacional"];
+
+            ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
+
+            FViaje.Eliminar_Viaje(unInter);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "El Viaje " + Convert.ToString(unInter.Numero) + " ha sido eliminado correctamente.";
 
             LimpioFormulario();
         }
@@ -327,9 +405,5 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
                 BtnAlta.Enabled = true;
             }
         }
-    }
-    protected void BtnModificar_Click(object sender, EventArgs e)
-    {
-
     }
 }

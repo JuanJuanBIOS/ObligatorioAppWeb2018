@@ -2,91 +2,79 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PaginaPrincipal" runat="server">
 
-
-
-    <h2 align="center">
-        <asp:Label ID="LbSubt" runat="server" 
-            Text="Mantenimiento de Viajes Internacionales"></asp:Label>
-    </h2>
-<p>
-    Número:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox 
+    <table>
+        <tr>
+            <td align="center" valign="middle" colspan="6">
+                <h2 align="center">
+                    <asp:Label ID="LbSubt" runat="server" 
+                    Text="Mantenimiento de Viajes Internacionales"></asp:Label>
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" colspan="6">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" style="width: 142px">
+                <asp:Label ID="LBNumero" runat="server" Text="Número: "></asp:Label>
+            </td>
+            <td align="left" valign="middle" colspan="2">
+                <asp:TextBox 
         ID="TBNumero" runat="server"></asp:TextBox>
-    &nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td align="left" valign="middle" colspan="3">
     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" onclick="BtnBuscar_Click" 
        />
-</p>
-    <p dir="ltr" style="margin-left: 80px">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
-    <table style="width: 100%">
-        <tr>
-            <td style="width: 179px">
-                Compañía:
             </td>
-            <td colspan="13">
+        </tr>
+        <tr>
+            <td align="center" valign="middle" style="height: 23px;" colspan="6">
+                </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" style="width: 142px">
+            </td>
+            <td align="left" valign="middle" colspan="5">
+        <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" colspan="6">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" style="width: 142px">
+                <asp:Label ID="LBCompania" runat="server" Text="Compañía: "></asp:Label>
+            </td>
+            <td align="left" valign="middle" colspan="5">
                 <asp:DropDownList ID="DDLCompania" runat="server" Width="240px">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td style="width: 179px">
-                Terminal:
+            <td align="center" valign="middle" style="width: 142px">
+                <asp:Label ID="LBTerminal" runat="server" Text="Terminal: "></asp:Label>
             </td>
-            <td colspan="13">
+            <td align="left" valign="middle" colspan="5">
                 <asp:DropDownList ID="DDLTerminal" runat="server" Enabled="False" Width="240px">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-                <td style="width: 179px">
-                    &nbsp;</td>
-                <td class="style10" colspan="2">
-                    &nbsp;</td>
-                <td colspan="3">
-                    &nbsp;</td>
-                <td class="style9" colspan="1" style="width: 370px">
-                    &nbsp;</td>
-                <td class="style9">
-                    &nbsp;</td>
-                <td colspan="2">
-                    &nbsp;</td>
-            </tr>
-            <tr>
-                <td class="style7" style="width: 179px">
+            <td align="center" valign="middle" colspan="6">
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="middle" colspan="2" style="width: 175px">
                     <asp:Label ID="LbFechaPartida" runat="server" Text="Fecha Partida"></asp:Label>
                     <br />
                     <asp:TextBox ID="TBFechaPartida" runat="server" Enabled="False"></asp:TextBox>
-                </td>
-                <td class="style10" colspan="6" align="center" valign="middle">
-                    <asp:Calendar ID="CalFechaPartida" runat="server" Enabled="False" 
-                        onselectionchanged="CalFechaPartida_SelectionChanged"></asp:Calendar>
-                </td>
-                <td class="style9" style="width: 60px">
                     <br />
                     <br />
                     <br />
-                </td>
-                <td>
-                    <asp:Label ID="LbFechaArribo" runat="server" Text="Fecha Arribo"></asp:Label>
-                    <br />
-                    <asp:TextBox ID="TBFechaArribo" runat="server" Enabled="False"></asp:TextBox>
-                </td>
-                <td class="style10" colspan="3" align="center" valign="middle" 
-                    style="width: 268435392px">
-                    <asp:Calendar ID="CalFechaArribo" runat="server" Enabled="False" 
-                        onselectionchanged="CalFechaArribo_SelectionChanged"></asp:Calendar>
-                </td>
-                <td
-                </td colspan="2">
-            </tr>
-                <tr>
-            <td style="width: 179px">
                 <asp:Label ID="LBHoraPartida" runat="server" Text="Hora Partida"></asp:Label>
-            </td>
-            <td colspan="7">
+                    <br />
                 <asp:DropDownList ID="DDLHoraPartida" runat="server" Enabled="False" 
                     Width="70px" onselectedindexchanged="DDLHoraPartida_SelectedIndexChanged" 
                     AutoPostBack="True">
@@ -182,12 +170,21 @@
                     <asp:ListItem>59</asp:ListItem>
                 </asp:DropDownList>
             </td>
-            <td style="width: 61px">
-                &nbsp;</td>
-            <td style="width: 125px">
-                <asp:Label ID="LBHoraArribo" runat="server" Text="Hora Arribo"></asp:Label>
+            <td align="center" valign="middle" style="width: 250px">
+            <asp:Calendar ID="CalFechaPartida" runat="server" Enabled="False" 
+                        onselectionchanged="CalFechaPartida_SelectionChanged"></asp:Calendar>
+                    &nbsp;</td>
+            <td align="center" valign="middle" style="width: 30px">
             </td>
-            <td colspan="2" style="width: 228px">
+            <td align="left" valign="middle" style="width: 175px">
+                    <asp:Label ID="LbFechaArribo" runat="server" Text="Fecha Arribo"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="TBFechaArribo" runat="server" Enabled="False"></asp:TextBox>
+                    <br />
+                    <br />
+                    <br />
+                <asp:Label ID="LBHoraArribo" runat="server" Text="Hora Arribo"></asp:Label>
+                    <br />
                 <asp:DropDownList ID="DDLHoraArribo" runat="server" Enabled="False" 
                     Width="70px" onselectedindexchanged="DDLHoraArribo_SelectedIndexChanged" 
                     AutoPostBack="True">
@@ -283,37 +280,29 @@
                     <asp:ListItem>59</asp:ListItem>
                 </asp:DropDownList>
             </td>
-            <td colspan="2">
-                &nbsp;</td>
+            <td align="center" valign="middle" style="width: 250px">
+                    <asp:Calendar ID="CalFechaArribo" runat="server" Enabled="False" 
+                        onselectionchanged="CalFechaArribo_SelectionChanged"></asp:Calendar>
+            </td>
         </tr>
         <tr>
-            <td style="width: 179px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
-            <td colspan="2" style="width: 75px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
-            <td colspan="3">
-                &nbsp;</td>
-            <td colspan="2" style="width: 228px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
+            <td align="center" valign="middle" colspan="6">
+            </td>
         </tr>
         <tr>
-            <td style="width: 179px; height: 26px;">
-                Cantidad de Asientos: </td>
-            <td colspan="13" style="height: 26px">
+            <td align="left" valign="middle" style="width: 142px">
+                <asp:Label ID="LBCantidadAsientos" runat="server" Text="Cantidad de Asientos: "></asp:Label>
+            </td>
+            <td align="left" valign="middle" colspan="5">
                 <asp:TextBox ID="TBCantAsientos" runat="server" Enabled="False" Width="66px" 
                     MaxLength="3"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td style="width: 179px">
-                Servicio a bordo: </td>
-            <td colspan="13">
+            <td align="left" valign="middle" style="width: 142px">
+                <asp:Label ID="Label1" runat="server" Text="Servicio a Bordo: "></asp:Label>
+            </td>
+            <td align="left" valign="middle" colspan="5">
                 <asp:DropDownList ID="DDLServicio" runat="server" Enabled="False">
                     <asp:ListItem>No</asp:ListItem>
                     <asp:ListItem>Si</asp:ListItem>
@@ -321,56 +310,35 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 179px">
-                Documentación: </td>
-            <td colspan="13">
+            <td align="left" valign="middle" style="width: 142px">
+                <asp:Label ID="LBDocumentacion" runat="server" Text="Documentación: "></asp:Label>
+            </td>
+            <td align="left" valign="middle" colspan="5">
                 <asp:TextBox ID="TBDocumentacion" runat="server" Enabled="False" 
                     TextMode="MultiLine" Width="257px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td style="width: 179px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
-            <td colspan="2" style="width: 75px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
-            <td colspan="3">
-                &nbsp;</td>
-            <td colspan="2" style="width: 228px">
-                &nbsp;</td>
-            <td colspan="2">
-                &nbsp;</td>
+            <td align="center" valign="middle" colspan="6">
+            </td>
         </tr>
         <tr>
-            <td align="center" style="width: 179px" >
-                &nbsp;</td>
-            <td align="center" >
+            <td align="center" valign="middle" style="width: 142px">
                 <asp:Button ID="BtnAlta" runat="server" Text="Alta" Enabled="False" onclick="BtnAlta_Click" 
                     />
             </td>
-            <td align="center" style="width: 117px" >
+            <td align="center" valign="middle" colspan="2">
                 <asp:Button ID="BtnModificar" runat="server" Text="Modificar"  Enabled="False" onclick="BtnModificar_Click" 
                     />
             </td>
-            <td align="center" style="width: 22px" >
-                &nbsp;</td>
-            <td align="center" colspan="4" >
-                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" 
+            <td align="center" valign="middle" colspan="2">
+                <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar"  Enabled="False" onclick="BtnEliminar_Click" 
                      />
             </td>
-            <td align="center" colspan="2" >
+            <td align="center" valign="middle">
                 <asp:Button ID="BtnLimpiar" runat="server"
                     Text="Limpiar formulario" onclick="BtnLimpiar_Click" />
             </td>
-            <td align="center" style="width: 268435440px" >
-                &nbsp;</td>
-            <td align="left" colspan="2" >
-                &nbsp;</td>
-            <td align="left" style="width: 543px" >
-                &nbsp;</td>
         </tr>
     </table>
 </asp:Content>

@@ -74,5 +74,168 @@ namespace Persistencia
 
             return unNac;
         }
+
+        public void Alta_Nacional(Nacionales unNac)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Alta_ViajeNacional", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@numero", unNac.Numero);
+            oComando.Parameters.AddWithValue("@compania", unNac.Compania.Nombre);
+            oComando.Parameters.AddWithValue("@destino", unNac.Terminal.Codigo);
+            oComando.Parameters.AddWithValue("@fecha_partida", unNac.Fecha_partida);
+            oComando.Parameters.AddWithValue("@fecha_arribo", unNac.Fecha_arribo);
+            oComando.Parameters.AddWithValue("@asientos", unNac.Asientos);
+            oComando.Parameters.AddWithValue("@empleado", unNac.Empleado.Cedula);
+            oComando.Parameters.AddWithValue("@paradas", unNac.Paradas);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oConexion.Open();
+
+                oComando.ExecuteNonQuery();
+
+                if (Convert.ToInt32(oRetorno.Value) == -1)
+                {
+                    throw new Exception("El número de viaje ingresado ya existe en la base de datos");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -2)
+                {
+                    throw new Exception("Ya existe un viaje al destino indicado en ese horario. Los viajes al mismo destino deben tener un mínimo de 2 horas de diferencia entre ellos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -3)
+                {
+                    throw new Exception("La compañía ingresada no existe en la base de datos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -4)
+                {
+                    throw new Exception("La terminal ingresada no existe en la base de datos..");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -5)
+                {
+                    throw new Exception("El empleado logueado no existe en la base de datos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -6 || Convert.ToInt32(oRetorno.Value) == -7)
+                {
+                    throw new Exception("Se produjo un error al intentar dar de alta el viaje. Inténtelo nuevamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+        }
+
+        public void Modificar_Nacional(Nacionales unNac)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Modificar_ViajeNacional", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@numero", unNac.Numero);
+            oComando.Parameters.AddWithValue("@compania", unNac.Compania.Nombre);
+            oComando.Parameters.AddWithValue("@destino", unNac.Terminal.Codigo);
+            oComando.Parameters.AddWithValue("@fecha_partida", unNac.Fecha_partida);
+            oComando.Parameters.AddWithValue("@fecha_arribo", unNac.Fecha_arribo);
+            oComando.Parameters.AddWithValue("@asientos", unNac.Asientos);
+            oComando.Parameters.AddWithValue("@empleado", unNac.Empleado.Cedula);
+            oComando.Parameters.AddWithValue("@paradas", unNac.Paradas);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            try
+            {
+                oConexion.Open();
+
+                oComando.ExecuteNonQuery();
+
+                if (Convert.ToInt32(oRetorno.Value) == -1)
+                {
+                    throw new Exception("El número de viaje ingresado no existe en la base de datos");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -2)
+                {
+                    throw new Exception("Ya existe un viaje al destino indicado en ese horario. Los viajes al mismo destino deben tener un mínimo de 2 horas de diferencia entre ellos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -3)
+                {
+                    throw new Exception("La compañía ingresada no existe en la base de datos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -4)
+                {
+                    throw new Exception("La terminal ingresada no existe en la base de datos..");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -5)
+                {
+                    throw new Exception("El empleado logueado no existe en la base de datos.");
+                }
+                if (Convert.ToInt32(oRetorno.Value) == -6 || Convert.ToInt32(oRetorno.Value) == -7)
+                {
+                    throw new Exception("Se produjo un error al intentar modificar el viaje. Inténtelo nuevamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+        }
+
+        public void Eliminar_Nacional(Nacionales unNac)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Eliminar_ViajeNacional", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@numero", unNac.Numero);
+
+            SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            oRetorno.Direction = ParameterDirection.ReturnValue;
+            oComando.Parameters.Add(oRetorno);
+
+            int oAfectados = -1;
+
+            try
+            {
+                oConexion.Open();
+                oComando.ExecuteNonQuery();
+
+                oAfectados = (int)oComando.Parameters["@Retorno"].Value;
+
+                if (oAfectados == -1)
+                {
+                    throw new Exception("El viaje ingresado no existe en la base de datos");
+                }
+                if (oAfectados == -2 || oAfectados == -3)
+                {
+                    throw new Exception("Error al eliminar el viaje en la base de datos. Inténtelo nuevamente   ");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos:" + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+        }
     }
 }

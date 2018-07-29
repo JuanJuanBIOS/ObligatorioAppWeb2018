@@ -38,7 +38,7 @@
             <td colspan="2" align="right" valign="middle" class="style5">
                 <asp:Label ID="LblUser" runat="server"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:HyperLink ID="Salir" runat="server" NavigateUrl="~/Default.aspx">Salir</asp:HyperLink>
+                <asp:HyperLink ID="Salir" runat="server" NavigateUrl="~/Logueo.aspx">Salir</asp:HyperLink>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
         </tr>

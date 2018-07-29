@@ -11,5 +11,9 @@ namespace Logica.Interfaces
         Viajes Buscar_Viaje(int pCodViaje);
 
         void Alta_Viaje(Viajes pViaje);
+
+        void Modificar_Viaje(Viajes pViaje);
+
+        void Eliminar_Viaje(Viajes pViaje);
     }
 }

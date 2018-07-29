@@ -11,5 +11,9 @@ namespace Persistencia.Interfaces
         Internacionales Buscar_Viaje(int pCodViaje);
 
         void Alta_Internacional(Internacionales pInternacional);
+
+        void Modificar_Internacional(Internacionales pInternacional);
+
+        void Eliminar_Internacional(Internacionales pInternacional);
     }
 }
