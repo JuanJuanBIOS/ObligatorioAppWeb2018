@@ -943,7 +943,7 @@ GO
 
 -- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA LISTAR VIAJES NACIONALES
-CREATE PROCEDURE Listar_ViajesNacionales
+CREATE PROCEDURE Listar_Viajes_Nacionales
 AS
 BEGIN
 	SELECT Viajes.*, Nacionales.paradas FROM Viajes INNER JOIN Nacionales 
@@ -955,7 +955,7 @@ GO
 
 -- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA LISTAR VIAJES INTERNACIONALES
-CREATE PROCEDURE Listar_ViajesInternacionales
+CREATE PROCEDURE Listar_Viajes_Internacionales
 AS
 BEGIN
 	SELECT Viajes.*, Internacionales.servicio, Internacionales.documentacion 

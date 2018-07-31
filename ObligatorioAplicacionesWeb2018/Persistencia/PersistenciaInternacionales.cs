@@ -46,8 +46,6 @@ namespace Persistencia
 
                 if (_Reader.HasRows)
                 {
-                    _Reader.Read();
-
                     int _numero = (int)_Reader["numero"];
                     Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
                     Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
@@ -239,6 +237,49 @@ namespace Persistencia
             {
                 oConexion.Close();
             }
+        }
+
+
+
+        public List<Internacionales> Listar_Viajes_Int()
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Listar_Viajes_Internacionales", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+            List<Internacionales> _Lista = new List<Internacionales>();
+
+            try
+            {
+                oConexion.Open();
+                SqlDataReader _Reader = oComando.ExecuteReader();
+                while (_Reader.Read())
+                {
+                    int _numero = (int)_Reader["numero"];
+                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
+                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
+                    DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
+                    DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
+                    int _asientos = (int)_Reader["asientos"];
+                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
+                    bool _servicio = (bool)_Reader["servicio"];
+                    string _documentacion = (string)_Reader["documentacion"];
+
+                    Internacionales viaje = new Internacionales(_numero, _compania, _terminal, _fechapartida, _fechaarribo, _asientos, _empleado, _servicio, _documentacion);
+                    _Lista.Add(viaje);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return _Lista;
         }
     }
 }

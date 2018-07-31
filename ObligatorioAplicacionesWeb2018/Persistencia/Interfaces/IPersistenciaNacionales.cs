@@ -15,5 +15,7 @@ namespace Persistencia.Interfaces
         void Modificar_Nacional(Nacionales pNacional);
 
         void Eliminar_Nacional(Nacionales pNacional);
+
+        List<Nacionales> Listar_Viajes_Nac();
     }
 }

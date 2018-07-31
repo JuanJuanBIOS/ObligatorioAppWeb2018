@@ -94,5 +94,19 @@ namespace Logica
                 FNacional.Eliminar_Nacional((Nacionales)unViaje);
             }
         }
+
+        //Tiene que ser estatico?
+        public List<Viajes> Listar_Viajes()
+        {
+            List<Viajes> _Lista = new List<Viajes>();
+            
+            IPersistenciaNacionales Viajes_Nacionales = FabricaPersistencia.getPersistenciaNacionales();
+            _Lista.AddRange(Viajes_Nacionales.Listar_Viajes_Nac());
+
+            IPersistenciaInternacionales Viajes_Internacionales = FabricaPersistencia.getPersistenciaInternacionales();
+            _Lista.AddRange(Viajes_Internacionales.Listar_Viajes_Int());
+            
+            return _Lista;
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace Logica.Interfaces
         void Modificar_Viaje(Viajes pViaje);
 
         void Eliminar_Viaje(Viajes pViaje);
+
+        List<Viajes> Listar_Viajes();
     }
 }

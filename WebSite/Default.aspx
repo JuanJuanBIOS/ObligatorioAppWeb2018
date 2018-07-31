@@ -25,11 +25,15 @@
             width: 268435392px;
             height: 192px;
         }
+        .style5
+        {
+            width: 87px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div style="text-align: left">
     
     <table style="width: 100%">
         <tr>
@@ -53,12 +57,13 @@
         <tr>
                 <td style="width: 179px">
                     &nbsp;</td>
-                <td class="style10">
+                <td class="style5">
                     &nbsp;</td>
                 <td>
                     &nbsp;</td>
                 <td class="style9" colspan="1" style="width: 370px">
-                    &nbsp;</td>
+                    <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
+                </td>
                 <td class="style9">
                     &nbsp;</td>
                 <td colspan="2">
@@ -86,8 +91,8 @@
                 <td class="style4" colspan="2" align="center" valign="middle">
                     <asp:Calendar ID="CalHasta" runat="server"></asp:Calendar>
                 </td>
-                <td
-                </td class="style2">
+                <td>
+                </td>
             </tr>
                 <tr>
             <td style="width: 179px">
@@ -105,32 +110,58 @@
                 &nbsp;</td>
         </tr>
     </table>
-    
-        <asp:Repeater ID="RepeaterViajes" runat="server" 
-            onitemcommand="RepeaterViajes_ItemCommand">
+
+    <br />
+        <asp:Repeater ID="RepeaterViajes" runat="server" OnItemCommand="RepeaterViajes_ItemCommand">
+            <HeaderTemplate>
+                <table>
+                    <tr>
+                        <td>
+                            Número
+                        </td>
+                        <td>
+                            Companía
+                        </td>
+                        <td>
+                            Fecha y hora de partida
+                        </td>
+                        <td>
+                            Fecha y hora de arribo
+                        </td>
+                        <td>
+                            Destino
+                        </td>
+                        <td>
+                            Botones
+                        </td>
+                    </tr>
+                    <br />
+            </HeaderTemplate>
             <ItemTemplate>
-                    <table>
-                        <tr>
-                            <th>Número</th>
-                            <th>Companía</th>
-                            <th>Fecha y hora de partida</th>
-                            <th>Fecha y hora de arribo</th>
-                            <th>Destino</th>
-                        </tr>
-                        <td>
-                            Número1:<asp:TextBox ID="número" runat="server" Text ='<%#Bind("numero") %>'></asp:TextBox>
-                        <br />
-                        </td>
-                         <td>
-                            Companía:<asp:TextBox ID="TextBox1" runat="server" Text ='<%#Bind("numero") %>'></asp:TextBox>
-                        <br />
-                        </td>
-                        <td>
-                            FechHora1:<asp:TextBox ID="TextBox2" runat="server" Text ='<%#Bind("numero") %>'></asp:TextBox>
-                        <br />
-                        </td>
-                    </table>
-                </ItemTemplate>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="TBNum" runat="server" Text='<%#Bind("Numero") %>'></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TBComp" runat="server" Text='<%#Eval("Compania.Nombre") %>'></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TBFechP" runat="server" Text='<%#Bind("Fecha_partida") %>'></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TBFechA" runat="server" Text='<%#Bind("Fecha_arribo") %>'></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TBDestino" runat="server" Text='<%#Eval("Terminal.Codigo") %>'></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Button ID="Button1" runat="server" CommandName="ConsultaViaje" Style="text-align: center"
+                            Text="Consulta individual de Viaje" />
+                    </td>
+                    <br />
+                </tr>
+                </table>
+            </ItemTemplate>
         </asp:Repeater>
     
         <br />

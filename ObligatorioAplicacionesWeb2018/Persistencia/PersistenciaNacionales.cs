@@ -239,20 +239,19 @@ namespace Persistencia
             }
         }
 
-        //revisar que haya quedado andando bien
-        public List<Nacionales> ListarViajeNac()
+
+        public List<Nacionales> Listar_Viajes_Nac()
         {
             SqlConnection oConexion = new SqlConnection(Conexion.STR);
-            SqlCommand oComando = new SqlCommand("ListarViajeNacional", oConexion);
+            SqlCommand oComando = new SqlCommand("Listar_Viajes_Nacionales", oConexion);
             oComando.CommandType = CommandType.StoredProcedure;
-            List<Nacionales> _Lista = null;
+            List<Nacionales> _Lista = new List<Nacionales>();
             try
             {
                 oConexion.Open();
                 SqlDataReader _Reader = oComando.ExecuteReader();
                 while (_Reader.Read())
                 {
-                    _Reader.Read();
                     int _numero = (int)_Reader["numero"];
                     Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
                     Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);

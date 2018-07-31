@@ -15,5 +15,7 @@ namespace Persistencia.Interfaces
         void Modificar_Internacional(Internacionales pInternacional);
 
         void Eliminar_Internacional(Internacionales pInternacional);
+
+        List<Internacionales> Listar_Viajes_Int();
     }
 }
