@@ -38,11 +38,35 @@ namespace Logica
 
         public Empleados Buscar_Empleado(string pCedula)
         {
-            IPersistenciaEmpleado Fempleado = FabricaPersistencia.getPersistenciaEmpleado();
+            IPersistenciaEmpleado FEmpleado = FabricaPersistencia.getPersistenciaEmpleado();
 
-            Empleados E = Fempleado.Buscar_Empleado(pCedula);
+            Empleados E = FEmpleado.Buscar_Empleado(pCedula);
 
             return E;
         }
+
+
+        public void Alta_Empleado(Empleados E)
+        {
+            IPersistenciaEmpleado FEmpleado = FabricaPersistencia.getPersistenciaEmpleado();
+
+            FEmpleado.Alta_Empleado(E);
+
+        }
+
+        public void Eliminar_Empleado(Empleados E)
+        {
+            IPersistenciaEmpleado FEmpleado = FabricaPersistencia.getPersistenciaEmpleado();
+
+            FEmpleado.Eliminar_Empleado(E);
+        }
+
+        public void Modificar_Empleado(Empleados E)
+        {
+            IPersistenciaEmpleado FEmpleado = FabricaPersistencia.getPersistenciaEmpleado();
+
+            FEmpleado.Modificar_Empleado(E);
+        }
+
     }
 }

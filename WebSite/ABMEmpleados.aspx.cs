@@ -57,32 +57,83 @@ public partial class ABMEmpleados : System.Web.UI.Page
     }
 
 
-    //protected void BtnAlta_Click(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        string _Cedula = Convert.ToString(TBCedula.Text);
-    //        string _Nombre = Convert.ToString(TBNombre.Text);
-    //        string _Constraseña = Convert.ToString(TBContraseña.Text);
+    protected void BtnAlta_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            string _Cedula = Convert.ToString(TBCedula.Text);
+            string _Nombre = Convert.ToString(TBNombre.Text);
+            string _Contraseña = Convert.ToString(TBContraseña.Text);
 
-    //        ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
+            ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
 
-    //        Empleados unEmp = FEmpleado.Buscar_Empleado(_Cedula);
+            Empleados unEmp = new Empleados(_Cedula, _Contraseña, _Nombre);
 
-    //        FEmpleado.(unEmp);
+            FEmpleado.Alta_Empleado(unEmp);
 
-    //        LblError.ForeColor = System.Drawing.Color.Blue;
-    //        LblError.Text = "La Compania " + Convert.ToString(unaComp.Nombre) + " ha sido ingresada a la base de datos correctamente.";
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "El empleado " + Convert.ToString(unEmp.Nombre) + " ha sido ingresada a la base de datos correctamente.";
 
-    //        LimpioFormulario();
-    //    }
+            LimpioFormulario();
+        }
 
-    //    catch (Exception ex)
-    //    {
-    //        LblError.ForeColor = System.Drawing.Color.Red;
-    //        LblError.Text = ex.Message;
-    //    }
-    //}
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+    protected void BtnModificar_Click(object sender, EventArgs e)
+    {
+
+        try
+        {
+            string _Cedula = Convert.ToString(TBCedula.Text);
+            string _Nombre = Convert.ToString(TBNombre.Text);
+            string _Contraseña = Convert.ToString(TBContraseña.Text);
+
+            ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
+
+            Empleados unEmp = new Empleados(_Cedula, _Contraseña, _Nombre);
+
+            FEmpleado.Modificar_Empleado(unEmp);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "El empleado " + Convert.ToString(unEmp.Nombre) + " ha sido modificado correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
+
+    protected void BtnEliminar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Empleados unEmp = (Empleados)Session["Empleado"];
+
+            ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
+
+            FEmpleado.Eliminar_Empleado(unEmp);
+
+            LblError.ForeColor = System.Drawing.Color.Blue;
+            LblError.Text = "La empleado " + Convert.ToString(unEmp.Nombre) + " ha sido eliminada correctamente.";
+
+            LimpioFormulario();
+        }
+
+        catch (Exception ex)
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = ex.Message;
+        }
+    }
 
 
 
@@ -129,19 +180,6 @@ public partial class ABMEmpleados : System.Web.UI.Page
         BtnAlta.Enabled = false;
         BtnModificar.Enabled = true;
         BtnEliminar.Enabled = true;
-    }
-
-    protected void BtnAlta_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void BtnModificar_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void BtnEliminar_Click(object sender, EventArgs e)
-    {
-
     }
 }
 

@@ -11,5 +11,12 @@ namespace Logica.Interfaces
         Empleados Login(string pCedula, string pPass);
 
         Empleados Buscar_Empleado(string pCedula);
+
+        void Alta_Empleado(Empleados E);
+
+        void Eliminar_Empleado(Empleados E);
+
+        void Modificar_Empleado(Empleados E);
+
     }
 }
