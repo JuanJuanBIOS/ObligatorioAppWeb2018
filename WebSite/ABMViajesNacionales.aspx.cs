@@ -34,6 +34,7 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
             DDLCompania.DataSource = ListaCompanias;
             DDLCompania.DataTextField = "nombre";
             DDLCompania.DataBind();
+            DDLCompania.Items.Insert(0, new ListItem("","NA"));
 
             bool encontrado = false;
             Session["Encontrado"] = encontrado;

@@ -41,7 +41,12 @@
                 Destino:
             </td>
             <td colspan="8">
-                <asp:DropDownList ID="DDLTerminal" runat="server" Enabled="False" Width="240px">
+                <asp:DropDownList ID="DDLTerminal" runat="server" Width="240px" 
+                    AppendDataBoundItems="true" 
+                    onselectedindexchanged="DDLTerminal_SelectedIndexChanged">
+                <Items>
+                    <asp:ListItem Text="" Value="" />
+                </Items>
                 </asp:DropDownList>
             </td>
         </tr>
@@ -76,7 +81,8 @@
                     <asp:TextBox ID="TBDesFechaPartida" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td class="style2" colspan="3" align="center" valign="middle">
-                    <asp:Calendar ID="CalDesde" runat="server"></asp:Calendar>
+                    <asp:Calendar ID="CalDesde" runat="server" 
+                        onselectionchanged="CalDesde_SelectionChanged"></asp:Calendar>
                 </td>
                 <td class="style3">
                     <br />
@@ -89,7 +95,8 @@
                     <asp:TextBox ID="TBHasFechaPartida" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td class="style4" colspan="2" align="center" valign="middle">
-                    <asp:Calendar ID="CalHasta" runat="server"></asp:Calendar>
+                    <asp:Calendar ID="CalHasta" runat="server" 
+                        onselectionchanged="CalHasta_SelectionChanged"></asp:Calendar>
                 </td>
                 <td>
                 </td>
@@ -100,7 +107,8 @@
             <td colspan="4">
                 &nbsp;</td>
             <td style="width: 61px">
-                &nbsp;</td>
+                <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" />
+                    </td>
             <td style="width: 125px">
                 <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar" />
                     </td>
