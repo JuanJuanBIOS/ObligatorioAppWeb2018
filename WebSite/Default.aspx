@@ -114,7 +114,6 @@
     <br />
         <asp:Repeater ID="RepeaterViajes" runat="server" OnItemCommand="RepeaterViajes_ItemCommand">
             <HeaderTemplate>
-                <table>
                     <tr>
                         <td>
                             Número
@@ -160,7 +159,6 @@
                     </td>
                     <br />
                 </tr>
-                </table>
             </ItemTemplate>
         </asp:Repeater>
     

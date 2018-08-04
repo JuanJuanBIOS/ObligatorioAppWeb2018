@@ -1042,3 +1042,6 @@ Alta_ViajeInternacional 7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23
 GO
 Alta_ViajeInternacional 8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '41348194', 0, ''
 GO
+Alta_ViajeNacional 9,'Compania 1','AAA', '05/12/2018 04:00', '06/12/2018 08:30', 35, '41348194', 2
+GO
+Alta_ViajeInternacional 10,'Compania 2','CCC', '15/1/2019 17:25', '15/1/2019 23:55', 35, '47879585', 1, 'Pasaporte y vacunas'
