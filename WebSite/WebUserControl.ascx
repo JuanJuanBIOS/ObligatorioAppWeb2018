@@ -13,6 +13,17 @@
         width: 151px;
         text-align: left;
     }
+    .style7
+    {
+        width: 151px;
+        text-align: left;
+        height: 26px;
+    }
+    .style8
+    {
+        width: 226px;
+        height: 26px;
+    }
 </style>
 
 <p>
@@ -79,12 +90,12 @@
         </td>
     </tr>
     <tr>
-        <td class="style6">
+        <td class="style7">
             <asp:Label ID="LblServicio" runat="server" Text="Servicio a bordo:"></asp:Label>
         </td>
-        <td class="style5">
-            <asp:DropDownList ID="DDServicio" runat="server" Enabled="False" Height="16px" 
-                Width="125px" BackColor="#EBEBE4">
+        <td class="style8">
+            <asp:DropDownList ID="DDServicio" runat="server" Enabled="False" 
+                Width="128px" BackColor="#EBEBE4">
                 <asp:ListItem>No</asp:ListItem>
                 <asp:ListItem>Si</asp:ListItem>
             </asp:DropDownList>
@@ -156,8 +167,8 @@
         <td class="style6" valign="top">
             Facilidades:</td>
         <td class="style5">
-            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="126px" Enabled="False" 
-                BackColor="#EBEBE4" EnableViewState="False">
+            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="221px" Enabled="False" 
+                BackColor="#EBEBE4" EnableViewState="False" Height="181px">
             </asp:ListBox>
         </td>
     </tr>
