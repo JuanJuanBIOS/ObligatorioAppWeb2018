@@ -72,17 +72,11 @@ public partial class _Default : System.Web.UI.Page
                 int viajeseleccionado = Convert.ToInt32(((TextBox)(e.Item.Controls[1])).Text);
 
                 //Uso LinQ para tener solo el viaje seleccionado por el click en el boton del repeater
-                // sólo quiero el viaje con ese id
-                var resultado = from unViaje in (List<Viajes>)Session["ListaViajes"]
+                //Solo se puede seleccionar un viaje pro eso usamos first
+                Session["ViajeSeleccionado"]  = (from unViaje in (List<Viajes>)Session["ListaViajes"]
                                 where unViaje.Numero == viajeseleccionado
-                                select unViaje;
-
-                // Casteo el resultado del LinQ y la paso al session
-                foreach (Viajes unViaje in resultado)
-                {
-                    Session["ViajeSeleccionado"] = unViaje;
-                }
-
+                                select unViaje).First();
+               
                 Response.Redirect("~/ConsultaIndividualViaje.aspx");
 
             }
@@ -157,13 +151,15 @@ public partial class _Default : System.Web.UI.Page
     
     protected void BtnFiltrar_Click(object sender, EventArgs e)
     {
+
+
         try
         {
 
             List<Viajes> viajesfiltrados = (from unViaje in (List<Viajes>)Session["ListaViajes"]
                                             where unViaje.Terminal.Codigo == DDLTerminal.SelectedValue
 
-                                           
+  
                                             select unViaje).ToList<Viajes>();
             RepeaterViajes.DataSource = viajesfiltrados;
             RepeaterViajes.DataBind();
