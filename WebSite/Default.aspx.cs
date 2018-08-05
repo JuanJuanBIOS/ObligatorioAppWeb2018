@@ -41,12 +41,12 @@ public partial class _Default : System.Web.UI.Page
                 DDLTerminal.DataSource = ListaTerminales;
                 DDLTerminal.DataTextField = "codigo";
                 DDLTerminal.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", "No seleccionado"));
+                DDLCompania.Items.Insert(0, new ListItem("", ""));
 
                 DDLCompania.DataSource = ListaCompanias;
                 DDLCompania.DataTextField = "nombre";
                 DDLCompania.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", "No seleccionado"));
+                DDLCompania.Items.Insert(0, new ListItem("", ""));
 
 
                 //Uso LinQ para tener solo los viajes que aún no hayan partido
@@ -151,6 +151,21 @@ public partial class _Default : System.Web.UI.Page
     
     protected void BtnFiltrar_Click(object sender, EventArgs e)
     {
+        //Defino por defecto los minimos y maximos valores para que incluya todos en el filtro
+        DateTime DesFechaPart = DateTime.MinValue;
+        DateTime HasFechaPart = DateTime.MaxValue;
+
+
+        if (TBDesFechaPartida.Text != "")
+        {
+            DesFechaPart = Convert.ToDateTime(TBDesFechaPartida.Text);
+        }
+
+        if (TBHasFechaPartida.Text != "")
+        {
+            HasFechaPart = Convert.ToDateTime(TBHasFechaPartida.Text);
+        }
+
 
 
         try
@@ -158,9 +173,20 @@ public partial class _Default : System.Web.UI.Page
 
             List<Viajes> viajesfiltrados = (from unViaje in (List<Viajes>)Session["ListaViajes"]
                                             where unViaje.Terminal.Codigo == DDLTerminal.SelectedValue
-
-  
+                                            && unViaje.Fecha_partida >= DesFechaPart
+                                            && unViaje.Fecha_partida <=Convert.ToDateTime(HasFechaPart)
                                             select unViaje).ToList<Viajes>();
+
+            if (!String.IsNullOrEmpty(DDLCompania.Text))
+            {
+                viajesfiltrados = (from unViaje in (List<Viajes>)Session["ListaViajes"]
+                                   where unViaje.Terminal.Codigo == DDLTerminal.SelectedValue
+                                   && unViaje.Fecha_partida >= DesFechaPart
+                                   && unViaje.Fecha_partida <= Convert.ToDateTime(HasFechaPart)
+                                   && unViaje.Compania.Nombre == DDLCompania.Text
+                                   select unViaje).ToList<Viajes>();
+            }
+
             RepeaterViajes.DataSource = viajesfiltrados;
             RepeaterViajes.DataBind();
 
