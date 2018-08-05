@@ -39,13 +39,21 @@ public partial class WebUserControl : System.Web.UI.UserControl
             LblParadas.Visible = false;
 
             //Imprimo variables de internacionales
-            CBServicio.Checked = ((Internacionales)_viaje).Servicio;
+
+            if (((Internacionales)_viaje).Servicio)
+            {
+                DDServicio.SelectedIndex = 1;
+            }
+            else
+            {
+                DDServicio.SelectedIndex = 0;
+            }
             TBDocumentacion.Text = ((Internacionales)_viaje).Documentacion;
         }
         else
         {
             //Escondo campos de internacionales
-            CBServicio.Visible = TBDocumentacion.Visible = false;
+            DDServicio.Visible = TBDocumentacion.Visible = false;
             LblServicio.Visible = LblDocumentacion.Visible = false;
 
             //Imprimo variables de nacionales
@@ -76,11 +84,10 @@ public partial class WebUserControl : System.Web.UI.UserControl
         TBCodigoTer.Text = _viaje.Terminal.Codigo;
         TBCiudadTer.Text = _viaje.Terminal.Ciudad;
         TBPaisTer.Text = _viaje.Terminal.Pais;
-        foreach(Facilidades f in _viaje.Terminal.ListaFacilidades)
-        {
-            LBFacilidadesTer.Text = LBFacilidadesTer.Text + Convert.ToString(f.Facilidad);
 
-        }
+        LBFacilidadesTer.DataSource = _viaje.Terminal.ListaFacilidades;
+        LBFacilidadesTer.DataTextField = "Facilidad";
+        LBFacilidadesTer.DataBind();
 
     }
 

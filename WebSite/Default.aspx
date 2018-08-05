@@ -50,13 +50,17 @@
             width: 149px;
             height: 192px;
         }
+        .style12
+        {
+            width: 268435424px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div style="text-align: left">
     
-    <table style="width: 72%">
+    <table style="width: 74%">
         <tr>
             <td style="width: 179px">
                 Destino:
@@ -70,6 +74,9 @@
                     <asp:ListItem Text="" Value="" />
                 </Items>
                 </asp:DropDownList>
+            </td>
+            <td>
+                <asp:HyperLink ID="Ingresar" runat="server" NavigateUrl="~/Logueo.aspx">Ingresar</asp:HyperLink>
             </td>
         </tr>
         <tr>
@@ -120,7 +127,7 @@
                     <asp:Calendar ID="CalHasta" runat="server" 
                         onselectionchanged="CalHasta_SelectionChanged"></asp:Calendar>
                 </td>
-                <td>
+                <td class="style12">
                 </td>
             </tr>
                 <tr>
@@ -138,7 +145,7 @@
                     </td>
             <td class="style7">
                 &nbsp;</td>
-            <td>
+            <td class="style12">
                 &nbsp;</td>
         </tr>
     </table>

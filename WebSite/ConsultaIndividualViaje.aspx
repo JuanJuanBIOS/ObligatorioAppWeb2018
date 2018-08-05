@@ -13,8 +13,11 @@
     <div>
     
     </div>
-    <h2>
-        Consulta Individual de Viaje:</h2>
+    <h2 style="text-align: justify">
+        Consulta Individual de Viaje: </h2>
+    <p style="text-align: right">
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">Volver</asp:HyperLink>
+    </p>
     <uc1:WebUserControl ID="WebUserControl1" runat="server" />
     </form>
 </body>

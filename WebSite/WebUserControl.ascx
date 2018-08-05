@@ -80,10 +80,14 @@
     </tr>
     <tr>
         <td class="style6">
-            <asp:Label ID="LblServicio" runat="server" Text="Servicio:"></asp:Label>
+            <asp:Label ID="LblServicio" runat="server" Text="Servicio a bordo:"></asp:Label>
         </td>
         <td class="style5">
-            <asp:CheckBox ID="CBServicio" runat="server" />
+            <asp:DropDownList ID="DDServicio" runat="server" Enabled="False" Height="16px" 
+                Width="125px">
+                <asp:ListItem>No</asp:ListItem>
+                <asp:ListItem>Si</asp:ListItem>
+            </asp:DropDownList>
         </td>
     </tr>
     <tr>
@@ -152,7 +156,7 @@
         <td class="style6" valign="top">
             Facilidades:</td>
         <td class="style5">
-            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="126px">
+            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="126px" Enabled="False">
             </asp:ListBox>
         </td>
     </tr>
