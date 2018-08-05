@@ -78,8 +78,10 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
                     DDLCompania.Text = unInter.Compania.Nombre;
                     DDLTerminal.Text = unInter.Terminal.Codigo;
                     CalFechaPartida.SelectedDate = unInter.Fecha_partida.Date;
+                    CalFechaPartida.VisibleDate = unInter.Fecha_partida.Date;
                     TBFechaPartida.Text = unInter.Fecha_partida.Date.ToShortDateString();
                     CalFechaArribo.SelectedDate = unInter.Fecha_arribo.Date;
+                    CalFechaArribo.VisibleDate = unInter.Fecha_arribo.Date;
                     TBFechaArribo.Text = unInter.Fecha_arribo.Date.ToShortDateString();
                     DDLHoraPartida.SelectedIndex = unInter.Fecha_partida.Hour;
                     DDLMinutosPartida.SelectedIndex = unInter.Fecha_partida.Minute;

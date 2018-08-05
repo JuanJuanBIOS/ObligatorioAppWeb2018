@@ -78,8 +78,10 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
                     DDLCompania.Text = unNac.Compania.Nombre;
                     DDLTerminal.Text = unNac.Terminal.Codigo;
                     CalFechaPartida.SelectedDate = unNac.Fecha_partida.Date;
+                    CalFechaArribo.VisibleDate = unNac.Fecha_partida.Date;
                     TBFechaPartida.Text = unNac.Fecha_partida.Date.ToShortDateString();
                     CalFechaArribo.SelectedDate = unNac.Fecha_arribo.Date;
+                    CalFechaPartida.VisibleDate = unNac.Fecha_arribo.Date;
                     TBFechaArribo.Text = unNac.Fecha_arribo.Date.ToShortDateString();
                     DDLHoraPartida.SelectedIndex = unNac.Fecha_partida.Hour;
                     DDLMinutosPartida.SelectedIndex = unNac.Fecha_partida.Minute;

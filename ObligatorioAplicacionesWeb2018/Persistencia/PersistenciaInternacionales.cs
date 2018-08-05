@@ -46,6 +46,8 @@ namespace Persistencia
 
                 if (_Reader.HasRows)
                 {
+                    _Reader.Read();
+
                     int _numero = (int)_Reader["numero"];
                     Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
                     Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
