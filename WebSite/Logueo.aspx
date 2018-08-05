@@ -66,14 +66,12 @@
                 <td align="center" class="style2" colspan="2">
                     <asp:Button ID="BtnLogin" runat="server" onclick="BtnLogin_Click" 
                         Text="Ingresar" />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="BtnRegistro" runat="server" 
-                        Text="Registrarse" />
                 </td>
             </tr>
             <tr>
                 <td align="center" class="style2" colspan="2">
-                    &nbsp;</td>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">Volver</asp:HyperLink>
+                </td>
             </tr>
             <tr>
                 <td align="center" class="style2" colspan="2">
