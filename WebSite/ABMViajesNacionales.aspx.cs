@@ -25,6 +25,7 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
             DDLTerminal.DataSource = ListaTerminales;
             DDLTerminal.DataTextField = "codigo";
             DDLTerminal.DataBind();
+            DDLTerminal.Items.Insert(0, new ListItem("", "No seleccionado"));
 
             ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
 
@@ -34,7 +35,7 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
             DDLCompania.DataSource = ListaCompanias;
             DDLCompania.DataTextField = "nombre";
             DDLCompania.DataBind();
-            DDLCompania.Items.Insert(0, new ListItem("","NA"));
+            DDLCompania.Items.Insert(0, new ListItem("", "No seleccionado"));
 
             bool encontrado = false;
             Session["Encontrado"] = encontrado;
@@ -102,13 +103,15 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
     {
         try
         {
-            int _Numero = Convert.ToInt16(TBNumero.Text);
+            int _Numero = Convert.ToInt32(TBNumero.Text);
 
-            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
-            Companias _Compania = FCompania.Buscar_Compania(DDLCompania.SelectedValue);
+            Terminales _Terminal = (from unaTerminal in (List<Terminales>)Session["Terminales"]
+                                    where unaTerminal.Codigo == DDLTerminal.SelectedValue
+                                    select unaTerminal).First();
 
-            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
-            Terminales _Terminal = FTerminal.Buscar_Terminal(DDLTerminal.SelectedValue);
+            Companias _Compania = (from unaCompania in (List<Companias>)Session["Companias"]
+                                   where unaCompania.Nombre == DDLCompania.SelectedValue
+                                   select unaCompania).First();
 
             int diapartida = Convert.ToDateTime(TBFechaPartida.Text).Day;
             int mespartida = Convert.ToDateTime(TBFechaPartida.Text).Month;
@@ -153,11 +156,13 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
         {
             int _Numero = Convert.ToInt16(TBNumero.Text);
 
-            ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
-            Companias _Compania = FCompania.Buscar_Compania(DDLCompania.SelectedValue);
+            Terminales _Terminal = (from unaTerminal in (List<Terminales>)Session["Terminales"]
+                                    where unaTerminal.Codigo == DDLTerminal.SelectedValue
+                                    select unaTerminal).First();
 
-            ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
-            Terminales _Terminal = FTerminal.Buscar_Terminal(DDLTerminal.SelectedValue);
+            Companias _Compania = (from unaCompania in (List<Companias>)Session["Companias"]
+                                   where unaCompania.Nombre == DDLCompania.SelectedValue
+                                   select unaCompania).First();
 
             int diapartida = Convert.ToDateTime(TBFechaPartida.Text).Day;
             int mespartida = Convert.ToDateTime(TBFechaPartida.Text).Month;
@@ -298,33 +303,57 @@ public partial class ABMViajesNacionales : System.Web.UI.Page
 
     protected void CalFechaPartida_SelectionChanged(object sender, EventArgs e)
     {
+        LblError.Text = "";
         TBFechaPartida.Text = CalFechaPartida.SelectedDate.ToShortDateString();
-        VerificarFechas();
+        if (TBFechaArribo.Text != "")
+        {
+            VerificarFechas();
+        }
     }
 
 
     protected void CalFechaArribo_SelectionChanged(object sender, EventArgs e)
     {
+        LblError.Text = "";
         TBFechaArribo.Text = CalFechaArribo.SelectedDate.ToShortDateString();
-        VerificarFechas();
+        if (TBFechaPartida.Text != "")
+        {
+            VerificarFechas();
+        }
     }
 
     protected void DDLHoraPartida_SelectedIndexChanged(object sender, EventArgs e)
     {
-        VerificarFechas();
+        LblError.Text = "";
+        if (TBFechaPartida.Text != "" || TBFechaArribo.Text != "")
+        {
+            VerificarFechas();
+        }
     }
 
     protected void DDLMinutosPartida_SelectedIndexChanged(object sender, EventArgs e)
     {
-        VerificarFechas();
+        LblError.Text = "";
+        if (TBFechaPartida.Text != "" || TBFechaArribo.Text != "")
+        {
+            VerificarFechas();
+        }
     }
     protected void DDLHoraArribo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        VerificarFechas();
+        LblError.Text = "";
+        if (TBFechaPartida.Text != "" || TBFechaArribo.Text != "")
+        {
+            VerificarFechas();
+        }
     }
     protected void DDLMinutosArribo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        VerificarFechas();
+        LblError.Text = "";
+        if (TBFechaPartida.Text != "" || TBFechaArribo.Text != "")
+        {
+            VerificarFechas();
+        }
     }
 
     private void VerificarFechas()
