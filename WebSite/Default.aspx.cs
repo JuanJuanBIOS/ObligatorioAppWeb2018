@@ -22,43 +22,46 @@ public partial class _Default : System.Web.UI.Page
             
             try
             {
-                //Obtengo lista de terminales y lo guardo en el session
-                ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
-                List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
-                Session["Terminales"] = ListaTerminales;
+                    //Obtengo lista de terminales y lo guardo en el session
+                    ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
+                    List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
+                    Session["Terminales"] = ListaTerminales;
 
-                //Obtengo lista de viajes y lo guardo en el session
-                ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
-                List<Viajes> ListaViajes = FViaje.Listar_Viajes();
-                Session["ListaViajes"] = ListaViajes;
+                    //Obtengo lista de viajes y lo guardo en el session
+                    ILogicaViajes FViaje = FabricaLogica.getLogicaViaje();
+                    List<Viajes> ListaViajes = FViaje.Listar_Viajes();
+                    Session["ListaViajes"] = ListaViajes;
 
-                //Obtengo la lista de companias y lo guardo en el session
-                ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
-                List<Companias> ListaCompanias = FCompania.Listar_Companias();
-                Session["Companias"] = ListaCompanias;
+                    //Obtengo la lista de companias y lo guardo en el session
+                    ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
+                    List<Companias> ListaCompanias = FCompania.Listar_Companias();
+                    Session["Companias"] = ListaCompanias;
 
-                //Predefino los valores en los dropdown lists
-                DDLTerminal.DataSource = ListaTerminales;
-                DDLTerminal.DataTextField = "codigo";
-                DDLTerminal.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", ""));
+                    //Predefino los valores en los dropdown lists
+                    DDLTerminal.DataSource = ListaTerminales;
+                    DDLTerminal.DataTextField = "codigo";
+                    DDLTerminal.DataBind();
+                    DDLCompania.Items.Insert(0, new ListItem("", ""));
 
-                DDLCompania.DataSource = ListaCompanias;
-                DDLCompania.DataTextField = "nombre";
-                DDLCompania.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", ""));
+                    DDLCompania.DataSource = ListaCompanias;
+                    DDLCompania.DataTextField = "nombre";
+                    DDLCompania.DataBind();
+                    DDLCompania.Items.Insert(0, new ListItem("", ""));
 
 
-                //Uso LinQ para tener solo los viajes que aún no hayan partido
-                List<Viajes> viajesnopartieron = (from unViaje in ListaViajes
-                                                  where unViaje.Fecha_partida >= DateTime.Now
-                                                  select unViaje).ToList<Viajes>();
+                    //Uso LinQ para tener solo los viajes que aún no hayan partido
+                    List<Viajes> viajesnopartieron = (from unViaje in ListaViajes
+                                                      where unViaje.Fecha_partida >= DateTime.Now
+                                                      select unViaje).ToList<Viajes>();
 
-                RepeaterViajes.DataSource = viajesnopartieron;
-                RepeaterViajes.DataBind();
+                    RepeaterViajes.DataSource = viajesnopartieron;
+                    RepeaterViajes.DataBind();
             }
-            catch (Exception ex) { LblError.Text = ex.Message; }
 
+            catch (Exception ex)
+            {
+                LblError.Text = ex.Message;
+            }
         }
     }
     protected void RepeaterViajes_ItemCommand(object source, RepeaterCommandEventArgs e)

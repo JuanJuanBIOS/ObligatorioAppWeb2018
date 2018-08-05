@@ -118,7 +118,7 @@ namespace Persistencia
             catch (Exception ex)
             {
                 _transaccion.Rollback();
-                throw new Exception("Problemas con la base de datos:" + ex.Message);
+                throw new Exception("Problemas con la base de datos. Contacte al administrador");
             }
 
             finally
@@ -159,7 +159,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos:" + ex.Message);
+                throw new Exception("Problemas con la base de datos. Contacte al administrador");
             }
 
             finally
@@ -179,6 +179,7 @@ namespace Persistencia
             oComando.Parameters.AddWithValue("@pais", unaTer.Pais);
 
             SqlParameter oRetorno = new SqlParameter("@Retorno", SqlDbType.Int);
+
             oRetorno.Direction = ParameterDirection.ReturnValue;
             oComando.Parameters.Add(oRetorno);
 
@@ -203,6 +204,7 @@ namespace Persistencia
                     throw new Exception("Error al eliminar la terminal en la base de datos");
                 }
 
+
                 PersistenciaFacilidades.Eliminar_Facilidades(unaTer, _transaccion);
 
                 foreach (Facilidades unaFac in unaTer.ListaFacilidades)
@@ -215,7 +217,7 @@ namespace Persistencia
             catch (Exception ex)
             {
                 _transaccion.Rollback();
-                throw new Exception("Problemas con la base de datos:" + ex.Message);
+                throw new Exception("Problemas con la base de datos. Contacte al administrador");
             }
 
             finally
@@ -250,7 +252,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos:" + ex.Message);
+                throw new Exception("Problemas con la base de datos. Contacte al administrador");
             }
 
             finally
