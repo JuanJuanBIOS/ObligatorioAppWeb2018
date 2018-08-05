@@ -84,7 +84,7 @@
         </td>
         <td class="style5">
             <asp:DropDownList ID="DDServicio" runat="server" Enabled="False" Height="16px" 
-                Width="125px">
+                Width="125px" BackColor="#EBEBE4">
                 <asp:ListItem>No</asp:ListItem>
                 <asp:ListItem>Si</asp:ListItem>
             </asp:DropDownList>
@@ -156,7 +156,8 @@
         <td class="style6" valign="top">
             Facilidades:</td>
         <td class="style5">
-            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="126px" Enabled="False">
+            <asp:ListBox ID="LBFacilidadesTer" runat="server" Width="126px" Enabled="False" 
+                BackColor="#EBEBE4" EnableViewState="False">
             </asp:ListBox>
         </td>
     </tr>

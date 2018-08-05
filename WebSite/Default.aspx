@@ -55,10 +55,15 @@
             width: 268435424px;
         }
     </style>
+    <link href="HojaDeEstiloTerminales.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div style="text-align: left">
+    
+        <h1>
+            Terminales<br />
+        </h1>
     
     <table style="width: 74%">
         <tr>
@@ -194,7 +199,7 @@
                     </td>
                     <td>
                         <asp:Button ID="Button1" runat="server" CommandName="ConsultaViaje" Style="text-align: center"
-                            Text="Consulta individual de Viaje" />
+                            Text="Consulta" />
                     </td>
                     <br />
                 </tr>

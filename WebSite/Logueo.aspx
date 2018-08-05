@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Logueo.aspx.cs" Inherits="_Default" %>
 
+<link href="HojaDeEstiloTerminales.css" rel="stylesheet" type="text/css" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,7 +33,8 @@
         <table align="center" class="style1">
             <tr>
                 <td align="center" class="style5" colspan="2">
-                    <h3 align="center"><asp:Label ID="LblMens" runat="server" Text="Ingrese su Usuario y Contraseña"></asp:Label></h3>
+                    <h3 align="center"><asp:Label ID="LblMens" runat="server" 
+                            Text="Ingrese su Usuario y Contraseña" style="text-align: center"></asp:Label></h3>
                 </td>
             </tr>
             <tr>

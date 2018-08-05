@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ConsultaIndividualViaje.aspx.cs" Inherits="ConsultaIndividualViaje" %>
 
+<link href="HojaDeEstiloTerminales.css" rel="stylesheet" type="text/css" />
 <%@ Register src="WebUserControl.ascx" tagname="WebUserControl" tagprefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,7 +14,7 @@
     <div>
     
     </div>
-    <h2 style="text-align: justify">
+    <h2>
         Consulta Individual de Viaje: </h2>
     <p style="text-align: right">
         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">Volver</asp:HyperLink>
