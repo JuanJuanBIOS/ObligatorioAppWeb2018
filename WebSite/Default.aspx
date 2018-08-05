@@ -198,7 +198,6 @@
                         <asp:Button ID="Button1" runat="server" CommandName="ConsultaViaje" Style="text-align: center"
                             Text="Consulta" />
                     </td>
-                    <br />
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
