@@ -186,10 +186,10 @@
                         <asp:TextBox ID="TBComp" runat="server" Text='<%#Eval("Compania.Nombre") %>'></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="TBFechP" runat="server" Text='<%#Bind("Fecha_partida") %>'></asp:TextBox>
+                        <asp:TextBox ID="TBFechP" runat="server" Text='<%#Bind("Fecha_partida") %>' Width="222"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="TBFechA" runat="server" Text='<%#Bind("Fecha_arribo") %>'></asp:TextBox>
+                        <asp:TextBox ID="TBFechA" runat="server" Text='<%#Bind("Fecha_arribo") %>' Width="220"></asp:TextBox>
                     </td>
                     <td>
                         <asp:TextBox ID="TBDestino" runat="server" Text='<%#Eval("Terminal.Codigo") %>'></asp:TextBox>
