@@ -77,7 +77,6 @@
         <td colspan="2">
                 &nbsp;</td>
     </tr>
-    <tr>
         <td align="center" style="width: 94px" >
                 &nbsp;</td>
         <td align="center" >
@@ -91,7 +90,6 @@
         </td>
         <td align="center" style="width: 22px" >
                 &nbsp;</td>
-        </td>
         <td align="center" style="width: 34px" >
                 <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar" Enabled="False" 
                     onclick="BtnEliminar_Click" />

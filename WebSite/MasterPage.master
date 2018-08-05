@@ -2,7 +2,6 @@
 
 <link href="HojaDeEstiloTerminales.css" rel="stylesheet" type="text/css" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<link href="Styles/Site.css" rel="stylesheet" type="text/css" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
@@ -60,7 +59,7 @@
                             </p>
                         <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource" 
                             StaticDisplayLevels="2" BackColor="#B2B2B2" ForeColor="White" 
-                            CssClass="Menu">
+                            CssClass="Menu" Width="400px">
                         </asp:Menu>
                         <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
                         <p align="center">

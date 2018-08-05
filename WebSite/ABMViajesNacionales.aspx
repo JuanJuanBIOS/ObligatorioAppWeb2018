@@ -1,13 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ABMViajesNacionales.aspx.cs" Inherits="ABMViajesNacionales" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PaginaPrincipal" Runat="Server">
-<table>
-        <tr>
-            <td align="center" valign="middle" colspan="6">
                 <h2 align="center">
                     <asp:Label ID="LbSubt" runat="server" 
                     Text="Mantenimiento de Viajes Nacionales"></asp:Label>
                 </h2>
+
+<table>
+        <tr>
+            <td align="center" valign="middle" colspan="6">
+
             </td>
         </tr>
         <tr>

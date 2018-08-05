@@ -158,27 +158,24 @@
     <br />
         <asp:Repeater ID="RepeaterViajes" runat="server" OnItemCommand="RepeaterViajes_ItemCommand">
             <HeaderTemplate>
+            <table>
                     <tr>
-                        <td>
+                        <th>
                             Número
-                        </td>
-                        <td>
+                        </th>
+                        <th>
                             Companía
-                        </td>
-                        <td>
-                            Fecha y hora de partida
-                        </td>
-                        <td>
-                            Fecha y hora de arribo
-                        </td>
-                        <td>
+                        </th>
+                        <th>
+                            Fecha y hora de partida&nbsp&nbsp&nbsp
+                        </th>
+                        <th>
+                            Fecha y hora de arribo&nbsp&nbsp&nbsp
+                        </th>
+                        <th>
                             Destino
-                        </td>
-                        <td>
-                            Botones
-                        </td>
+                        </th>
                     </tr>
-                    <br />
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
@@ -204,6 +201,10 @@
                     <br />
                 </tr>
             </ItemTemplate>
+            <FooterTemplate>
+                        </table>
+            </FooterTemplate>
+
         </asp:Repeater>
     
         <br />
