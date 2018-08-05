@@ -29,13 +29,34 @@
         {
             width: 87px;
         }
+        .style6
+        {
+            width: 172px;
+        }
+        .style7
+        {
+            width: 185px;
+        }
+        .style9
+        {
+            width: 63px;
+        }
+        .style10
+        {
+            width: 149px;
+        }
+        .style11
+        {
+            width: 149px;
+            height: 192px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div style="text-align: left">
     
-    <table style="width: 100%">
+    <table style="width: 72%">
         <tr>
             <td style="width: 179px">
                 Destino:
@@ -43,7 +64,8 @@
             <td colspan="8">
                 <asp:DropDownList ID="DDLTerminal" runat="server" Width="240px" 
                     AppendDataBoundItems="true" 
-                    onselectedindexchanged="DDLTerminal_SelectedIndexChanged">
+                    onselectedindexchanged="DDLTerminal_SelectedIndexChanged" 
+                    AutoPostBack="True">
                 <Items>
                     <asp:ListItem Text="" Value="" />
                 </Items>
@@ -66,7 +88,7 @@
                     &nbsp;</td>
                 <td>
                     &nbsp;</td>
-                <td class="style9" colspan="1" style="width: 370px">
+                <td class="style6" colspan="1">
                     <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
                 </td>
                 <td class="style9">
@@ -89,7 +111,7 @@
                     <br />
                     <br />
                 </td>
-                <td class="style2">
+                <td class="style11">
                     <asp:Label ID="LbFechaArribo" runat="server" Text="Hasta fecha de partida:"></asp:Label>
                     <br />
                     <asp:TextBox ID="TBHasFechaPartida" runat="server" Enabled="False"></asp:TextBox>
@@ -106,13 +128,15 @@
                 &nbsp;</td>
             <td colspan="4">
                 &nbsp;</td>
-            <td style="width: 61px">
-                <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" />
+            <td class="style10">
+                <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" 
+                    onclick="BtnFiltrar_Click" />
                     </td>
             <td style="width: 125px">
-                <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar" />
+                <asp:Button ID="BtnLimpiar" runat="server" Text="Limpiar" 
+                    onclick="BtnLimpiar_Click" />
                     </td>
-            <td style="width: 228px">
+            <td class="style7">
                 &nbsp;</td>
             <td>
                 &nbsp;</td>

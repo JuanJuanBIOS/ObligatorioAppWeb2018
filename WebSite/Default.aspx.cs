@@ -15,10 +15,11 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
-            BtnFiltrar.Enabled = false;
-
+            FiltroDestinoObligatorio();
+            
             try
             {
                 //Obtengo lista de terminales y lo guardo en el session
@@ -40,12 +41,12 @@ public partial class _Default : System.Web.UI.Page
                 DDLTerminal.DataSource = ListaTerminales;
                 DDLTerminal.DataTextField = "codigo";
                 DDLTerminal.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", "Blanco"));
+                DDLCompania.Items.Insert(0, new ListItem("", "No seleccionado"));
 
                 DDLCompania.DataSource = ListaCompanias;
                 DDLCompania.DataTextField = "nombre";
                 DDLCompania.DataBind();
-                DDLCompania.Items.Insert(0, new ListItem("", "Blanco"));
+                DDLCompania.Items.Insert(0, new ListItem("", "No seleccionado"));
 
 
                 //Uso LinQ para tener solo los viajes que aún no hayan partido
@@ -71,7 +72,6 @@ public partial class _Default : System.Web.UI.Page
                 int viajeseleccionado = Convert.ToInt32(((TextBox)(e.Item.Controls[1])).Text);
 
                 //Uso LinQ para tener solo el viaje seleccionado por el click en el boton del repeater
-
                 // sólo quiero el viaje con ese id
                 var resultado = from unViaje in (List<Viajes>)Session["ListaViajes"]
                                 where unViaje.Numero == viajeseleccionado
@@ -93,15 +93,20 @@ public partial class _Default : System.Web.UI.Page
     protected void CalDesde_SelectionChanged(object sender, EventArgs e)
     {
         TBDesFechaPartida.Text = CalDesde.SelectedDate.ToShortDateString();
-        VerificarFechas();
+        if (!(TBHasFechaPartida.Text == ""))
+        {
+            VerificarFechas();
+        }
     }
 
 
     protected void CalHasta_SelectionChanged(object sender, EventArgs e)
     {
         TBHasFechaPartida.Text = CalHasta.SelectedDate.ToShortDateString();
-        VerificarFechas();
-
+        if (!(TBDesFechaPartida.Text == ""))
+        {
+            VerificarFechas();
+        }
     }
 
 
@@ -145,6 +150,79 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void DDLTerminal_SelectedIndexChanged(object sender, EventArgs e)
     {
-        BtnFiltrar.Enabled =true;
+        BtnFiltrar.Enabled = true;
+        ActivoRestoFiltros();
     }
+    
+    
+    protected void BtnFiltrar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+
+            List<Viajes> viajesfiltrados = (from unViaje in (List<Viajes>)Session["ListaViajes"]
+                                            where unViaje.Terminal.Codigo == DDLTerminal.SelectedValue
+
+                                           
+                                            select unViaje).ToList<Viajes>();
+            RepeaterViajes.DataSource = viajesfiltrados;
+            RepeaterViajes.DataBind();
+
+
+
+          
+
+
+        }
+
+        catch
+        {
+            LblError.ForeColor = System.Drawing.Color.Red;
+            LblError.Text = "El filtro no arroja resultados";
+        }
+
+    }
+
+    protected void BtnLimpiar_Click(object sender, EventArgs e)
+    {
+        LimpioFormulario();
+    }
+
+
+
+
+    private void LimpioFormulario()
+    {
+        DDLTerminal.ClearSelection();
+        DDLCompania.ClearSelection();
+        CalDesde.SelectedDates.Clear();
+        CalHasta.SelectedDates.Clear();
+        TBDesFechaPartida.Text = "";
+        TBHasFechaPartida.Text = "";
+        FiltroDestinoObligatorio();
+        LblError.Text = "";
+
+    }
+
+    private void FiltroDestinoObligatorio()
+    {
+        BtnFiltrar.Enabled = false;
+        DDLCompania.Enabled = false;
+        CalDesde.Enabled = false;
+        CalHasta.Enabled = false;
+        TBDesFechaPartida.Text = "";
+        TBHasFechaPartida.Text = "";
+
+    }
+
+    private void ActivoRestoFiltros()
+    {
+        BtnFiltrar.Enabled = true;
+        DDLCompania.Enabled = true;
+        CalDesde.Enabled = true;
+        CalHasta.Enabled = true;
+       
+    }
+
+
 }
