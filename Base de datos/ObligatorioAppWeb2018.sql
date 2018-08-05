@@ -629,7 +629,7 @@ BEGIN
 END
 GO
 -- Prueba Buscar_ViajeInternacional 1
--- Prueba Buscar_ViajeInternacional 4
+-- Prueba Buscar_ViajeInternacional 1005
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -649,7 +649,7 @@ BEGIN
 		RETURN -1
 	
 	IF EXISTS(SELECT * FROM Viajes 
-	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
+	WHERE (ABS(DATEDIFF(MINUTE,fecha_partida,@fecha_partida))<120 AND destino = @destino))
 		RETURN -2
 	
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
@@ -706,7 +706,7 @@ BEGIN
 		RETURN -1
 	
 	IF EXISTS(SELECT * FROM Viajes 
-	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino))
+	WHERE (ABS(DATEDIFF(MINUTE,fecha_partida,@fecha_partida))<120 AND destino = @destino))
 		RETURN -2
 		
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
@@ -974,74 +974,307 @@ GO
 -- INSERCIÓN DE DATOS DE PRUEBA
 -- -----------------------------------------------------------------------------------------------
 
-Alta_Empleado '47879585', '111111', 'Empleado1'
+Alta_Empleado '47879585', '123456', 'Juan'
 GO
-Alta_Empleado '41348194', '222222', 'Empleado2'
+Alta_Empleado '41348194', '123456', 'Pedro'
 GO
-Alta_Empleado '15080405', '333333', 'Empleado3'
+Alta_Empleado '15080405', '123456', 'Maria'
 GO
-
-Alta_Compania 'Compania 1','Calle 1','099111111'
+Alta_Empleado '16066363', '123456', 'Carlos'
 GO
-Alta_Compania 'Compania 2','Calle 2','099222222'
+Alta_Empleado '44142650', '123456', 'Paola'
 GO
-Alta_Compania 'Compania 3','Calle 3','099333333'
-GO
-
-Alta_Terminal 'AAA','Cuidad 1','Uruguay'
-GO
-Alta_Terminal 'BBB','Cuidad 2','Uruguay'
-GO
-Alta_Terminal 'CCC','Cuidad 3','Brasil'
-GO
-Alta_Terminal 'DDD','Cuidad 4','Brasil'
-GO
-Alta_Terminal 'EEE','Cuidad 5','Paraguay'
-GO
-Alta_Terminal 'FFF','Cuidad 6','Argentina'
+Alta_Empleado '43593913', '123456', 'Daniela'
 GO
 
-Alta_Facilidades 'AAA','Facilidad 1'
+Alta_Compania 'Agencia Central','Bulevar Artigas 3516','26185475'
 GO
-Alta_Facilidades 'AAA','Facilidad 2'
+Alta_Compania 'Buquebus','Garibaldi 1523','24845736'
 GO
-Alta_Facilidades 'AAA','Facilidad 3'
+Alta_Compania 'Chadre','General Flores 6548','29241536'
 GO
-Alta_Facilidades 'BBB','Facilidad 2'
+Alta_Compania 'Cita','Ocho de octubre 3883','26008452'
 GO
-Alta_Facilidades 'CCC','Facilidad 1'
+Alta_Compania 'Colonia Express','San Jose 1563','26284578'
 GO
-Alta_Facilidades 'CCC','Facilidad 3'
+Alta_Compania 'Copsa','18 de Julio 956','27106598'
 GO
-Alta_Facilidades 'DDD','Facilidad 1'
+Alta_Compania 'Cot','Avenida Italia 2345','24086536'
 GO
-Alta_Facilidades 'DDD','Facilidad 2'
+Alta_Compania 'Cynsa','Bolivia 1536','22045863'
 GO
-Alta_Facilidades 'EEE','Facilidad 3'
+Alta_Compania 'Ega','Gral. Rivera 3125','25114536'
 GO
-Alta_Facilidades 'FFF','Facilidad 1'
-GO
-Alta_Facilidades 'FFF','Facilidad 2'
-GO
-Alta_Facilidades 'FFF','Facilidad 3'
+Alta_Compania 'Nossar','Rbla República de Chile 1523','23584536'
 GO
 
-Alta_ViajeNacional 1,'Compania 1','AAA', '31/01/2017 12:00', '31/01/2017 16:30', 35, '47879585', 0
+Alta_Terminal 'SAL','Salto','Uruguay'
 GO
-Alta_ViajeNacional 2,'Compania 1','AAA', '05/01/2017 04:00', '05/01/2017 08:30', 35, '41348194', 2
+Alta_Terminal 'RIV','Rivera','Uruguay'
 GO
-Alta_ViajeNacional 3,'Compania 2','AAA', '25/02/2017 23:00', '26/02/2017 03:30', 35, '47879585', 0
+Alta_Terminal 'MAL','Maldonado','Uruguay'
 GO
-Alta_ViajeNacional 5,'Compania 2','AAA', '15/06/2017 15:55', '15/06/2017 20:25', 35, '41348194', 3
+Alta_Terminal 'RDJ','Rio de Janeiro','Brasil'
 GO
-Alta_ViajeInternacional 4,'Compania 1','CCC', '03/03/2017 14:40', '03/03/2017 18:50', 35, '47879585', 0, 'Cedula'
+Alta_Terminal 'SAP','Sao Paulo','Brasil'
 GO
-Alta_ViajeInternacional 6,'Compania 1','CCC', '15/04/2017 14:00', '15/04/2017 18:45', 35, '41348194', 1, ''
+Alta_Terminal 'REC','Recife','Brasil'
 GO
-Alta_ViajeInternacional 7,'Compania 2','CCC', '15/10/2017 17:25', '15/10/2017 23:55', 35, '47879585', 1, 'Pasaporte y vacunas'
+Alta_Terminal 'BSA','Buenos Aires','Argentina'
 GO
-Alta_ViajeInternacional 8,'Compania 2','CCC', '25/09/2017 06:35', '25/09/2017 09:55', 35, '41348194', 0, ''
+Alta_Terminal 'COR','Cordoba','Argentina'
 GO
-Alta_ViajeNacional 9,'Compania 1','AAA', '05/12/2018 04:00', '06/12/2018 08:30', 35, '41348194', 2
+Alta_Terminal 'ENR','Entre Rios','Argentina'
 GO
-Alta_ViajeInternacional 10,'Compania 2','CCC', '15/1/2019 17:25', '15/1/2019 23:55', 35, '47879585', 1, 'Pasaporte y vacunas'
+Alta_Terminal 'ASU','Asunción','Paraguay'
+GO
+Alta_Terminal 'DUR','Durazno','Uruguay'
+GO
+Alta_Terminal 'CUR','Curitiba','Brasil'
+GO
+Alta_Terminal 'COL','Colonia','Brasil'
+GO
+
+Alta_Facilidades 'SAL','Correo'
+GO
+Alta_Facilidades 'SAL','Telefonía'
+GO
+Alta_Facilidades 'SAL','Cambio de moneda'
+GO
+Alta_Facilidades 'RIV','Telefonía'
+GO
+Alta_Facilidades 'MAL','Correo'
+GO
+Alta_Facilidades 'MAL','Plaza de comidas'
+GO
+Alta_Facilidades 'RDJ','Plaza de comidas'
+GO
+Alta_Facilidades 'RDJ','Correo'
+GO
+Alta_Facilidades 'RDJ','Baños públicos'
+GO
+Alta_Facilidades 'RDJ','Telefonía'
+GO
+Alta_Facilidades 'REC','Baños públicos'
+GO
+Alta_Facilidades 'BSA','Correo'
+GO
+Alta_Facilidades 'BSA','Cambio de moneda'
+GO
+Alta_Facilidades 'BSA','Baños públicos'
+GO
+Alta_Facilidades 'COR','Correo'
+GO
+Alta_Facilidades 'COR','Cambio de moneda'
+GO
+Alta_Facilidades 'ASU','Baños públicos'
+GO
+Alta_Facilidades 'CUR','Plaza de comidas'
+GO
+Alta_Facilidades 'CUR','Cambio de moneda'
+GO
+Alta_Facilidades 'COL','Correo'
+GO
+Alta_Facilidades 'COL','Plaza de comidas'
+GO
+
+Alta_ViajeNacional 878, 'Agencia Central', 'SAP', '13/03/2017 3:41', '14/03/2017 8:19', 23, '16066363', 0
+GO
+Alta_ViajeNacional 891, 'Chadre', 'SAP', '25/09/2017 19:47', '26/09/2017 5:11', 41, '41348194', 0
+GO
+Alta_ViajeNacional 819, 'Copsa', 'BSA', '03/10/2017 3:28', '04/10/2017 9:18', 18, '16066363', 1
+GO
+Alta_ViajeNacional 977, 'Ega', 'SAL', '14/04/2017 21:56', '15/04/2017 20:44', 48, '16066363', 1
+GO
+Alta_ViajeNacional 844, 'Cot', 'BSA', '01/02/2019 3:28', '03/02/2019 2:56', 29, '16066363', 1
+GO
+Alta_ViajeNacional 614, 'Buquebus', 'DUR', '31/03/2017 13:19', '02/04/2017 4:31', 46, '15080405', 1
+GO
+Alta_ViajeNacional 117, 'Cynsa', 'BSA', '08/10/2017 18:42', '10/10/2017 14:26', 25, '47879585', 2
+GO
+Alta_ViajeNacional 153, 'Agencia Central', 'REC', '02/12/2018 5:33', '02/12/2018 18:8', 39, '15080405', 3
+GO
+Alta_ViajeNacional 252, 'Cynsa', 'COL', '21/03/2017 12:14', '21/03/2017 16:53', 41, '15080405', 3
+GO
+Alta_ViajeNacional 253, 'Cynsa', 'RDJ', '25/01/2018 10:19', '26/01/2018 19:3', 53, '43593913', 3
+GO
+Alta_ViajeNacional 925, 'Buquebus', 'ENR', '26/04/2018 0:32', '27/04/2018 7:46', 23, '15080405', 3
+GO
+Alta_ViajeNacional 653, 'Buquebus', 'ASU', '26/01/2018 13:6', '28/01/2018 4:6', 45, '16066363', 3
+GO
+Alta_ViajeNacional 249, 'Agencia Central', 'ASU', '12/09/2018 1:33', '13/09/2018 6:3', 54, '43593913', 4
+GO
+Alta_ViajeNacional 700, 'Copsa', 'DUR', '12/04/2019 14:46', '12/04/2019 15:52', 35, '44142650', 5
+GO
+Alta_ViajeNacional 459, 'Colonia Express', 'CUR', '16/03/2017 21:36', '17/03/2017 15:15', 45, '43593913', 5
+GO
+Alta_ViajeNacional 248, 'Buquebus', 'ASU', '23/09/2019 19:30', '23/09/2019 23:4', 31, '44142650', 7
+GO
+Alta_ViajeNacional 801, 'Ega', 'RIV', '23/12/2017 3:41', '24/12/2017 1:24', 27, '44142650', 8
+GO
+Alta_ViajeNacional 780, 'Copsa', 'COR', '14/12/2017 23:50', '15/12/2017 15:11', 36, '41348194', 8
+GO
+Alta_ViajeNacional 21, 'Copsa', 'ASU', '02/08/2017 15:33', '02/08/2017 18:46', 21, '43593913', 9
+GO
+Alta_ViajeNacional 6, 'Cot', 'ASU', '21/09/2017 8:44', '21/09/2017 17:41', 30, '16066363', 9
+GO
+Alta_ViajeNacional 761, 'Copsa', 'COL', '16/08/2019 23:28', '18/08/2019 5:4', 34, '47879585', 10
+GO
+Alta_ViajeNacional 556, 'Colonia Express', 'SAP', '07/03/2019 15:59', '09/03/2019 13:4', 20, '15080405', 11
+GO
+Alta_ViajeNacional 800, 'Buquebus', 'RDJ', '26/04/2017 3:32', '28/04/2017 10:50', 11, '16066363', 11
+GO
+Alta_ViajeNacional 841, 'Agencia Central', 'RIV', '22/05/2018 19:57', '23/05/2018 16:14', 17, '16066363', 12
+GO
+Alta_ViajeNacional 378, 'Agencia Central', 'COR', '09/05/2017 21:19', '11/05/2017 6:26', 45, '44142650', 12
+GO
+Alta_ViajeNacional 386, 'Cita', 'SAL', '31/03/2018 0:41', '01/04/2018 4:42', 44, '47879585', 13
+GO
+Alta_ViajeNacional 932, 'Nossar', 'DUR', '01/02/2020 11:1', '02/02/2020 21:13', 32, '16066363', 13
+GO
+Alta_ViajeNacional 796, 'Colonia Express', 'SAP', '27/09/2017 15:11', '27/09/2017 16:30', 34, '15080405', 14
+GO
+Alta_ViajeNacional 751, 'Buquebus', 'MAL', '25/11/2017 20:6', '27/11/2017 2:43', 47, '47879585', 14
+GO
+Alta_ViajeNacional 976, 'Agencia Central', 'SAL', '18/06/2017 0:13', '20/06/2017 17:48', 11, '41348194', 14
+GO
+Alta_ViajeNacional 998, 'Nossar', 'SAL', '02/11/2018 15:2', '02/11/2018 19:16', 36, '47879585', 15
+GO
+Alta_ViajeNacional 368, 'Chadre', 'CUR', '02/05/2017 5:5', '04/05/2017 10:16', 16, '41348194', 15
+GO
+Alta_ViajeNacional 195, 'Nossar', 'ASU', '15/05/2017 6:39', '17/05/2017 20:31', 56, '47879585', 15
+GO
+Alta_ViajeInternacional 360, 'Ega', 'RIV', '17/03/2018 9:55', '17/03/2018 15:8', 51, '15080405', 0, 'Vacunas'
+GO
+Alta_ViajeInternacional 611, 'Copsa', 'COR', '23/09/2017 6:56', '23/09/2017 15:38', 16, '41348194', 0, 'Cedula'
+GO
+Alta_ViajeInternacional 342, 'Cynsa', 'ENR', '14/07/2019 8:18', '14/07/2019 13:19', 40, '47879585', 0, 'Pasaporte'
+GO
+Alta_ViajeInternacional 606, 'Cita', 'RIV', '22/11/2018 9:10', '22/11/2018 10:35', 27, '41348194', 0, ''
+GO
+Alta_ViajeInternacional 412, 'Cynsa', 'SAL', '16/06/2019 20:32', '16/06/2019 23:10', 59, '47879585', 0, ''
+GO
+Alta_ViajeInternacional 291, 'Ega', 'SAL', '06/02/2017 0:8', '06/02/2017 19:5', 45, '43593913', 0, 'Pasaporte'
+GO
+Alta_ViajeInternacional 353, 'Chadre', 'BSA', '13/08/2019 5:10', '13/08/2019 13:37', 27, '15080405', 0, 'Cedula'
+GO
+Alta_ViajeInternacional 517, 'Buquebus', 'REC', '10/05/2018 22:36', '10/05/2018 23:24', 35, '41348194', 0, ''
+GO
+Alta_ViajeInternacional 960, 'Copsa', 'MAL', '21/08/2019 4:23', '21/08/2019 8:55', 52, '15080405', 0, 'Pasaporte y Vacunas'
+GO
+Alta_ViajeInternacional 898, 'Cita', 'RDJ', '31/08/2018 9:23', '31/08/2018 11:57', 30, '41348194', 0, ''
+GO
+Alta_ViajeInternacional 790, 'Nossar', 'COR', '28/01/2018 7:18', '28/01/2018 8:42', 45, '15080405', 0, ''
+GO
+Alta_ViajeInternacional 150, 'Cot', 'REC', '09/08/2019 12:9', '09/08/2019 20:12', 51, '16066363', 0, 'Cedula'
+GO
+Alta_ViajeInternacional 54, 'Agencia Central', 'DUR', '11/06/2020 19:58', '11/06/2020 23:12', 25, '44142650', 0, 'Pasaporte'
+GO
+Alta_ViajeInternacional 55, 'Cynsa', 'ENR', '12/05/2018 15:53', '12/05/2018 16:17', 23, '16066363', 0, 'Vacunas'
+GO
+Alta_ViajeInternacional 301, 'Ega', 'ASU', '21/01/2017 22:47', '21/01/2017 23:11', 51, '43593913', 0, ''
+GO
+Alta_ViajeInternacional 465, 'Cynsa', 'SAP', '23/05/2017 2:43', '24/05/2017 5:34', 37, '41348194', 0, 'Vacunas'
+GO
+Alta_ViajeInternacional 721, 'Colonia Express', 'BSA', '26/03/2018 14:54', '27/03/2018 2:19', 35, '15080405', 0, ''
+GO
+Alta_ViajeInternacional 460, 'Copsa', 'SAP', '20/07/2019 10:53', '21/07/2019 10:42', 38, '15080405', 0, 'Vacunas'
+GO
+Alta_ViajeInternacional 799, 'Cynsa', 'MAL', '20/10/2019 10:19', '21/10/2019 21:44', 46, '47879585', 0, 'Cedula y Vacunas'
+GO
+Alta_ViajeInternacional 741, 'Colonia Express', 'REC', '12/08/2020 9:8', '13/08/2020 16:22', 10, '43593913', 0, 'Pasaporte'
+GO
+Alta_ViajeInternacional 144, 'Ega', 'DUR', '11/01/2018 17:5', '12/01/2018 7:44', 21, '43593913', 0, ''
+GO
+Alta_ViajeInternacional 726, 'Cita', 'ASU', '10/04/2017 14:4', '11/04/2017 19:15', 47, '15080405', 0, 'Cedula y Pasaporte'
+GO
+Alta_ViajeInternacional 749, 'Copsa', 'COR', '23/11/2018 17:27', '24/11/2018 13:16', 20, '16066363', 0, ''
+GO
+Alta_ViajeInternacional 620, 'Cot', 'MAL', '18/03/2018 10:20', '19/03/2018 22:21', 34, '16066363', 0, ''
+GO
+Alta_ViajeInternacional 659, 'Agencia Central', 'COR', '15/08/2018 6:24', '17/08/2018 19:4', 52, '44142650', 0, 'Cedula y Pasaporte'
+GO
+Alta_ViajeInternacional 978, 'Copsa', 'BSA', '14/03/2018 16:48', '16/03/2018 3:51', 43, '47879585', 0, 'Cedula y Vacunas'
+GO
+Alta_ViajeInternacional 391, 'Nossar', 'ENR', '19/03/2018 10:49', '21/03/2018 19:49', 33, '47879585', 0, ''
+GO
+Alta_ViajeInternacional 939, 'Colonia Express', 'SAP', '01/08/2017 22:18', '03/08/2017 20:33', 14, '47879585', 0, ''
+GO
+Alta_ViajeInternacional 443, 'Cita', 'MAL', '15/06/2017 22:39', '17/06/2017 9:21', 51, '15080405', 0, ''
+GO
+Alta_ViajeInternacional 682, 'Colonia Express', 'ASU', '02/07/2018 12:14', '04/07/2018 16:33', 17, '15080405', 0, 'Pasaporte y Vacunas'
+GO
+Alta_ViajeInternacional 124, 'Ega', 'BSA', '08/06/2018 8:13', '10/06/2018 0:29', 36, '44142650', 0, 'Pasaporte y Vacunas'
+GO
+Alta_ViajeInternacional 609, 'Agencia Central', 'SAL', '01/07/2018 4:13', '03/07/2018 10:8', 24, '44142650', 0, 'Pasaporte'
+GO
+Alta_ViajeInternacional 654, 'Agencia Central', 'REC', '05/03/2018 2:56', '07/03/2018 1:22', 40, '47879585', 0, 'Vacunas'
+GO
+Alta_ViajeInternacional 484, 'Agencia Central', 'COL', '07/09/2018 0:45', '09/09/2018 13:40', 18, '43593913', 0, 'Cedula y Vacunas'
+GO
+Alta_ViajeInternacional 1032, 'Colonia Express', 'ENR', '12/09/2019 12:54', '14/09/2019 7:32', 42, '47879585', 0, ''
+GO
+Alta_ViajeInternacional 168, 'Buquebus', 'ASU', '08/01/2017 10:38', '08/01/2017 12:7', 52, '44142650', 1, 'Pasaporte y Vacunas'
+GO
+Alta_ViajeInternacional 615, 'Cynsa', 'CUR', '15/04/2019 16:25', '15/04/2019 17:24', 24, '43593913', 1, ''
+GO
+Alta_ViajeInternacional 795, 'Agencia Central', 'DUR', '29/01/2018 10:22', '29/01/2018 11:21', 18, '15080405', 1, ''
+GO
+Alta_ViajeInternacional 25, 'Chadre', 'CUR', '06/04/2018 4:43', '06/04/2018 7:5', 25, '15080405', 1, ''
+GO
+Alta_ViajeInternacional 79, 'Cot', 'ASU', '03/09/2018 20:8', '03/09/2018 23:30', 36, '16066363', 1, 'Vacunas'
+GO
+Alta_ViajeInternacional 267, 'Agencia Central', 'BSA', '06/11/2017 20:30', '06/11/2017 23:54', 37, '47879585', 1, 'Vacunas'
+GO
+Alta_ViajeInternacional 183, 'Agencia Central', 'COR', '02/04/2018 8:18', '02/04/2018 10:25', 35, '41348194', 1, 'Pasaporte'
+GO
+Alta_ViajeInternacional 15, 'Agencia Central', 'ASU', '22/11/2017 2:12', '22/11/2017 16:25', 55, '44142650', 1, ''
+GO
+Alta_ViajeInternacional 966, 'Cynsa', 'CUR', '20/06/2018 11:55', '20/06/2018 13:25', 31, '47879585', 1, 'Cedula'
+GO
+Alta_ViajeInternacional 421, 'Buquebus', 'COL', '29/11/2018 20:49', '29/11/2018 23:39', 47, '43593913', 1, 'Pasaporte'
+GO
+Alta_ViajeInternacional 521, 'Cot', 'COR', '20/01/2018 13:46', '21/01/2018 13:58', 58, '44142650', 1, 'Pasaporte'
+GO
+Alta_ViajeInternacional 173, 'Ega', 'COR', '04/06/2017 19:19', '05/06/2017 22:3', 57, '41348194', 1, 'Vacunas'
+GO
+Alta_ViajeInternacional 728, 'Nossar', 'SAP', '12/09/2019 16:55', '13/09/2019 5:23', 52, '43593913', 1, 'Cedula y Pasaporte'
+GO
+Alta_ViajeInternacional 678, 'Agencia Central', 'SAL', '24/08/2017 7:36', '25/08/2017 6:54', 25, '15080405', 1, 'Cedula y Vacunas'
+GO
+Alta_ViajeInternacional 864, 'Cot', 'CUR', '17/03/2019 20:1', '18/03/2019 19:40', 47, '16066363', 1, 'Vacunas'
+GO
+Alta_ViajeInternacional 628, 'Agencia Central', 'CUR', '29/01/2017 21:8', '30/01/2017 23:50', 19, '43593913', 1, 'Pasaporte'
+GO
+Alta_ViajeInternacional 499, 'Buquebus', 'COR', '17/02/2019 22:45', '18/02/2019 11:33', 33, '47879585', 1, ''
+GO
+Alta_ViajeInternacional 565, 'Ega', 'REC', '07/02/2017 21:3', '08/02/2017 0:55', 18, '44142650', 1, 'Vacunas'
+GO
+Alta_ViajeInternacional 1000, 'Cot', 'COR', '24/07/2019 1:9', '25/07/2019 7:46', 54, '15080405', 1, 'Cedula y Vacunas'
+GO
+Alta_ViajeInternacional 1005, 'Nossar', 'RIV', '19/08/2018 20:28', '20/08/2018 20:13', 20, '16066363', 1, ''
+GO
+Alta_ViajeInternacional 383, 'Copsa', 'CUR', '13/09/2018 16:47', '15/09/2018 9:20', 20, '16066363', 1, 'Cedula'
+GO
+Alta_ViajeInternacional 159, 'Cot', 'ASU', '23/05/2019 20:52', '25/05/2019 22:10', 26, '47879585', 1, 'Pasaporte'
+GO
+Alta_ViajeInternacional 911, 'Colonia Express', 'SAP', '30/07/2017 17:37', '01/08/2017 3:24', 21, '41348194', 1, ''
+GO
+Alta_ViajeInternacional 430, 'Colonia Express', 'COR', '06/03/2019 8:35', '08/03/2019 1:30', 37, '43593913', 1, ''
+GO
+Alta_ViajeInternacional 732, 'Chadre', 'COR', '03/04/2017 20:18', '05/04/2017 22:24', 10, '16066363', 1, ''
+GO
+Alta_ViajeInternacional 935, 'Agencia Central', 'SAL', '02/01/2019 1:18', '04/01/2019 8:18', 55, '16066363', 1, 'Cedula y Pasaporte'
+GO
+Alta_ViajeInternacional 68, 'Copsa', 'DUR', '05/05/2019 17:8', '07/05/2019 8:28', 19, '47879585', 1, ''
+GO
+Alta_ViajeInternacional 480, 'Colonia Express', 'DUR', '22/03/2017 12:20', '24/03/2017 14:19', 42, '16066363', 1, ''
+GO
+Alta_ViajeInternacional 127, 'Cot', 'RIV', '29/11/2017 12:4', '01/12/2017 14:3', 19, '47879585', 1, ''
+GO
+Alta_ViajeInternacional 854, 'Nossar', 'CUR', '20/05/2019 19:51', '22/05/2019 17:57', 52, '43593913', 1, ''
+GO
+Alta_ViajeInternacional 118, 'Colonia Express', 'SAP', '31/05/2018 3:3', '02/06/2018 17:51', 35, '47879585', 1, 'Pasaporte y Vacunas'
+GO
+Alta_ViajeInternacional 999, 'Cita', 'COL', '13/03/2019 15:43', '15/03/2019 7:45', 48, '41348194', 1, 'Cedula y Pasaporte'
+GO
