@@ -59,7 +59,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally

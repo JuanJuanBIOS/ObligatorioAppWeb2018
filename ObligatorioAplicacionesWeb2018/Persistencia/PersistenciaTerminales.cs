@@ -72,6 +72,50 @@ namespace Persistencia
             return unaTer;
         }
 
+        public Terminales BuscarTodos_Terminal(string pCodTerminal)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("BuscarTodos_Terminal", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@codigo", pCodTerminal);
+
+            Terminales unaTer = null;
+
+            try
+            {
+                oConexion.Open();
+
+                SqlDataReader _Reader = oComando.ExecuteReader();
+
+                if (_Reader.HasRows)
+                {
+                    _Reader.Read();
+
+                    string _codigo = (string)_Reader["codigo"];
+                    string _ciudad = (string)_Reader["ciudad"];
+                    string _pais = (string)_Reader["pais"];
+                    List<Facilidades> _facilidades = new List<Facilidades>();
+                    _facilidades = PersistenciaFacilidades.CargoFacilidades(pCodTerminal);
+
+                    unaTer = new Terminales(_codigo, _ciudad, _pais, _facilidades);
+
+                    _Reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return unaTer;
+        }
+
 
         public void Alta_Terminal(Terminales unaTer)
         {
@@ -118,7 +162,7 @@ namespace Persistencia
             catch (Exception ex)
             {
                 _transaccion.Rollback();
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -159,7 +203,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -217,7 +261,7 @@ namespace Persistencia
             catch (Exception ex)
             {
                 _transaccion.Rollback();
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -252,7 +296,44 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return ListaTerminales;
+        }
+
+        public List<Terminales> Listar_Todos_Terminales()
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Listar_Todos_Terminales", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            List<Terminales> ListaTerminales = new List<Terminales>();
+
+            try
+            {
+                oConexion.Open();
+                SqlDataReader oReader = oComando.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        Terminales Ter = BuscarTodos_Terminal(oReader["codigo"].ToString());
+                        ListaTerminales.Add(Ter);
+                    }
+                }
+
+                oReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally

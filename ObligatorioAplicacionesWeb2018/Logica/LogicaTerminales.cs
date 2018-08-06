@@ -61,5 +61,12 @@ namespace Logica.Interfaces
 
             return FTerminal.Listar_Terminales();
         }
+
+        public List<Terminales> Listar_Todos_Terminales()
+        {
+            IPersistenciaTerminales FTerminal = FabricaPersistencia.getPersistenciaTerminal();
+
+            return FTerminal.Listar_Todos_Terminales();
+        }
     }
 }

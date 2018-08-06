@@ -364,6 +364,17 @@ GO
 -- Prueba Listar_Companias
 -- -----------------------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA LISTAR COMPANIAS
+CREATE PROCEDURE Listar_Todos_Companias
+AS
+BEGIN
+	Select * from Companias
+END
+GO
+-- Prueba Listar_Todos_Companias
+-- -----------------------------------------------------------------------------------------------
+
 
 
 
@@ -403,6 +414,19 @@ GO
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE TERMINAL
+CREATE PROCEDURE BuscarTodos_Terminal
+@codigo VARCHAR(3)
+AS
+BEGIN
+	SELECT * FROM Terminales WHERE codigo = @codigo
+END
+GO
+-- Prueba Buscar_Terminal 'AAA'
+-- Prueba Buscar_Terminal 'CCC'
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE FACILIDADES
 CREATE PROCEDURE Buscar_Facilidades
 @terminal VARCHAR(3)
@@ -413,19 +437,6 @@ END
 GO
 -- Prueba Buscar_Facilidades 'AAA'
 -- Prueba Buscar_Facilidades 'CCC'
--- -----------------------------------------------------------------------------------------------
-
--- -----------------------------------------------------------------------------------------------
--- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE TODAS LAS TERMINALES
-CREATE PROCEDURE BuscarTodos_Terminal
-@codigo VARCHAR(3)
-AS
-BEGIN
-	SELECT * FROM Terminales WHERE codigo = @codigo
-END
-GO
--- Prueba BuscarTodos_Terminal 'AAA'
--- Prueba BuscarTodos_Terminal 'CCC'
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
@@ -577,6 +588,17 @@ CREATE PROCEDURE Listar_Terminales
 AS
 BEGIN
 	Select * from Terminales where activo = 1
+END
+GO
+-- Prueba Listar_Terminales
+-- -----------------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------------
+-- SE CREA PROCEDIMIENTO PARA LISTAR TERMINALES
+CREATE PROCEDURE Listar_Todos_Terminales
+AS
+BEGIN
+	Select * from Terminales
 END
 GO
 -- Prueba Listar_Terminales

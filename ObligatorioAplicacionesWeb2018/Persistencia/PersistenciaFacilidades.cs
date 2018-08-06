@@ -71,7 +71,7 @@ namespace Persistencia
 
                 if (retorno == -1)
                 {
-                    throw new Exception("La terminal ingresada no existe en la base de datos");
+                    throw new Exception("La terminal ingresada no existe en la base de datos o está dada de baja");
                 }
                 if (retorno == -2)
                 {
@@ -105,7 +105,7 @@ namespace Persistencia
 
                 if (retorno == -1)
                 {
-                    throw new Exception("La terminal ingresada no existe en la base de datos");
+                    throw new Exception("La terminal ingresada no existe en la base de datos o está dada de baja");
                 }
                 if (retorno == -2)
                 {

@@ -24,7 +24,7 @@ public partial class _Default : System.Web.UI.Page
             {
                     //Obtengo lista de terminales y lo guardo en el session
                     ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
-                    List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
+                    List<Terminales> ListaTerminales = FTerminal.Listar_Todos_Terminales();
                     Session["Terminales"] = ListaTerminales;
 
                     //Obtengo lista de viajes y lo guardo en el session
@@ -34,7 +34,7 @@ public partial class _Default : System.Web.UI.Page
 
                     //Obtengo la lista de companias y lo guardo en el session
                     ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
-                    List<Companias> ListaCompanias = FCompania.Listar_Companias();
+                    List<Companias> ListaCompanias = FCompania.Listar_Todos_Companias();
                     Session["Companias"] = ListaCompanias;
 
                     //Predefino los valores en los dropdown lists

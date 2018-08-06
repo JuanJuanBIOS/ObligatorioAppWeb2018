@@ -49,8 +49,8 @@ namespace Persistencia
                     _Reader.Read();
 
                     int _numero = (int)_Reader["numero"];
-                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
-                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
+                    Companias _compania = PersistenciaCompania.GetInstancia().BuscarTodos_Compania((string)_Reader["compania"]);
+                    Terminales _terminal = PersistenciaTerminales.GetInstancia().BuscarTodos_Terminal((string)_Reader["destino"]);
                     DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
                     DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
                     int _asientos = (int)_Reader["asientos"];
@@ -112,15 +112,15 @@ namespace Persistencia
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -3)
                 {
-                    throw new Exception("La compañía ingresada no existe en la base de datos.");
+                    throw new Exception("La compañía ingresada no existe en la base de datos o está dada de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -4)
                 {
-                    throw new Exception("La terminal ingresada no existe en la base de datos..");
+                    throw new Exception("La terminal ingresada no existe en la base de datos o está dada de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -5)
                 {
-                    throw new Exception("El empleado logueado no existe en la base de datos.");
+                    throw new Exception("El empleado logueado no existe en la base de datos o está dado de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -6 || Convert.ToInt32(oRetorno.Value) == -7) 
                 {
@@ -129,7 +129,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -174,15 +174,15 @@ namespace Persistencia
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -3)
                 {
-                    throw new Exception("La compañía ingresada no existe en la base de datos.");
+                    throw new Exception("La compañía ingresada no existe en la base de datos o está dada de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -4)
                 {
-                    throw new Exception("La terminal ingresada no existe en la base de datos..");
+                    throw new Exception("La terminal ingresada no existe en la base de datos o está dada de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -5)
                 {
-                    throw new Exception("El empleado logueado no existe en la base de datos.");
+                    throw new Exception("El empleado logueado no existe en la base de datos o está dado de baja.");
                 }
                 if (Convert.ToInt32(oRetorno.Value) == -6 || Convert.ToInt32(oRetorno.Value) == -7)
                 {
@@ -191,7 +191,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -232,7 +232,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -257,8 +257,8 @@ namespace Persistencia
                 while (_Reader.Read())
                 {
                     int _numero = (int)_Reader["numero"];
-                    Companias _compania = PersistenciaCompania.GetInstancia().Buscar_Compania((string)_Reader["compania"]);
-                    Terminales _terminal = PersistenciaTerminales.GetInstancia().Buscar_Terminal((string)_Reader["destino"]);
+                    Companias _compania = PersistenciaCompania.GetInstancia().BuscarTodos_Compania((string)_Reader["compania"]);
+                    Terminales _terminal = PersistenciaTerminales.GetInstancia().BuscarTodos_Terminal((string)_Reader["destino"]);
                     DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
                     DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
                     int _asientos = (int)_Reader["asientos"];

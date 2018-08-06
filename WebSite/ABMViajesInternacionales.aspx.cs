@@ -18,7 +18,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
             ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
 
-            List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
+            List<Terminales> ListaTerminales = FTerminal.Listar_Todos_Terminales();
 
             Session["Terminales"] = ListaTerminales;
 
@@ -29,7 +29,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
             ILogicaCompania FCompania = FabricaLogica.getLogicaCompania();
 
-            List<Companias> ListaCompanias = FCompania.Listar_Companias();
+            List<Companias> ListaCompanias = FCompania.Listar_Todos_Companias();
 
             Session["Companias"] = ListaCompanias;
             DDLCompania.DataSource = ListaCompanias;

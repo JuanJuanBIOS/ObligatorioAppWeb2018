@@ -62,5 +62,12 @@ namespace Logica
 
             return FCompania.Listar_Companias();
         }
+
+        public List<Companias> Listar_Todos_Companias()
+        {
+            IPersistenciaCompania FCompania = FabricaPersistencia.getPersistenciaCompania();
+
+            return FCompania.Listar_Todos_Companias();
+        }
     }
 }

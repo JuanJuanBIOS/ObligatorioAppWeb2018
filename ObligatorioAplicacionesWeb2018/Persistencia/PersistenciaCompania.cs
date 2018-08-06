@@ -59,7 +59,48 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos. Contacte al administrador");
+                throw new ApplicationException("Problemas con la base de datos: " + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return unaComp;
+        }
+
+        public Companias BuscarTodos_Compania(string pNombre)
+        {
+            Companias unaComp = null;
+
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("BuscarTodos_Compania", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@nombre", pNombre);
+
+            try
+            {
+                oConexion.Open();
+                SqlDataReader oReader = oComando.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+
+                    string _nombre = (string)oReader["nombre"];
+                    string _direccion = (string)oReader["direccion"];
+                    string _telefono = (string)oReader["telefono"];
+
+                    oReader.Close();
+
+                    unaComp = new Companias(_nombre, _direccion, _telefono);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
@@ -218,7 +259,44 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Problemas con la base de datos. Contacte al administrador");
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return ListaCompanias;
+        }
+
+        public List<Companias> Listar_Todos_Companias()
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("Listar_Todos_Companias", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            List<Companias> ListaCompanias = new List<Companias>();
+
+            try
+            {
+                oConexion.Open();
+                SqlDataReader oReader = oComando.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        Companias Comp = BuscarTodos_Compania(oReader["nombre"].ToString());
+                        ListaCompanias.Add(Comp);
+                    }
+                }
+
+                oReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Problemas con la base de datos: " + ex.Message);
             }
 
             finally
