@@ -59,6 +59,12 @@ namespace Persistencia
                     _Reader.Close();
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -103,6 +109,12 @@ namespace Persistencia
                     _Reader.Close();
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -159,6 +171,12 @@ namespace Persistencia
 
                 _transaccion.Commit();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 _transaccion.Rollback();
@@ -201,6 +219,12 @@ namespace Persistencia
                     throw new Exception("Error al eliminar la terminal en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -258,6 +282,13 @@ namespace Persistencia
 
                 _transaccion.Commit();
             }
+
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 _transaccion.Rollback();
@@ -294,6 +325,12 @@ namespace Persistencia
 
                 oReader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -331,6 +368,12 @@ namespace Persistencia
 
                 oReader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);

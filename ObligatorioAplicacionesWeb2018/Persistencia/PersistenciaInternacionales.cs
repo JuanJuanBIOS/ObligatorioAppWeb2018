@@ -54,7 +54,7 @@ namespace Persistencia
                     DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
                     DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
                     int _asientos = (int)_Reader["asientos"];
-                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
+                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().BuscarTodos_Empleado((string)_Reader["empleado"]);
                     bool _servicio = (bool)_Reader["servicio"];
                     string _documentacion = (string)_Reader["documentacion"];
 
@@ -63,6 +63,13 @@ namespace Persistencia
                     _Reader.Close();
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -127,6 +134,12 @@ namespace Persistencia
                     throw new Exception("Se produjo un error al intentar dar de alta el viaje. Inténtelo nuevamente.");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -189,6 +202,12 @@ namespace Persistencia
                     throw new Exception("Se produjo un error al intentar modificar el viaje. Inténtelo nuevamente.");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -230,6 +249,12 @@ namespace Persistencia
                     throw new Exception("Error al eliminar el viaje en la base de datos. Inténtelo nuevamente   ");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -262,7 +287,7 @@ namespace Persistencia
                     DateTime _fechapartida = (DateTime)_Reader["fecha_partida"];
                     DateTime _fechaarribo = (DateTime)_Reader["fecha_arribo"];
                     int _asientos = (int)_Reader["asientos"];
-                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().Buscar_Empleado((string)_Reader["empleado"]);
+                    Empleados _empleado = PersistenciaEmpleado.GetInstancia().BuscarTodos_Empleado((string)_Reader["empleado"]);
                     bool _servicio = (bool)_Reader["servicio"];
                     string _documentacion = (string)_Reader["documentacion"];
 
@@ -271,6 +296,12 @@ namespace Persistencia
                 }
                 _Reader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

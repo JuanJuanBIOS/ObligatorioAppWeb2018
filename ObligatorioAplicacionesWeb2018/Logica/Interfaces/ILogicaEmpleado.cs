@@ -12,6 +12,8 @@ namespace Logica.Interfaces
 
         Empleados Buscar_Empleado(string pCedula);
 
+        Empleados BuscarTodos_Empleado(string pCedula);
+
         void Alta_Empleado(Empleados E);
 
         void Eliminar_Empleado(Empleados E);

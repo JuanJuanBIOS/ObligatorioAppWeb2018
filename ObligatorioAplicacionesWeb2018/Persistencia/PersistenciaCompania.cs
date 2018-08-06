@@ -57,6 +57,12 @@ namespace Persistencia
                     unaComp = new Companias(_nombre, _direccion, _telefono);
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new ApplicationException("Problemas con la base de datos: " + ex.Message);
@@ -98,6 +104,12 @@ namespace Persistencia
                     unaComp = new Companias(_nombre, _direccion, _telefono);
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new ApplicationException("Problemas con la base de datos: " + ex.Message);
@@ -143,6 +155,12 @@ namespace Persistencia
                     throw new Exception("Error en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -184,6 +202,12 @@ namespace Persistencia
                     throw new Exception("Error en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -223,6 +247,12 @@ namespace Persistencia
                     throw new Exception("Error al eliminar Compañía de la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -257,6 +287,12 @@ namespace Persistencia
 
                 oReader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -294,6 +330,12 @@ namespace Persistencia
 
                 oReader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);

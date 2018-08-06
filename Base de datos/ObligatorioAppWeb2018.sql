@@ -860,7 +860,7 @@ BEGIN
 		RETURN -1
 	
 	IF EXISTS(SELECT * FROM Viajes 
-	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
+	WHERE (ABS(DATEDIFF(MINUTE,fecha_partida,@fecha_partida))<120 AND destino = @destino AND numero <> @numero))
 		RETURN -2
 	
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)
@@ -919,7 +919,7 @@ BEGIN
 		RETURN -1
 	
 	IF EXISTS(SELECT * FROM Viajes 
-	WHERE (DATEDIFF(MINUTE,fecha_partida,@fecha_partida)<120 AND destino = @destino AND numero != @numero))
+	WHERE (ABS(DATEDIFF(MINUTE,fecha_partida,@fecha_partida))<120 AND destino = @destino AND numero != @numero))
 		RETURN -2
 	
 	IF NOT EXISTS(SELECT * FROM Companias WHERE nombre = @compania AND activo = 1)

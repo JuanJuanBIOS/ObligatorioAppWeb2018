@@ -57,6 +57,12 @@ namespace Persistencia
                     unEmp = new Empleados(_cedula, _pass, _nombre);
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception("Problemas con la base de datos: " + ex.Message);
@@ -101,6 +107,60 @@ namespace Persistencia
                     _Reader.Close();
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                oConexion.Close();
+            }
+
+            return unEmp;
+        }
+
+        public Empleados BuscarTodos_Empleado(string pCedula)
+        {
+            SqlConnection oConexion = new SqlConnection(Conexion.STR);
+            SqlCommand oComando = new SqlCommand("BuscarTodos_Empleado", oConexion);
+            oComando.CommandType = CommandType.StoredProcedure;
+
+            oComando.Parameters.AddWithValue("@cedula", pCedula);
+
+            Empleados unEmp = null;
+
+            try
+            {
+                oConexion.Open();
+
+                SqlDataReader _Reader = oComando.ExecuteReader();
+
+                if (_Reader.HasRows)
+                {
+                    _Reader.Read();
+
+                    string _cedula = (string)_Reader["cedula"];
+                    string _pass = (string)_Reader["pass"];
+                    string _nombre = (string)_Reader["nombre"];
+
+                    unEmp = new Empleados(_cedula, _pass, _nombre);
+
+                    _Reader.Close();
+                }
+            }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -145,6 +205,12 @@ namespace Persistencia
                     throw new Exception("Error en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -186,6 +252,12 @@ namespace Persistencia
                     throw new Exception("Error en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -225,6 +297,12 @@ namespace Persistencia
                     throw new Exception("Error al eliminar el empleado de la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;

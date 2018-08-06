@@ -8,16 +8,7 @@
 
 <table>
         <tr>
-            <td align="center" valign="middle" colspan="6">
-
-            </td>
-        </tr>
-        <tr>
-            <td align="center" valign="middle" colspan="6">
-            </td>
-        </tr>
-        <tr>
-            <td align="center" valign="middle" style="width: 142px">
+            <td align="center" valign="middle" style="width: 142px; text-align: left;">
                 <asp:Label ID="LBNumero" runat="server" Text="Número: "></asp:Label>
             </td>
             <td align="left" valign="middle" colspan="2">
@@ -34,9 +25,7 @@
                 </td>
         </tr>
         <tr>
-            <td align="center" valign="middle" style="width: 142px">
-            </td>
-            <td align="left" valign="middle" colspan="5">
+            <td align="center" valign="middle" style="text-align: left;" colspan="6">
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>
             </td>
         </tr>
@@ -45,7 +34,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" valign="middle" style="width: 142px">
+            <td align="center" valign="middle" style="width: 142px; text-align: left;">
                 <asp:Label ID="LBCompania" runat="server" Text="Compañía: "></asp:Label>
             </td>
             <td align="left" valign="middle" colspan="5">
@@ -54,7 +43,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" valign="middle" style="width: 142px">
+            <td align="center" valign="middle" style="width: 142px; text-align: left;">
                 <asp:Label ID="LBTerminal" runat="server" Text="Terminal: "></asp:Label>
             </td>
             <td align="left" valign="middle" colspan="5">

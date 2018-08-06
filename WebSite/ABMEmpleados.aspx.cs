@@ -53,7 +53,6 @@ public partial class ABMEmpleados : System.Web.UI.Page
                 LblError.Text = ex.Message;
             }
         }
-
     }
 
 

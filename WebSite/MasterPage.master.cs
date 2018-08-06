@@ -12,7 +12,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if (Session["Empleado"] == null)
         {
-            Response.Redirect("Login.aspx", false);
+            Response.Redirect("Logueo.aspx", false);
         }
         else
         {

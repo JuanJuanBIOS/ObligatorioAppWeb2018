@@ -227,6 +227,14 @@ public partial class _Default : System.Web.UI.Page
         FiltroDestinoObligatorio();
         LblError.Text = "";
 
+        //Uso LinQ para tener solo los viajes que aún no hayan partido
+        List<Viajes> viajesnopartieron = (from unViaje in (List<Viajes>)Session["ListaViajes"]
+                                          where unViaje.Fecha_partida >= DateTime.Now
+                                          select unViaje).ToList<Viajes>();
+
+        RepeaterViajes.DataSource = viajesnopartieron;
+        RepeaterViajes.DataBind();
+
     }
 
     private void FiltroDestinoObligatorio()
@@ -248,6 +256,5 @@ public partial class _Default : System.Web.UI.Page
         CalHasta.Enabled = true;
        
     }
-
 
 }

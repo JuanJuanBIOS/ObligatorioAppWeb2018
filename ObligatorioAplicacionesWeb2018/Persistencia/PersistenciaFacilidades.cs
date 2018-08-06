@@ -36,6 +36,12 @@ namespace Persistencia
 
                 _Reader.Close();
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -78,6 +84,12 @@ namespace Persistencia
                     throw new Exception("Error al crear la terminal en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
@@ -112,6 +124,12 @@ namespace Persistencia
                     throw new Exception("Error al eliminar la terminal en la base de datos");
                 }
             }
+
+            catch (SqlException)
+            {
+                throw new Exception("La base de datos no se encuantra disponible. Contacte al administrador.");
+            }
+
             catch (Exception ex)
             {
                 throw ex;
