@@ -32,7 +32,7 @@ public partial class ABMEmpleados : System.Web.UI.Page
 
                 Empleados unEmp = FEmpleado.Buscar_Empleado(_Cedula);
 
-                Session["Empleado"] = unEmp;
+                Session["EmpleadoBuscado"] = unEmp;
 
                 if (unEmp == null)
                 {
@@ -115,16 +115,27 @@ public partial class ABMEmpleados : System.Web.UI.Page
     {
         try
         {
-            Empleados unEmp = (Empleados)Session["Empleado"];
+            Empleados EmpLogueado = (Empleados)Session["Empleado"];
 
-            ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
+            Empleados unEmp = (Empleados)Session["EmpleadoBuscado"];
 
-            FEmpleado.Eliminar_Empleado(unEmp);
+            if (EmpLogueado.Cedula == unEmp.Cedula)
+            {
+                LblError.ForeColor = System.Drawing.Color.Red;
+                LblError.Text = "El Empleado logueado no se puede eliminar a sí mismo";
+            }
 
-            LblError.ForeColor = System.Drawing.Color.Blue;
-            LblError.Text = "La empleado " + Convert.ToString(unEmp.Nombre) + " ha sido eliminada correctamente.";
+            else
+            {
+                ILogicaEmpleado FEmpleado = FabricaLogica.getLogicaEmpleado();
 
-            LimpioFormulario();
+                FEmpleado.Eliminar_Empleado(unEmp);
+
+                LblError.ForeColor = System.Drawing.Color.Blue;
+                LblError.Text = "La empleado " + Convert.ToString(unEmp.Nombre) + " ha sido eliminada correctamente.";
+
+                LimpioFormulario();
+            }
         }
 
         catch (Exception ex)

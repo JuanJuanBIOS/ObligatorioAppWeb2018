@@ -18,7 +18,7 @@ public partial class ABMViajesInternacionales : System.Web.UI.Page
 
             ILogicaTerminales FTerminal = FabricaLogica.getLogicaTerminal();
 
-            List<Terminales> ListaTerminales = FTerminal.Listar_Todos_Terminales();
+            List<Terminales> ListaTerminales = FTerminal.Listar_Terminales();
 
             Session["Terminales"] = ListaTerminales;
 
