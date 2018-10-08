@@ -259,19 +259,6 @@ GO
 -- -----------------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------------
--- SE CREA PROCEDIMIENTO PARA BÚSQUEDA DE TODAS LAS COMPAÑÍAS
-CREATE PROCEDURE BuscarTodos_Compania
-@nombre VARCHAR(50)
-AS
-BEGIN
-	SELECT * FROM Companias WHERE nombre = @nombre
-END
-GO
--- Prueba BuscarTodos_Compania 'Compania 1'
--- Prueba BuscarTodos_Compania 'Compania 2'
--- -----------------------------------------------------------------------------------------------
-
--- -----------------------------------------------------------------------------------------------
 -- SE CREA PROCEDIMIENTO PARA ALTA DE COMPAÑÍA
 CREATE PROCEDURE Alta_Compania
 @nombre VARCHAR(50),
@@ -543,9 +530,6 @@ CREATE PROCEDURE Eliminar_Facilidades
 @codigo VARCHAR(9)
 AS
 BEGIN
-	IF NOT EXISTS(SELECT * FROM Terminales WHERE codigo = @codigo)
-		RETURN -1
-	
 	DELETE FROM Facilidades WHERE terminal = @codigo
 	IF (@@ERROR = 0)
 		RETURN 1
@@ -592,20 +576,6 @@ END
 GO
 -- Prueba Listar_Terminales
 -- -----------------------------------------------------------------------------------------------
-
--- -----------------------------------------------------------------------------------------------
--- SE CREA PROCEDIMIENTO PARA LISTAR TERMINALES
-CREATE PROCEDURE Listar_Todos_Terminales
-AS
-BEGIN
-	Select * from Terminales
-END
-GO
--- Prueba Listar_Terminales
--- -----------------------------------------------------------------------------------------------
-
-
-
 
 
 
